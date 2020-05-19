@@ -24,7 +24,7 @@ public class Principal {
 			PreparedStatement pst = con.prepareStatement(SQL);
 			
 			pst.setString(1, "1232392");
-			pst.setString(2, "pruebaxxx");
+			pst.setString(2, "prueba");
 			
 			
 			
