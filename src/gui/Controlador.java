@@ -24,7 +24,7 @@ public class Controlador {
 	 * @throws Exception
 	 */
 	public void ventanaPrueba() throws Exception {
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/ventanas/prueba.fxml"));
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/ventanas/ventanaCRUD.fxml"));
 		Parent root = fxmlLoader.load();
 		Scene scene = new Scene(root);
 		Stage primaryStage = new Stage();
@@ -32,9 +32,9 @@ public class Controlador {
 		primaryStage.show();
 		primaryStage.setResizable(false);
 
-		Prueba vp = fxmlLoader.getController();
-		vp.setControlador(this);
-		vp.setVentanaPrincipal(primaryStage);
+		VentanaCRUD vc = fxmlLoader.getController();
+		vc.setControlador(this);
+		vc.setVentanaPrincipal(primaryStage);
 	}
 
 }

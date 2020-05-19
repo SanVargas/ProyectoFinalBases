@@ -19,10 +19,9 @@ public class ConectorBD {
 
 			Class.forName("com.mysql.jdbc.Driver");
 			c = (Connection) DriverManager.getConnection(URL, USER, PASSWORD);
-			JOptionPane.showMessageDialog(null, "Conexion exitosa con la base de datos.");
-
+			System.out.println("Conexion exitosa con la base de datos.");
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "Conexion NO exitosa con la base de datos.");
+			System.out.println("Conexion no exitosa con la base de datos, verifique. error: " + e.getMessage());
 		}
 
 		return c;
