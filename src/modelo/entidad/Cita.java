@@ -5,6 +5,7 @@ import java.sql.Date;
 public class Cita {
 	private Date fechaHora;
 	private String id;
+	//solo es un comentario
 	private Medico medico;
 	private Paciente paciente;
 	private Empleado empleado;
