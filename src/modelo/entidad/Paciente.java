@@ -25,6 +25,18 @@ public class Paciente {
 		lstTelefono = new ArrayList<Telefono_Paciente>();
 
 	}
+	
+	public Paciente(String nombre, String dni, String direccion) {
+		super();
+		this.nombre = nombre;
+		this.dni = dni;
+		this.direccion = direccion;
+
+		lstRegistro = new ArrayList<RegistroAmbulancia>();
+		lstCita = new ArrayList<Cita>();
+		lstTelefono = new ArrayList<Telefono_Paciente>();
+
+	}
 
 	public String getNombre() {
 		return nombre;
