@@ -23,7 +23,7 @@ public class Controlador {
 	 * Controlador De la Ventana Principal en JavaFx
 	 * @throws Exception
 	 */
-	public void ventanaPrueba() throws Exception {
+	public void ventanaCRUD() throws Exception {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/ventanas/ventanaCRUD.fxml"));
 		Parent root = fxmlLoader.load();
 		Scene scene = new Scene(root);

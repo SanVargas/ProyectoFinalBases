@@ -4,9 +4,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-
 import javax.swing.JOptionPane;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -17,7 +15,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
@@ -121,7 +118,7 @@ public class VentanaCRUD implements Initializable {
 			JOptionPane.showMessageDialog(null, "Revise los valores ingresados. error: " + e.getMessage());
 		}
 
-		Paciente p = controlador.principal.insertarPaciente(nombre, dni, direccion, estatura, peso, grupoS, rh);
+		Paciente p = controlador.principal.getControladorPaciente().insertarPaciente(nombre, dni, direccion, estatura, peso, grupoS, rh);
 
 		if (p != null) {
 			columnaNombrePaciente.setCellValueFactory(new PropertyValueFactory<Paciente, String>("nombre"));
@@ -136,7 +133,7 @@ public class VentanaCRUD implements Initializable {
 	@FXML
 	void actionEliminarPaciente(ActionEvent event) {
 
-		controlador.principal.eliminarPaciente(txtDNIPaciente.getText());
+		controlador.principal.getControladorPaciente().eliminarPaciente(txtDNIPaciente.getText());
 		actionLimpiarVenPaciente(event);
 		mostrarPaciente();
 	}
@@ -154,7 +151,7 @@ public class VentanaCRUD implements Initializable {
 		String grupoS = cmbGrupoSnaguineo.getValue();
 		String rh = cmbRH.getValue();
 
-		controlador.principal.modificarPaciente(dni, nombre, direccion, peso, estatura, rh, grupoS, null);
+		controlador.principal.getControladorPaciente().modificarPaciente(dni, nombre, direccion, peso, estatura, rh, grupoS, null);
 		
 		actionLimpiarVenPaciente(event);
 		mostrarPaciente();
@@ -164,7 +161,7 @@ public class VentanaCRUD implements Initializable {
 	@FXML
 	void actionBuscarPaciente(ActionEvent event) {
 
-		Paciente p = controlador.principal.buscarPaciente(txtBuscarPaciente.getText());
+		Paciente p = controlador.principal.getControladorPaciente().buscarPaciente(txtBuscarPaciente.getText());
 		ObservableList<Paciente> items1 = FXCollections.observableArrayList();
 		tablaPaciente.setItems(items1);
 
@@ -205,7 +202,6 @@ public class VentanaCRUD implements Initializable {
 	void actionRadioBtnAgregarPaciente(ActionEvent event) {
 
 		btnAgregarPaciente.setDisable(false);
-
 		txtNombrePaciente.setEditable(true);
 		txtDireccionPaciente.setEditable(true);
 		txtDNIPaciente.setEditable(true);
@@ -252,7 +248,7 @@ public class VentanaCRUD implements Initializable {
 	}
 
 	void mostrarPaciente() {
-		ArrayList<Paciente> lstPaciente = controlador.principal.mostrarDatos();
+		ArrayList<Paciente> lstPaciente = controlador.principal.getControladorPaciente().mostrarDatos();
 
 		for (Paciente paciente : lstPaciente) {
 
