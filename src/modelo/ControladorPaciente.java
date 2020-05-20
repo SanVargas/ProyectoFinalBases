@@ -11,10 +11,20 @@ import modelo.entidad.HistoriaClinica;
 import modelo.entidad.Paciente;
 
 public class ControladorPaciente {
-	ConectorBD cc = new ConectorBD();
-	Connection con = cc.establecerConexion();
+	ConectorBD cc;
+	Connection con;
 	private PreparedStatement ps;
 	private ResultSet rs;
+
+	
+	
+	
+
+	public ControladorPaciente(ConectorBD cc, Connection con) {
+		super();
+		this.cc = cc;
+		this.con = con;
+	}
 
 	public Paciente insertarPaciente(String nombre, String dni, String direccion, double altura, double peso,
 			String grupoS, String rh) {

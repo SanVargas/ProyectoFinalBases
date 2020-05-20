@@ -16,7 +16,7 @@ public class Principal {
 	private ControladorPaciente controladorPaciente;
 
 	public Principal() {
-		controladorPaciente = new ControladorPaciente();
+		controladorPaciente = new ControladorPaciente(cc,con);
 	}
 
 	public ControladorPaciente getControladorPaciente() {
