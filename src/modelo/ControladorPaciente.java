@@ -1,12 +1,11 @@
 package modelo;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import com.mysql.jdbc.Connection;
 import conector.ConectorBD;
 import modelo.entidad.HistoriaClinica;
 import modelo.entidad.Paciente;
@@ -61,7 +60,7 @@ public class ControladorPaciente {
 
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null,
-					"No se agrego correctamente, verifique la información. error: " + e.getMessage());
+					"No se agrego correctamente, verifique la informaciï¿½n. error: " + e.getMessage());
 			p = null;
 		}
 
