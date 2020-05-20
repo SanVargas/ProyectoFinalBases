@@ -3,8 +3,11 @@ package modelo;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 import com.mysql.jdbc.Connection;
 
@@ -71,29 +74,6 @@ public class Principal {
 
 	}
 
-	public Paciente buscarPaciente(String dniPaciente) {
-
-		Paciente p = null;
-
-		try {
-
-			String SQL = "SELECT * FROM Paciente WHERE dni = ?";
-			ps = con.prepareStatement(SQL);
-			ps.setString(1, dniPaciente);
-			rs = ps.executeQuery();
-
-			if (rs.next()) {
-				p = new Paciente(rs.getNString("nombre"), rs.getNString("dni"), rs.getNString("direccion"));
-			}
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "No se realizo consulta" + e.getMessage());
-			e.printStackTrace();
-		}
-
-		return p;
-
-	}
-
 	public void modificar() {
 
 		try {
@@ -137,6 +117,92 @@ public class Principal {
 
 	public int generarAleatorio() {
 		return (int) Math.floor(Math.random() * (10000 - 0 + 1) + 0);
+	}
+
+	public Paciente buscarPaciente(String dniPaciente) {
+
+		Paciente p = null;
+
+		try {
+
+			String SQL = "SELECT * FROM Paciente WHERE dni = ?";
+			ps = con.prepareStatement(SQL);
+			ps.setString(1, dniPaciente);
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				p = new Paciente(rs.getNString("nombre"), rs.getNString("dni"), rs.getNString("direccion"));
+
+				String SQL1 = "SELECT * FROM HistoriaClinica";
+				Statement st1 = con.createStatement();
+				ResultSet rs1 = st1.executeQuery(SQL1);
+
+				while (rs1.next()) {
+
+					if (rs1.getString("numero").equals(rs.getString("HistoriaClinica_numero"))) {
+						HistoriaClinica hc = new HistoriaClinica(rs1.getString("numero"),
+								rs1.getString("InformacionMedica"), rs1.getDouble("estatura"), rs1.getDouble("peso"),
+								null, p);
+						p.setHistoriaClinica(hc);
+
+					}
+
+				}
+			}
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "No se realizo consulta" + e.getMessage());
+			e.printStackTrace();
+		}
+
+		return p;
+
+	}
+
+	public ArrayList<Paciente> mostrarDatos() {
+
+		ArrayList<Paciente> lstPaciente = new ArrayList<Paciente>();
+
+		String SQL = "Select * from Paciente";
+
+		try {
+
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(SQL);
+
+			while (rs.next()) {
+
+				String dni = rs.getString("dni");
+				String nombre = rs.getString("nombre");
+				String direccion = rs.getString("direccion");
+
+				Paciente p = new Paciente(nombre, dni, direccion, null, null);
+
+				String SQL1 = "SELECT * FROM HistoriaClinica";
+				Statement st1 = con.createStatement();
+				ResultSet rs1 = st1.executeQuery(SQL1);
+
+				while (rs1.next()) {
+
+					if (rs1.getString("numero").equals(rs.getString("HistoriaClinica_numero"))) {
+						HistoriaClinica hc = new HistoriaClinica(rs1.getString("numero"),
+								rs1.getString("InformacionMedica"), rs1.getDouble("estatura"), rs1.getDouble("peso"),
+								null, p);
+						p.setHistoriaClinica(hc);
+
+					}
+
+				}
+
+				lstPaciente.add(p);
+			}
+
+		} catch (Exception e) {
+
+			JOptionPane.showMessageDialog(null, "Error al listar pacientes. error: " + e.getMessage());
+		}
+
+		return lstPaciente;
+
 	}
 
 	public String determinarIdSanguineo(String rh, String grupoS) {

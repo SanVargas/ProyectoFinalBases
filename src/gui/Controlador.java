@@ -35,6 +35,7 @@ public class Controlador {
 		VentanaCRUD vc = fxmlLoader.getController();
 		vc.setControlador(this);
 		vc.setVentanaPrincipal(primaryStage);
+		vc.mostrarPaciente();
 	}
 
 }
