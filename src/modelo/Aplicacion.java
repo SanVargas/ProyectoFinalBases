@@ -25,6 +25,7 @@ public class Aplicacion extends Application {
 		Principal principal = new Principal();
 		Controlador controlador = new Controlador(principal);
 		controlador.ventanaPrueba();
+		controlador.principal.insertarGrupoSangre();
 	}
 	
 

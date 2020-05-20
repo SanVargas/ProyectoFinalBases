@@ -105,6 +105,7 @@ public class VentanaCRUD implements Initializable {
 	@FXML
 	void actionAgregarPaciente(ActionEvent event) {
 
+		txtDNIPaciente.setEditable(false);
 		String nombre = txtNombrePaciente.getText();
 		String dni = txtDNIPaciente.getText();
 		String direccion = txtDireccionPaciente.getText();
@@ -134,13 +135,29 @@ public class VentanaCRUD implements Initializable {
 
 	@FXML
 	void actionEliminarPaciente(ActionEvent event) {
-		
-		
 
+		controlador.principal.eliminarPaciente(txtDNIPaciente.getText());
+		actionLimpiarVenPaciente(event);
+		mostrarPaciente();
 	}
 
 	@FXML
 	void actionModificarPaciente(ActionEvent event) {
+
+		txtDNIPaciente.setEditable(false);
+		String nombre = txtNombrePaciente.getText();
+		String dni = txtDNIPaciente.getText();
+		String direccion = txtDireccionPaciente.getText();
+		double peso = Double.parseDouble(txtPesoPaciente.getText());
+		double estatura = Double.parseDouble(txtEstaturaPaciente.getText());
+
+		String grupoS = cmbGrupoSnaguineo.getValue();
+		String rh = cmbRH.getValue();
+
+		controlador.principal.modificarPaciente(dni, nombre, direccion, peso, estatura, rh, grupoS, null);
+		
+		actionLimpiarVenPaciente(event);
+		mostrarPaciente();
 
 	}
 
@@ -178,6 +195,8 @@ public class VentanaCRUD implements Initializable {
 			radioBtnModifcarPaciente.setDisable(true);
 			btnModificarPaciente.setDisable(true);
 			btnEliminarPaciente.setDisable(true);
+			mostrarPaciente();
+
 		}
 
 	}
@@ -200,7 +219,7 @@ public class VentanaCRUD implements Initializable {
 
 	@FXML
 	void actionRadioBtnEliminarPaciente(ActionEvent event) {
-		
+
 		btnEliminarPaciente.setDisable(false);
 		btnModificarPaciente.setDisable(true);
 		btnAgregarPaciente.setDisable(true);
@@ -212,16 +231,16 @@ public class VentanaCRUD implements Initializable {
 		txtEstaturaPaciente.setEditable(false);
 		cmbGrupoSnaguineo.setDisable(true);
 		cmbRH.setDisable(true);
-		
+
 	}
 
 	@FXML
 	void actionRadioBtnModifcarPaciente(ActionEvent event) {
-		
+
 		btnEliminarPaciente.setDisable(true);
 		btnModificarPaciente.setDisable(false);
 		btnAgregarPaciente.setDisable(true);
-		
+
 		txtNombrePaciente.setEditable(true);
 		txtDireccionPaciente.setEditable(true);
 		txtPesoPaciente.setEditable(true);
@@ -257,7 +276,6 @@ public class VentanaCRUD implements Initializable {
 		ObservableList<Paciente> items1 = FXCollections.observableArrayList();
 
 		tablaPaciente.setItems(items1);
-		
 
 	}
 
@@ -296,7 +314,7 @@ public class VentanaCRUD implements Initializable {
 			txtPesoPaciente.setText(paciente.getHistoriaClinica().getPeso() + "");
 			cmbGrupoSnaguineo.getSelectionModel().select(0);
 			cmbRH.getSelectionModel().select(0);
-			
+
 			txtNombrePaciente.setEditable(false);
 			txtDNIPaciente.setEditable(false);
 			txtDireccionPaciente.setEditable(false);
@@ -309,7 +327,6 @@ public class VentanaCRUD implements Initializable {
 			btnLimpiarVenPaciente.setDisable(false);
 			radioBtnEliminarPaciente.setDisable(false);
 			radioBtnModifcarPaciente.setDisable(false);
-			
 
 		}
 	}
