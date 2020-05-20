@@ -14,17 +14,11 @@ public class Principal {
 	private PreparedStatement ps;
 	private ResultSet rs;
 	private ControladorPaciente controladorPaciente;
+	private ControladorEps  controladorEps;
 
 	public Principal() {
 		controladorPaciente = new ControladorPaciente(cc,con);
-	}
-
-	public ControladorPaciente getControladorPaciente() {
-		return controladorPaciente;
-	}
-
-	public void setControladorPaciente(ControladorPaciente controladorPaciente) {
-		this.controladorPaciente = controladorPaciente;
+		controladorEps = new ControladorEps(cc, con);
 	}
 
 	public void insertarGrupoSangre() {
@@ -98,4 +92,21 @@ public class Principal {
 		}
 
 	}
+	
+	public ControladorPaciente getControladorPaciente() {
+		return controladorPaciente;
+	}
+
+	public void setControladorPaciente(ControladorPaciente controladorPaciente) {
+		this.controladorPaciente = controladorPaciente;
+	}
+
+	public ControladorEps getControladorEps() {
+		return controladorEps;
+	}
+
+	public void setControladorEps(ControladorEps controladorEps) {
+		this.controladorEps = controladorEps;
+	}
+
 }

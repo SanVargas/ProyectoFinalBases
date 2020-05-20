@@ -16,10 +16,6 @@ public class ControladorPaciente {
 	private PreparedStatement ps;
 	private ResultSet rs;
 
-	
-	
-	
-
 	public ControladorPaciente(ConectorBD cc, Connection con) {
 		super();
 		this.cc = cc;
@@ -66,7 +62,7 @@ public class ControladorPaciente {
 			pst2.execute();
 			pst1.execute();
 
-			JOptionPane.showMessageDialog(null, "Se agrego correctamente");
+			JOptionPane.showMessageDialog(null, "Se agrego correctamente el paciente.");
 
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null,
@@ -103,10 +99,10 @@ public class ControladorPaciente {
 
 			ps.execute();
 
-			JOptionPane.showMessageDialog(null, "Se realizo la modificacion existosamente!");
+			JOptionPane.showMessageDialog(null, "Se realizo la modificacion existosamente.");
 
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "No se realizo modificacion" + e.getMessage());
+			JOptionPane.showMessageDialog(null, "No se realizo modificacion." + e.getMessage());
 			e.printStackTrace();
 		}
 	}
@@ -128,7 +124,7 @@ public class ControladorPaciente {
 			ps1.execute();
 			ps.execute();
 
-			JOptionPane.showMessageDialog(null, "Se realizo la eliminacion existosamente!");
+			JOptionPane.showMessageDialog(null, "Se realizo la eliminacion existosamente.");
 
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "No se realizo eliminacion. error: " + e.getMessage());
@@ -174,7 +170,7 @@ public class ControladorPaciente {
 				}
 			}
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "No se realizo consulta" + e.getMessage());
+			JOptionPane.showMessageDialog(null, "No se realizo consulta." + e.getMessage());
 			e.printStackTrace();
 		}
 

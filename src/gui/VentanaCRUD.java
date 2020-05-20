@@ -20,82 +20,59 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import modelo.entidad.Eps;
 import modelo.entidad.Paciente;
 
 public class VentanaCRUD implements Initializable {
 
 	@FXML
 	Stage stage;
-
 	Controlador controlador;
-
+// PACIENTE
 	private int posicionPacienteEnTabla;
-
 	ObservableList<Paciente> pacientes;
-
 	@FXML
 	private ComboBox<String> cmbGrupoSnaguineo;
-
 	@FXML
 	private Button btnBuscarPaciente;
-
 	@FXML
 	private Button btnAgregarPaciente;
-
 	@FXML
 	private TextField txtNombrePaciente;
-
 	@FXML
 	private ComboBox<String> cmbRH;
-
 	@FXML
 	private ComboBox<String> cmbSeleccionarEPS;
-
 	@FXML
 	private RadioButton radioBtnEliminarPaciente;
-
 	@FXML
 	private Button btnEliminarPaciente;
-
 	@FXML
 	private TextField txtDNIPaciente;
-
 	@FXML
 	private Button btnLimpiarVenPaciente;
-
 	@FXML
 	private TextField txtEstaturaPaciente;
-
 	@FXML
 	private Button btnModificarPaciente;
-
 	@FXML
 	private TextField txtDireccionPaciente;
-
 	@FXML
 	private TextField txtBuscarPaciente;
-
 	@FXML
 	private ToggleGroup radioGroupOpcionPaciente;
-
 	@FXML
 	private RadioButton radioBtnModifcarPaciente;
-
 	@FXML
 	private RadioButton radioBtnAgregarPaciente;
-
 	@FXML
 	private TextField txtPesoPaciente;
-
 	@FXML
 	private TableView<Paciente> tablaPaciente;
-
 	@FXML
 	private TableColumn<Paciente, String> columnaNombrePaciente;
-
 	@FXML
 	private TableColumn<Paciente, String> columnaDNIPaciente;
-
 	@FXML
 	private TableColumn<Paciente, String> columnaDireccionPaciente;
 
@@ -118,7 +95,8 @@ public class VentanaCRUD implements Initializable {
 			JOptionPane.showMessageDialog(null, "Revise los valores ingresados. error: " + e.getMessage());
 		}
 
-		Paciente p = controlador.principal.getControladorPaciente().insertarPaciente(nombre, dni, direccion, estatura, peso, grupoS, rh);
+		Paciente p = controlador.principal.getControladorPaciente().insertarPaciente(nombre, dni, direccion, estatura,
+				peso, grupoS, rh);
 
 		if (p != null) {
 			columnaNombrePaciente.setCellValueFactory(new PropertyValueFactory<Paciente, String>("nombre"));
@@ -151,8 +129,9 @@ public class VentanaCRUD implements Initializable {
 		String grupoS = cmbGrupoSnaguineo.getValue();
 		String rh = cmbRH.getValue();
 
-		controlador.principal.getControladorPaciente().modificarPaciente(dni, nombre, direccion, peso, estatura, rh, grupoS, null);
-		
+		controlador.principal.getControladorPaciente().modificarPaciente(dni, nombre, direccion, peso, estatura, rh,
+				grupoS, null);
+
 		actionLimpiarVenPaciente(event);
 		mostrarPaciente();
 
@@ -327,21 +306,9 @@ public class VentanaCRUD implements Initializable {
 		}
 	}
 
-	public Controlador getControlador() {
-		return controlador;
-	}
-
-	public void setControlador(Controlador controlador) {
-		this.controlador = controlador;
-	}
-
-	public void setVentanaPrincipal(Stage venP) {
-		this.stage = venP;
-	}
-
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
+//PACIENTE
 		txtNombrePaciente.setEditable(false);
 		txtDireccionPaciente.setEditable(false);
 		txtDNIPaciente.setEditable(false);
@@ -359,28 +326,239 @@ public class VentanaCRUD implements Initializable {
 		btnLimpiarVenPaciente.setDisable(true);
 
 		ObservableList<String> items1 = FXCollections.observableArrayList();
-
 		items1.add("O");
 		items1.add("A");
 		items1.add("AB");
 		items1.add("B");
-
 		cmbGrupoSnaguineo.setItems(items1);
-
 		cmbGrupoSnaguineo.getSelectionModel().select(0);
 
 		ObservableList<String> items2 = FXCollections.observableArrayList();
-
 		items2.add("-");
 		items2.add("+");
-
 		cmbRH.setItems(items2);
-
 		cmbRH.getSelectionModel().select(0);
 
 		final ObservableList<Paciente> tablaPersonaSel = tablaPaciente.getSelectionModel().getSelectedItems();
 		tablaPersonaSel.addListener(selectorTablaPaciente);
 
+		// EPS
+		txtNitEps.setEditable(false);
+		txtNombreEps.setEditable(false);
+
+		btnAgregarEps.setDisable(true);
+		btnEliminarEps.setDisable(true);
+		btnModificarEps.setDisable(true);
+		radioBtnAgregarEps.setDisable(true);
+		radioBtnEliminarEps.setDisable(true);
+		radioBtnModifcarEps.setDisable(true);
+		btnLimpiarVenEps.setDisable(true);
+
+		final ObservableList<Eps> tablaEpsSel = tablaEps.getSelectionModel().getSelectedItems();
+		tablaEpsSel.addListener(selectorTablaEps);
+	}
+
+	// FIN PACIENTE
+//---------------
+	// EPS
+	@FXML
+	private Button btnAgregarEps;
+	@FXML
+	private Button btnEliminarEps;
+	@FXML
+	private RadioButton radioBtnAgregarEps;
+	@FXML
+	private TextField txtBuscarEps;
+	@FXML
+	private Button btnModificarEps;
+	@FXML
+	private Button btnBuscarEps;
+	@FXML
+	private TextField txtNombreEps;
+	@FXML
+	private TextField txtNitEps;
+	@FXML
+	private Button btnLimpiarVenEps;
+	@FXML
+	private TableView<Eps> tablaEps;
+	@FXML
+	private TableColumn<Eps, String> columnaNombreEps;
+	@FXML
+	private TableColumn<Eps, String> columnaNitEps;
+	@FXML
+	private RadioButton radioBtnModifcarEps;
+	@FXML
+	private RadioButton radioBtnEliminarEps;
+	@FXML
+	private ToggleGroup radioGroupOpcionEps;
+
+	@FXML
+	void actionAgregarEps(ActionEvent event) {
+		txtNitEps.setEditable(false);
+		String nit = txtNitEps.getText();
+		String nombre = txtNombreEps.getText();
+
+		Eps ep = controlador.principal.getControladorEps().insertarEps(nit, nombre);
+
+		if (ep != null) {
+			columnaNombreEps.setCellValueFactory(new PropertyValueFactory<Eps, String>("nombre"));
+			columnaNitEps.setCellValueFactory(new PropertyValueFactory<Eps, String>("nit"));
+
+			tablaEps.getItems().add(ep);
+		}
+	}
+
+	@FXML
+	void actionEliminarEps(ActionEvent event) {
+		controlador.principal.getControladorEps().eliminarEps(txtNitEps.getText());
+		actionLimpiarVenEps(event);
+		mostrarEps();
+	}
+
+	@FXML
+	void actionModificarEps(ActionEvent event) {
+		txtNitEps.setEditable(false);
+		String nit = txtNitEps.getText();
+		String nombre = txtNombreEps.getText();
+
+		controlador.principal.getControladorEps().modificarEps(nit, nombre);
+
+		actionLimpiarVenEps(event);
+		mostrarEps();
+	}
+
+	@FXML
+	void actionBuscarEps(ActionEvent event) {
+		Eps eps = controlador.principal.getControladorEps().buscarEps(txtBuscarEps.getText());
+		ObservableList<Eps> items1 = FXCollections.observableArrayList();
+		tablaEps.setItems(items1);
+
+		if (eps != null) {
+			columnaNombreEps.setCellValueFactory(new PropertyValueFactory<Eps, String>("nombre"));
+			columnaNitEps.setCellValueFactory(new PropertyValueFactory<Eps, String>("nit"));
+
+			tablaEps.getItems().add(eps);
+			radioBtnEliminarEps.setDisable(false);
+			radioBtnModifcarEps.setDisable(false);
+			btnModificarEps.setDisable(false);
+			btnEliminarEps.setDisable(false);
+			btnLimpiarVenEps.setDisable(false);
+			btnAgregarEps.setDisable(true);
+			radioBtnAgregarEps.setDisable(true);
+		} else {
+			JOptionPane.showMessageDialog(null, "Eps no encontrada.");
+			txtNitEps.setText(txtBuscarEps.getText());
+			txtBuscarEps.setText("");
+			
+		    txtNombreEps.setEditable(true);
+			radioBtnAgregarEps.setDisable(false);
+			btnLimpiarVenEps.setDisable(false);
+			radioBtnEliminarEps.setDisable(true);
+			radioBtnModifcarEps.setDisable(true);
+			btnModificarEps.setDisable(true);
+			btnEliminarEps.setDisable(true);
+			mostrarEps();
+		}
+	}
+
+	@FXML
+	void actionRadioBtnAgregarEps(ActionEvent event) {
+		btnAgregarEps.setDisable(false);
+		txtNitEps.setEditable(true);
+		txtNombreEps.setEditable(true);
+	}
+
+	@FXML
+	void actionRadioBtnEliminarEps(ActionEvent event) {
+		btnEliminarEps.setDisable(false);
+		btnModificarEps.setDisable(true);
+		btnAgregarEps.setDisable(true);
+
+		txtNitEps.setEditable(false);
+		txtNombreEps.setEditable(false);
+	}
+
+	@FXML
+	void actionRadioBtnModifcarEps(ActionEvent event) {
+		btnEliminarEps.setDisable(true);
+		btnModificarEps.setDisable(false);
+		btnAgregarEps.setDisable(true);
+
+		txtNitEps.setEditable(true);
+		txtNombreEps.setEditable(true);
+	}
+
+	@FXML
+	void actionLimpiarVenEps(ActionEvent event) {
+		txtBuscarEps.setText("");
+		txtNitEps.setText("");
+		txtNombreEps.setText("");
+
+		ObservableList<Eps> items1 = FXCollections.observableArrayList();
+
+		tablaEps.setItems(items1);
+
+	}
+
+	void mostrarEps() {
+		ArrayList<Eps> lstEps = controlador.principal.getControladorEps().mostrarDatosEps();
+
+		for (Eps eps : lstEps) {
+
+			columnaNombreEps.setCellValueFactory(new PropertyValueFactory<Eps, String>("nombre"));
+			columnaNitEps.setCellValueFactory(new PropertyValueFactory<Eps, String>("nit"));
+
+			tablaEps.getItems().add(eps);
+		}
+	}
+
+	private final ListChangeListener<Eps> selectorTablaEps = new ListChangeListener<Eps>() {
+
+		@Override
+		public void onChanged(ListChangeListener.Change<? extends Eps> c) {
+			ponerEpsSeleccionado();
+		}
+	};
+
+	public Eps getTablaEpsSeleccionada() {
+		if (tablaEps != null) {
+			List<Eps> tabla = tablaEps.getSelectionModel().getSelectedItems();
+			if (tabla.size() == 1) {
+				final Eps competicionSeleccionada = tabla.get(0);
+				return competicionSeleccionada;
+			}
+		}
+		return null;
+	}
+
+	private void ponerEpsSeleccionado() {
+		final Eps eps = getTablaEpsSeleccionada();
+
+		if (eps != null) {
+			txtNitEps.setText(eps.getNit());
+			txtNombreEps.setText(eps.getNombre());
+
+			txtNitEps.setEditable(false);
+			txtNombreEps.setEditable(false);
+
+			btnLimpiarVenEps.setDisable(false);
+			radioBtnEliminarEps.setDisable(false);
+			radioBtnModifcarEps.setDisable(false);
+		}
+	}
+
+	// FIN EPS
+
+	public Controlador getControlador() {
+		return controlador;
+	}
+
+	public void setControlador(Controlador controlador) {
+		this.controlador = controlador;
+	}
+
+	public void setVentanaPrincipal(Stage venP) {
+		this.stage = venP;
 	}
 
 }
