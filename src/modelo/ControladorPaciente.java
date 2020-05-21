@@ -3,27 +3,33 @@ package modelo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import conector.ConectorBD;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import modelo.entidad.Eps;
 import modelo.entidad.HistoriaClinica;
 import modelo.entidad.Paciente;
 
 public class ControladorPaciente {
 	ConectorBD cc;
 	Connection con;
+	Principal principal;
 	private PreparedStatement ps;
 	private ResultSet rs;
 
-	public ControladorPaciente(ConectorBD cc, Connection con) {
+	public ControladorPaciente(ConectorBD cc, Connection con, Principal principal) {
 		super();
 		this.cc = cc;
 		this.con = con;
+		this.principal = principal;
 	}
 
 	public Paciente insertarPaciente(String nombre, String dni, String direccion, double altura, double peso,
-			String grupoS, String rh) {
+			String grupoS, String rh, String eps, String numeroT, String descripcionT) {
 
 		Paciente p = null;
 		HistoriaClinica hc = null;
@@ -50,18 +56,26 @@ public class ControladorPaciente {
 			pst2.setString(1, nombre);
 			pst2.setString(2, dni);
 			pst2.setString(3, direccion);
-			pst2.setString(4, null);
+
 			pst2.setString(5, numero);
 
+			Eps eps1 = principal.getControladorEps().buscarEpsNombre(eps);
+
+			if (eps1 != null) {
+
+				pst2.setString(4, eps1.getNit());
+				p = new Paciente(nombre, dni, direccion, hc, eps1);
+			}
+
+			if (eps1 == null) {
+				pst2.setString(4, null);
+				p = new Paciente(nombre, dni, direccion, hc, null);
+			}
+
 			hc = new HistoriaClinica(numero, "", 70.2, 180.1, null, p);
-
-			p = new Paciente(nombre, dni, direccion, hc, null);
-
-			hc.setPaciente(p);
-
 			pst2.execute();
 			pst1.execute();
-
+			agregarTelefono(numeroT, descripcionT, dni);
 			JOptionPane.showMessageDialog(null, "Se agrego correctamente el paciente.");
 
 		} catch (Exception e) {
@@ -74,9 +88,29 @@ public class ControladorPaciente {
 
 	}
 
+	public void agregarTelefono(String numero, String descripcion, String dni) {
+
+		String SQL1 = "insert into Telefono_Paciente (numero, descripcion, Paciente_dni) values (?,?,?)";
+
+		try {
+			PreparedStatement pst1 = con.prepareStatement(SQL1);
+
+			pst1.setString(1, numero);
+			pst1.setString(2, descripcion);
+			pst1.setString(3, dni);
+			pst1.execute();
+		} catch (SQLException e) {
+			
+			JOptionPane.showMessageDialog(null, "Error al agregar el telefono. error: " + e.getMessage());
+			e.printStackTrace();
+		}
+
+	}
+
 	public void modificarPaciente(String dni, String nombre, String direccion, double peso, double estatura, String rh,
 			String grupoS, String eps) {
 
+		Eps ep = principal.getControladorEps().buscarEpsNombre(eps);
 		PreparedStatement ps1;
 
 		try {
@@ -90,11 +124,11 @@ public class ControladorPaciente {
 
 			ps1.execute();
 
-			String SQL = "UPDATE Paciente SET nombre = ? , dni = ?, direccion = ? WHERE dni = ?";
+			String SQL = "UPDATE Paciente SET nombre = ?, direccion = ?, EPS_nit = ? WHERE dni = ?";
 			ps = con.prepareStatement(SQL);
 			ps.setString(1, nombre);
-			ps.setString(2, dni);
-			ps.setString(3, direccion);
+			ps.setString(2, direccion);
+			ps.setString(3, ep.getNit());
 			ps.setString(4, dni);
 
 			ps.execute();
@@ -221,6 +255,19 @@ public class ControladorPaciente {
 			JOptionPane.showMessageDialog(null, "Error al listar pacientes. error: " + e.getMessage());
 		}
 		return lstPaciente;
+	}
+
+	public ObservableList<String> verEPS() {
+		ObservableList<String> items3 = FXCollections.observableArrayList();
+
+		ArrayList<Eps> lstEps = principal.getControladorEps().mostrarDatosEps();
+
+		for (Eps eps : lstEps) {
+			items3.add(eps.getNombre());
+		}
+
+		return items3;
+
 	}
 
 	public String determinarIdSanguineo(String rh, String grupoS) {

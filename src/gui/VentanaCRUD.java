@@ -28,8 +28,9 @@ public class VentanaCRUD implements Initializable {
 	@FXML
 	Stage stage;
 	Controlador controlador;
+
 // PACIENTE
-	private int posicionPacienteEnTabla;
+
 	ObservableList<Paciente> pacientes;
 	@FXML
 	private ComboBox<String> cmbGrupoSnaguineo;
@@ -77,6 +78,15 @@ public class VentanaCRUD implements Initializable {
 	private TableColumn<Paciente, String> columnaDireccionPaciente;
 
 	@FXML
+	private ComboBox<String> cmbDescTelefonoPaciente;
+
+	@FXML
+	private TextField txtTelefonoPaciente;
+
+	@FXML
+	private Button btnAgregarTelefonoPaciente;
+
+	@FXML
 	void actionAgregarPaciente(ActionEvent event) {
 
 		txtDNIPaciente.setEditable(false);
@@ -87,16 +97,20 @@ public class VentanaCRUD implements Initializable {
 		String rh = cmbRH.getValue();
 		double estatura = 0;
 		double peso = 0;
+		String numero = txtTelefonoPaciente.getText();
+		String descripcion = cmbDescTelefonoPaciente.getValue();
 
 		try {
-			estatura = Double.parseDouble(txtEstaturaPaciente.getText());
-			peso = Double.parseDouble(txtPesoPaciente.getText());
+			estatura = Double.parseDouble(txtPesoPaciente.getText());
+			peso = Double.parseDouble(txtEstaturaPaciente.getText());
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Revise los valores ingresados. error: " + e.getMessage());
 		}
 
+		String eps = cmbSeleccionarEPS.getValue();
+
 		Paciente p = controlador.principal.getControladorPaciente().insertarPaciente(nombre, dni, direccion, estatura,
-				peso, grupoS, rh);
+				peso, grupoS, rh, eps, numero, descripcion);
 
 		if (p != null) {
 			columnaNombrePaciente.setCellValueFactory(new PropertyValueFactory<Paciente, String>("nombre"));
@@ -105,6 +119,18 @@ public class VentanaCRUD implements Initializable {
 
 			tablaPaciente.getItems().add(p);
 		}
+		
+		txtNombrePaciente.setEditable(false);
+		txtDireccionPaciente.setEditable(false);
+		txtDNIPaciente.setEditable(false);
+		txtPesoPaciente.setEditable(false);
+		txtEstaturaPaciente.setEditable(false);
+		cmbGrupoSnaguineo.setDisable(true);
+		cmbRH.setDisable(true);
+		btnAgregarPaciente.setDisable(true);
+		cmbSeleccionarEPS.setDisable(true);
+		btnAgregarTelefonoPaciente.setDisable(false);
+		txtTelefonoPaciente.setText("");
 
 	}
 
@@ -114,6 +140,8 @@ public class VentanaCRUD implements Initializable {
 		controlador.principal.getControladorPaciente().eliminarPaciente(txtDNIPaciente.getText());
 		actionLimpiarVenPaciente(event);
 		mostrarPaciente();
+
+		btnEliminarEps.setDisable(true);
 	}
 
 	@FXML
@@ -125,12 +153,13 @@ public class VentanaCRUD implements Initializable {
 		String direccion = txtDireccionPaciente.getText();
 		double peso = Double.parseDouble(txtPesoPaciente.getText());
 		double estatura = Double.parseDouble(txtEstaturaPaciente.getText());
+		String eps = cmbSeleccionarEPS.getValue();
 
 		String grupoS = cmbGrupoSnaguineo.getValue();
 		String rh = cmbRH.getValue();
 
 		controlador.principal.getControladorPaciente().modificarPaciente(dni, nombre, direccion, peso, estatura, rh,
-				grupoS, null);
+				grupoS, eps);
 
 		actionLimpiarVenPaciente(event);
 		mostrarPaciente();
@@ -143,6 +172,9 @@ public class VentanaCRUD implements Initializable {
 		Paciente p = controlador.principal.getControladorPaciente().buscarPaciente(txtBuscarPaciente.getText());
 		ObservableList<Paciente> items1 = FXCollections.observableArrayList();
 		tablaPaciente.setItems(items1);
+
+		cmbSeleccionarEPS.setItems(controlador.principal.getControladorPaciente().verEPS());
+		cmbSeleccionarEPS.getSelectionModel().select(0);
 
 		if (p != null) {
 			columnaNombrePaciente.setCellValueFactory(new PropertyValueFactory<Paciente, String>("nombre"));
@@ -183,12 +215,15 @@ public class VentanaCRUD implements Initializable {
 		btnAgregarPaciente.setDisable(false);
 		txtNombrePaciente.setEditable(true);
 		txtDireccionPaciente.setEditable(true);
-		txtDNIPaciente.setEditable(true);
+		txtDNIPaciente.setEditable(false);
 		txtPesoPaciente.setEditable(true);
 		txtEstaturaPaciente.setEditable(true);
 		cmbGrupoSnaguineo.setDisable(false);
 		cmbRH.setDisable(false);
 		cmbSeleccionarEPS.setDisable(false);
+		txtTelefonoPaciente.setDisable(false);
+		btnAgregarTelefonoPaciente.setDisable(true);
+		cmbDescTelefonoPaciente.setDisable(false);
 
 	}
 
@@ -198,6 +233,9 @@ public class VentanaCRUD implements Initializable {
 		btnEliminarPaciente.setDisable(false);
 		btnModificarPaciente.setDisable(true);
 		btnAgregarPaciente.setDisable(true);
+		txtTelefonoPaciente.setDisable(true);
+		btnAgregarTelefonoPaciente.setDisable(true);
+		cmbDescTelefonoPaciente.setDisable(true);
 
 		txtNombrePaciente.setEditable(false);
 		txtDireccionPaciente.setEditable(false);
@@ -212,10 +250,16 @@ public class VentanaCRUD implements Initializable {
 	@FXML
 	void actionRadioBtnModifcarPaciente(ActionEvent event) {
 
+		cmbSeleccionarEPS.setItems(controlador.principal.getControladorPaciente().verEPS());
+		cmbSeleccionarEPS.getSelectionModel().select(0);
+
+		txtTelefonoPaciente.setDisable(false);
+		btnAgregarTelefonoPaciente.setDisable(false);
+		cmbDescTelefonoPaciente.setDisable(false);
+
 		btnEliminarPaciente.setDisable(true);
 		btnModificarPaciente.setDisable(false);
 		btnAgregarPaciente.setDisable(true);
-
 		txtNombrePaciente.setEditable(true);
 		txtDireccionPaciente.setEditable(true);
 		txtPesoPaciente.setEditable(true);
@@ -247,10 +291,7 @@ public class VentanaCRUD implements Initializable {
 		txtEstaturaPaciente.setText("");
 		txtNombrePaciente.setText("");
 		txtPesoPaciente.setText("");
-
-		ObservableList<Paciente> items1 = FXCollections.observableArrayList();
-
-		tablaPaciente.setItems(items1);
+		txtTelefonoPaciente.setText("");
 
 	}
 
@@ -302,60 +343,29 @@ public class VentanaCRUD implements Initializable {
 			btnLimpiarVenPaciente.setDisable(false);
 			radioBtnEliminarPaciente.setDisable(false);
 			radioBtnModifcarPaciente.setDisable(false);
+			btnAgregarPaciente.setDisable(true);
+			radioBtnAgregarPaciente.setDisable(true);
+
+			txtTelefonoPaciente.setDisable(false);
+			btnAgregarTelefonoPaciente.setDisable(false);
+			cmbDescTelefonoPaciente.setDisable(false);
 
 		}
 	}
 
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-//PACIENTE
-		txtNombrePaciente.setEditable(false);
-		txtDireccionPaciente.setEditable(false);
-		txtDNIPaciente.setEditable(false);
-		txtPesoPaciente.setEditable(false);
-		txtEstaturaPaciente.setEditable(false);
-		cmbGrupoSnaguineo.setDisable(true);
-		cmbRH.setDisable(true);
-		btnAgregarPaciente.setDisable(true);
-		btnEliminarPaciente.setDisable(true);
-		btnModificarPaciente.setDisable(true);
-		radioBtnAgregarPaciente.setDisable(true);
-		radioBtnEliminarPaciente.setDisable(true);
-		radioBtnModifcarPaciente.setDisable(true);
-		cmbSeleccionarEPS.setDisable(true);
-		btnLimpiarVenPaciente.setDisable(true);
+	@FXML
+	void actionAgregarTelefonopaciente(ActionEvent event) {
 
-		ObservableList<String> items1 = FXCollections.observableArrayList();
-		items1.add("O");
-		items1.add("A");
-		items1.add("AB");
-		items1.add("B");
-		cmbGrupoSnaguineo.setItems(items1);
-		cmbGrupoSnaguineo.getSelectionModel().select(0);
+		if (!txtDNIPaciente.getText().equals("")) {
 
-		ObservableList<String> items2 = FXCollections.observableArrayList();
-		items2.add("-");
-		items2.add("+");
-		cmbRH.setItems(items2);
-		cmbRH.getSelectionModel().select(0);
+			String numero = txtTelefonoPaciente.getText();
+			String descripcion = cmbDescTelefonoPaciente.getValue();
+			String dni = txtDNIPaciente.getText();
 
-		final ObservableList<Paciente> tablaPersonaSel = tablaPaciente.getSelectionModel().getSelectedItems();
-		tablaPersonaSel.addListener(selectorTablaPaciente);
+			controlador.principal.getControladorPaciente().agregarTelefono(numero, descripcion, dni);
+			JOptionPane.showMessageDialog(null, "Telefono agregado con exito.");
+		}
 
-		// EPS
-		txtNitEps.setEditable(false);
-		txtNombreEps.setEditable(false);
-
-		btnAgregarEps.setDisable(true);
-		btnEliminarEps.setDisable(true);
-		btnModificarEps.setDisable(true);
-		radioBtnAgregarEps.setDisable(true);
-		radioBtnEliminarEps.setDisable(true);
-		radioBtnModifcarEps.setDisable(true);
-		btnLimpiarVenEps.setDisable(true);
-
-		final ObservableList<Eps> tablaEpsSel = tablaEps.getSelectionModel().getSelectedItems();
-		tablaEpsSel.addListener(selectorTablaEps);
 	}
 
 	// FIN PACIENTE
@@ -429,7 +439,7 @@ public class VentanaCRUD implements Initializable {
 
 	@FXML
 	void actionBuscarEps(ActionEvent event) {
-		Eps eps = controlador.principal.getControladorEps().buscarEps(txtBuscarEps.getText());
+		Eps eps = controlador.principal.getControladorEps().buscarEpsNit(txtBuscarEps.getText());
 		ObservableList<Eps> items1 = FXCollections.observableArrayList();
 		tablaEps.setItems(items1);
 
@@ -449,8 +459,8 @@ public class VentanaCRUD implements Initializable {
 			JOptionPane.showMessageDialog(null, "Eps no encontrada.");
 			txtNitEps.setText(txtBuscarEps.getText());
 			txtBuscarEps.setText("");
-			
-		    txtNombreEps.setEditable(true);
+
+			txtNombreEps.setEditable(true);
 			radioBtnAgregarEps.setDisable(false);
 			btnLimpiarVenEps.setDisable(false);
 			radioBtnEliminarEps.setDisable(true);
@@ -548,6 +558,71 @@ public class VentanaCRUD implements Initializable {
 	}
 
 	// FIN EPS
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+//PACIENTE
+		txtNombrePaciente.setEditable(false);
+		txtDireccionPaciente.setEditable(false);
+		txtDNIPaciente.setEditable(false);
+		txtPesoPaciente.setEditable(false);
+		txtEstaturaPaciente.setEditable(false);
+		cmbGrupoSnaguineo.setDisable(true);
+		cmbRH.setDisable(true);
+		btnAgregarPaciente.setDisable(true);
+		btnEliminarPaciente.setDisable(true);
+		btnModificarPaciente.setDisable(true);
+		radioBtnAgregarPaciente.setDisable(true);
+		radioBtnEliminarPaciente.setDisable(true);
+		radioBtnModifcarPaciente.setDisable(true);
+		cmbSeleccionarEPS.setDisable(true);
+		btnLimpiarVenPaciente.setDisable(true);
+		btnAgregarPaciente.setDisable(true);
+		txtTelefonoPaciente.setDisable(true);
+		btnAgregarTelefonoPaciente.setDisable(true);
+		cmbDescTelefonoPaciente.setDisable(true);
+
+		ObservableList<String> items1 = FXCollections.observableArrayList();
+		items1.add("O");
+		items1.add("A");
+		items1.add("AB");
+		items1.add("B");
+		cmbGrupoSnaguineo.setItems(items1);
+		cmbGrupoSnaguineo.getSelectionModel().select(0);
+
+		ObservableList<String> items2 = FXCollections.observableArrayList();
+		items2.add("-");
+		items2.add("+");
+		cmbRH.setItems(items2);
+		cmbRH.getSelectionModel().select(0);
+
+		ObservableList<String> items3 = FXCollections.observableArrayList();
+		items3.add("Principal");
+		items3.add("Movil");
+		items3.add("Casa");
+		items3.add("Trabajo");
+		cmbDescTelefonoPaciente.setItems(items3);
+		cmbDescTelefonoPaciente.getSelectionModel().select(0);
+
+		final ObservableList<Paciente> tablaPersonaSel = tablaPaciente.getSelectionModel().getSelectedItems();
+		tablaPersonaSel.addListener(selectorTablaPaciente);
+
+		// EPS
+		txtNitEps.setEditable(false);
+		txtNombreEps.setEditable(false);
+
+		btnAgregarEps.setDisable(true);
+		btnEliminarEps.setDisable(true);
+		btnModificarEps.setDisable(true);
+		radioBtnAgregarEps.setDisable(true);
+		radioBtnEliminarEps.setDisable(true);
+		radioBtnModifcarEps.setDisable(true);
+		btnLimpiarVenEps.setDisable(true);
+
+		final ObservableList<Eps> tablaEpsSel = tablaEps.getSelectionModel().getSelectedItems();
+		tablaEpsSel.addListener(selectorTablaEps);
+
+	}
 
 	public Controlador getControlador() {
 		return controlador;

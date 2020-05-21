@@ -1,3 +1,4 @@
+
 package modelo;
 
 import java.sql.Connection;
@@ -12,13 +13,15 @@ import modelo.entidad.Eps;
 public class ControladorEps {
 	ConectorBD cc;
 	Connection con;
+	Principal principal;
 	private PreparedStatement ps;
 	private ResultSet rs;
 
-	public ControladorEps(ConectorBD cc, Connection con) {
+	public ControladorEps(ConectorBD cc, Connection con, Principal principal) {
 		super();
 		this.cc = cc;
 		this.con = con;
+		this.principal = principal;
 	}
 
 	public Eps insertarEps(String nit, String nombre) {
@@ -73,7 +76,7 @@ public class ControladorEps {
 		}
 	}
 
-	public Eps buscarEps(String nit) {
+	public Eps buscarEpsNit(String nit) {
 		Eps e = null;
 
 		try {
@@ -85,21 +88,6 @@ public class ControladorEps {
 			if (rs.next()) {
 				e = new Eps(rs.getNString("nit"), rs.getNString("nombre"));
 
-				/**
-				 * String SQL1 = "SELECT * FROM HistoriaClinica"; Statement st1 =
-				 * con.createStatement(); ResultSet rs1 = st1.executeQuery(SQL1);
-				 * 
-				 *while (rs1.next()) {
-				 * 
-				 * if (rs1.getString("numero").equals(rs.getString("HistoriaClinica_numero"))) {
-				 * HistoriaClinica hc = new HistoriaClinica(rs1.getString("numero"),
-				 * rs1.getString("InformacionMedica"), rs1.getDouble("estatura"),
-				 * rs1.getDouble("peso"), null, p); p.setHistoriaClinica(hc);
-				 * 
-				 * }
-				 * 
-				 * }
-				 */
 			}
 		} catch (Exception a) {
 			JOptionPane.showMessageDialog(null, "No se realizo consulta." + a.getMessage());
@@ -108,6 +96,26 @@ public class ControladorEps {
 		return e;
 	}
 	
+	public Eps buscarEpsNombre(String nombre) {
+		Eps e = null;
+
+		try {
+			String SQL = "SELECT * FROM Eps WHERE nombre = ?";
+			ps = con.prepareStatement(SQL);
+			ps.setString(1, nombre);
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				e = new Eps(rs.getNString("nit"), rs.getNString("nombre"));
+
+			}
+		} catch (Exception a) {
+			JOptionPane.showMessageDialog(null, "No se realizo consulta." + a.getMessage());
+			a.printStackTrace();
+		}
+		return e;
+	}
+
 	public ArrayList<Eps> mostrarDatosEps() {
 		ArrayList<Eps> lstEps = new ArrayList<Eps>();
 		String SQL = "Select * from Eps";

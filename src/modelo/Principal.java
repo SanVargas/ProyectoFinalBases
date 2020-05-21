@@ -17,8 +17,8 @@ public class Principal {
 	private ControladorEps  controladorEps;
 
 	public Principal() {
-		controladorPaciente = new ControladorPaciente(cc,con);
-		controladorEps = new ControladorEps(cc, con);
+		controladorPaciente = new ControladorPaciente(cc,con, this);
+		controladorEps = new ControladorEps(cc, con, this);
 	}
 
 	public void insertarGrupoSangre() {
