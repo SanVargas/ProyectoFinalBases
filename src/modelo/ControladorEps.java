@@ -51,6 +51,7 @@ public class ControladorEps {
 			ps = con.prepareStatement(SQL);
 			ps.setString(1, nit);
 			ps.setString(2, nombre);
+			ps.setString(3,nit);
 
 			ps.execute();
 
@@ -63,6 +64,20 @@ public class ControladorEps {
 
 	public void eliminarEps(String nit) {
 		try {
+			String SQL1 = "SELECT * FROM Paciente WHERE EPS_nit = ?";
+			PreparedStatement ps1 = con.prepareStatement(SQL1);
+			ResultSet rs1;
+			ps1.setString(1, nit);
+			rs1 = ps1.executeQuery();
+
+			while (rs1.next()) {
+				String SQL2 = "UPDATE Paciente SET EPS_nit = ? WHERE dni = ?";
+				PreparedStatement ps2 = con.prepareStatement(SQL2);
+				ps2.setString(1, null);
+				ps2.setString(2, rs1.getString("dni"));
+				ps2.execute();
+			}
+
 			String SQL = "DELETE FROM Eps WHERE nit = ?";
 			ps = con.prepareStatement(SQL);
 			ps.setString(1, nit);
@@ -95,7 +110,7 @@ public class ControladorEps {
 		}
 		return e;
 	}
-	
+
 	public Eps buscarEpsNombre(String nombre) {
 		Eps e = null;
 

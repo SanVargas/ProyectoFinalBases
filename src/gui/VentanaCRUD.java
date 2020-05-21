@@ -30,7 +30,6 @@ public class VentanaCRUD implements Initializable {
 	Controlador controlador;
 
 // PACIENTE
-
 	ObservableList<Paciente> pacientes;
 	@FXML
 	private ComboBox<String> cmbGrupoSnaguineo;
@@ -416,6 +415,9 @@ public class VentanaCRUD implements Initializable {
 
 			tablaEps.getItems().add(ep);
 		}
+		txtNitEps.setText("");
+		txtNombreEps.setText("");
+		btnAgregarEps.setDisable(true);
 	}
 
 	@FXML
@@ -460,7 +462,6 @@ public class VentanaCRUD implements Initializable {
 			txtNitEps.setText(txtBuscarEps.getText());
 			txtBuscarEps.setText("");
 
-			txtNombreEps.setEditable(true);
 			radioBtnAgregarEps.setDisable(false);
 			btnLimpiarVenEps.setDisable(false);
 			radioBtnEliminarEps.setDisable(true);
@@ -474,7 +475,7 @@ public class VentanaCRUD implements Initializable {
 	@FXML
 	void actionRadioBtnAgregarEps(ActionEvent event) {
 		btnAgregarEps.setDisable(false);
-		txtNitEps.setEditable(true);
+		txtNitEps.setEditable(false);
 		txtNombreEps.setEditable(true);
 	}
 
@@ -494,7 +495,7 @@ public class VentanaCRUD implements Initializable {
 		btnModificarEps.setDisable(false);
 		btnAgregarEps.setDisable(true);
 
-		txtNitEps.setEditable(true);
+		txtNitEps.setEditable(false);
 		txtNombreEps.setEditable(true);
 	}
 
