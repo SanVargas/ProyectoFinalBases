@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 import conector.ConectorBD;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -80,14 +79,12 @@ public class ControladorPaciente {
 			pst2.execute();
 			pst1.execute();
 			agregarTelefono(numeroT, descripcionT, dni);
-			JOptionPane.showMessageDialog(null, "Se agrego correctamente el paciente.");
 
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null,
-					"No se agrego correctamente, verifique la informacion. error: " + e.getMessage());
+			Alerta.mostrarAlerta("Confirmacion", "Alerta", "Se agrego existosamente.", AlertType.CONFIRMATION);
+		} catch (SQLException e) {
+			Alerta.mostrarAlerta("Error", "Alerta", "Error al agregar.", AlertType.ERROR);
 			p = null;
 		}
-
 		return p;
 
 	}
@@ -103,10 +100,10 @@ public class ControladorPaciente {
 			pst1.setString(2, descripcion);
 			pst1.setString(3, dni);
 			pst1.execute();
-			
-			Alerta.mostrarAlerta("Confirmacion", "Alerta", "El telefono se ingreso existosamente.", AlertType.CONFIRMATION);
-		} catch (SQLException e) {
-			Alerta.mostrarAlerta("Error", "Alerta", "Error al agregar el telefono.", AlertType.ERROR);
+
+			Alerta.mostrarAlerta("Confirmacion", "Alerta", "Se agrego existosamente.", AlertType.CONFIRMATION);
+		} catch (Exception e) {
+			Alerta.mostrarAlerta("Error", "Alerta", "Error al agregar.", AlertType.ERROR);
 		}
 
 	}
@@ -137,11 +134,9 @@ public class ControladorPaciente {
 
 			ps.execute();
 
-			JOptionPane.showMessageDialog(null, "Se realizo la modificacion existosamente.");
-
+			Alerta.mostrarAlerta("Confirmacion", "Alerta", "Se modifico existosamente.", AlertType.CONFIRMATION);
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "No se realizo modificacion." + e.getMessage());
-			e.printStackTrace();
+			Alerta.mostrarAlerta("Error", "Alerta", "Error al modificar.", AlertType.ERROR);
 		}
 	}
 
@@ -151,7 +146,7 @@ public class ControladorPaciente {
 		PreparedStatement ps3;
 
 		try {
-			
+
 			String SQL11 = "SELECT * FROM TELEFONO_PACIENTE WHERE Paciente_dni = ?";
 			PreparedStatement ps11 = con.prepareStatement(SQL11);
 			ResultSet rs11;
@@ -168,7 +163,7 @@ public class ControladorPaciente {
 			String SQL1 = "DELETE FROM HISTORIACLINICA WHERE Paciente_dni = ?";
 			ps1 = con.prepareStatement(SQL1);
 			ps1.setString(1, dni);
-			
+
 			String SQL2 = "DELETE FROM TELEFONO_PACIENTE WHERE Paciente_dni = ?";
 			ps3 = con.prepareStatement(SQL2);
 			ps3.setString(1, dni);
@@ -177,16 +172,13 @@ public class ControladorPaciente {
 			ps = con.prepareStatement(SQL);
 			ps.setString(1, dni);
 
-			
 			ps3.execute();
 			ps1.execute();
 			ps.execute();
 
-			JOptionPane.showMessageDialog(null, "Se realizo la eliminacion existosamente.");
-
+			Alerta.mostrarAlerta("Confirmacion", "Alerta", "Se elimino existosamente.", AlertType.CONFIRMATION);
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "No se realizo eliminacion. error: " + e.getMessage());
-			e.printStackTrace();
+			Alerta.mostrarAlerta("Error", "Alerta", "Error al eliminar.", AlertType.ERROR);
 		}
 	}
 
@@ -227,9 +219,9 @@ public class ControladorPaciente {
 
 				}
 			}
+
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "No se realizo consulta." + e.getMessage());
-			e.printStackTrace();
+			Alerta.mostrarAlerta("Error", "Alerta", "Error al buscar.", AlertType.ERROR);
 		}
 
 		return p;
@@ -267,16 +259,13 @@ public class ControladorPaciente {
 								null, p);
 						p.setHistoriaClinica(hc);
 						lstPaciente.add(p);
-
 					}
-
 				}
-
 			}
 
 		} catch (Exception e) {
-
-			JOptionPane.showMessageDialog(null, "Error al listar pacientes. error: " + e.getMessage());
+			Alerta.mostrarAlerta("Error", "Alerta", "Error al listar.", AlertType.ERROR);
+			e.printStackTrace();
 		}
 		return lstPaciente;
 	}

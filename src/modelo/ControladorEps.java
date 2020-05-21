@@ -4,14 +4,19 @@ package modelo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
-
 import conector.ConectorBD;
 import javafx.scene.control.Alert.AlertType;
 import modelo.entidad.Eps;
 
+/**
+ * Clase encargada de controlar lo relacionado con EPS.
+ * 
+ * @author Diego riveros - Lissete Quebrada - Santiago Vargas
+ *
+ */
 public class ControladorEps {
 	ConectorBD cc;
 	Connection con;
@@ -38,10 +43,9 @@ public class ControladorEps {
 
 			ps.execute();
 
-			JOptionPane.showMessageDialog(null, "Se agrego correctamente la EPS");
-		} catch (Exception a) {
-			JOptionPane.showMessageDialog(null,
-					"No se agrego correctamente, verifique la informaci�n. error: " + a.getMessage());
+			Alerta.mostrarAlerta("Confirmacion", "Alerta", "Se agrego existosamente.", AlertType.CONFIRMATION);
+		} catch (SQLException a) {
+			Alerta.mostrarAlerta("Error", "Alerta", "Error al agregar.", AlertType.ERROR);
 			e = null;
 		}
 		return e;
@@ -53,15 +57,13 @@ public class ControladorEps {
 			ps = con.prepareStatement(SQL);
 			ps.setString(1, nit);
 			ps.setString(2, nombre);
-			ps.setString(3,nit);
+			ps.setString(3, nit);
 
 			ps.execute();
-			
-			Alerta.mostrarAlerta("Confirmacion", "Alerta", "Se realizo la modificacion existosamente", AlertType.CONFIRMATION);
-			
+
+			Alerta.mostrarAlerta("Confirmacion", "Alerta", "Se modifico existosamente.", AlertType.CONFIRMATION);
 		} catch (Exception e) {
-			Alerta.mostrarAlerta("Mensaje", "Error", "No se realizo modificacion", AlertType.ERROR);
-			e.printStackTrace();
+			Alerta.mostrarAlerta("Error", "Alerta", "Error al modificar.", AlertType.ERROR);
 		}
 	}
 
@@ -86,12 +88,10 @@ public class ControladorEps {
 			ps.setString(1, nit);
 
 			ps.execute();
-			
-			Alerta.mostrarAlerta("Confirmacion", "Alerta", "Se realizo la eliminacion existosamente.", AlertType.CONFIRMATION);
-			
+
+			Alerta.mostrarAlerta("Confirmacion", "Alerta", "Se elimino existosamente.", AlertType.CONFIRMATION);
 		} catch (Exception e) {
-			
-			Alerta.mostrarAlerta("Error", "Alerta", "No se realizo la eliminacion existosamente.", AlertType.ERROR);
+			Alerta.mostrarAlerta("Error", "Alerta", "Error al eliminar.", AlertType.ERROR);
 			e.printStackTrace();
 		}
 	}
@@ -109,9 +109,9 @@ public class ControladorEps {
 				e = new Eps(rs.getNString("nit"), rs.getNString("nombre"));
 
 			}
+
 		} catch (Exception a) {
-			
-			Alerta.mostrarAlerta("Error", "Alerta", "No se realizo consulta.", AlertType.ERROR);
+			Alerta.mostrarAlerta("Error", "Alerta", "Error al buscar.", AlertType.ERROR);
 			a.printStackTrace();
 		}
 		return e;
@@ -155,7 +155,7 @@ public class ControladorEps {
 			}
 
 		} catch (Exception e) {
-			Alerta.mostrarAlerta("Error", "Alerta", "Error al listar las Eps's. error: ", AlertType.ERROR);
+			Alerta.mostrarAlerta("Error", "Alerta", "Error al listar.", AlertType.ERROR);
 			e.printStackTrace();
 		}
 		return lstEps;

@@ -3,9 +3,7 @@ package gui;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
 import java.util.ResourceBundle;
-import javax.swing.JOptionPane;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -24,6 +22,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import modelo.Alerta;
 import modelo.entidad.Eps;
+import modelo.entidad.Medico;
 import modelo.entidad.Paciente;
 
 public class VentanaCRUD implements Initializable {
@@ -106,7 +105,7 @@ public class VentanaCRUD implements Initializable {
 			estatura = Double.parseDouble(txtPesoPaciente.getText());
 			peso = Double.parseDouble(txtEstaturaPaciente.getText());
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "Revise los valores ingresados. error: " + e.getMessage());
+			Alerta.mostrarAlerta("Error", "Alerta", "Revise la informacion.", AlertType.ERROR);
 		}
 
 		String eps = cmbSeleccionarEPS.getValue();
@@ -192,7 +191,7 @@ public class VentanaCRUD implements Initializable {
 			btnAgregarPaciente.setDisable(true);
 			radioBtnAgregarPaciente.setDisable(true);
 		} else {
-			JOptionPane.showMessageDialog(null, "Paciente no encontrado.");
+			Alerta.mostrarAlerta("Confirmacion", "Alerta", "Busqueda no encontrada.", AlertType.CONFIRMATION);
 
 			if (radioBtnAgregarPaciente.isSelected()) {
 				btnAgregarPaciente.setDisable(false);
@@ -410,7 +409,7 @@ public class VentanaCRUD implements Initializable {
 	}
 
 	// FIN PACIENTE
-//---------------
+	// ---------------
 	// EPS
 	@FXML
 	private Button btnAgregarEps;
@@ -500,7 +499,7 @@ public class VentanaCRUD implements Initializable {
 			btnAgregarEps.setDisable(true);
 			radioBtnAgregarEps.setDisable(true);
 		} else {
-			JOptionPane.showMessageDialog(null, "Eps no encontrada.");
+			Alerta.mostrarAlerta("Confirmacion", "Alerta", "Busqueda no encontrada.", AlertType.CONFIRMATION);
 			txtNitEps.setText(txtBuscarEps.getText());
 			txtBuscarEps.setText("");
 
@@ -601,10 +600,211 @@ public class VentanaCRUD implements Initializable {
 	}
 
 	// FIN EPS
+	// -------------------------------------------
+
+	// MEDICO
+	@FXML
+	private TextField txtNombreMedico;
+	@FXML
+	private RadioButton radioBtnAgregarMedico;
+	@FXML
+	private TableColumn<Medico, String> columnaLicenciaMedico;
+	@FXML
+	private TextField txtBuscarMedico;
+	@FXML
+	private TableColumn<Medico, String> columnaNombreMedico;
+	@FXML
+	private RadioButton radioBtnModifcarMedico;
+	@FXML
+	private ComboBox<?> cmbEspecialidadMedico;
+	@FXML
+	private TextField txtLicenciaMedico;
+	@FXML
+	private Button btnAgregarMedico;
+	@FXML
+	private Button btnEliminarMedico;
+	@FXML
+	private Button btnModificarMedico;
+	@FXML
+	private Button btnBuscarMedico;
+	@FXML
+	private TableView<Medico> tablaMedico;
+	@FXML
+	private Button btnAgregarEspecialidadMedico;
+	@FXML
+	private Button btnLimpiarVenMedico;
+	@FXML
+	private RadioButton radioBtnEliminarMedico;
+	@FXML
+	private ToggleGroup radioGroupOpcionMedico;
+
+	@FXML
+	void actionAgregarMedico(ActionEvent event) {
+		txtLicenciaMedico.setEditable(false);
+		String licencia = txtLicenciaMedico.getText();
+		String nombre = txtNombreMedico.getText();
+
+		Medico m = controlador.principal.getControladorMedico().insertarMedico(licencia, nombre);
+
+		if (m != null) {
+			columnaLicenciaMedico.setCellValueFactory(new PropertyValueFactory<Medico, String>("licencia"));
+			columnaNombreMedico.setCellValueFactory(new PropertyValueFactory<Medico, String>("nombre"));
+
+			tablaMedico.getItems().add(m);
+		}
+		txtLicenciaMedico.setText("");
+		txtNombreMedico.setText("");
+		btnAgregarMedico.setDisable(true);
+		radioBtnAgregarMedico.setDisable(false);// ojo
+	}
+
+	@FXML
+	void actionEliminarMedico(ActionEvent event) {
+		controlador.principal.getControladorMedico().eliminarMedico(txtLicenciaMedico.getText());
+		actionLimpiarVenMedico(event);
+		mostrarMedico();
+	}
+
+	@FXML
+	void actionModificarMedico(ActionEvent event) {
+		txtLicenciaMedico.setEditable(false);
+		String licencia = txtLicenciaMedico.getText();
+		String nombre = txtNombreMedico.getText();
+
+		controlador.principal.getControladorMedico().modificarMedico(licencia, nombre);
+
+		actionLimpiarVenMedico(event);
+		mostrarMedico();
+	}
+
+	@FXML
+	void actionBuscarMedico(ActionEvent event) {
+		Medico m = controlador.principal.getControladorMedico().buscarMedico(txtBuscarMedico.getText());
+		ObservableList<Medico> items1 = FXCollections.observableArrayList();
+		tablaMedico.setItems(items1);
+
+		if (m != null) {
+			columnaNombreMedico.setCellValueFactory(new PropertyValueFactory<Medico, String>("nombre"));
+			columnaLicenciaMedico.setCellValueFactory(new PropertyValueFactory<Medico, String>("licencia"));
+			
+			tablaMedico.getItems().add(m);
+			radioBtnEliminarMedico.setDisable(false);
+			radioBtnModifcarMedico.setDisable(false);
+			btnModificarMedico.setDisable(false);
+			btnEliminarMedico.setDisable(false);
+			btnLimpiarVenMedico.setDisable(false);
+			btnAgregarMedico.setDisable(true);
+			radioBtnAgregarMedico.setDisable(true);
+		} else {
+			Alerta.mostrarAlerta("Confirmacion", "Alerta", "Busqueda no encontrada.", AlertType.CONFIRMATION);
+			txtLicenciaMedico.setText(txtBuscarMedico.getText());
+			txtBuscarMedico.setText("");
+
+			radioBtnAgregarMedico.setDisable(false);
+			btnLimpiarVenMedico.setDisable(false);
+			radioBtnEliminarMedico.setDisable(true);
+			radioBtnModifcarMedico.setDisable(true);
+			btnModificarMedico.setDisable(true);
+			btnEliminarMedico.setDisable(true);
+			mostrarMedico();
+		}
+	}
+
+	@FXML
+	void actionRadioBtnAgregarMedico(ActionEvent event) {
+		btnAgregarMedico.setDisable(false);
+		btnAgregarEspecialidadMedico.setDisable(false);
+		
+		txtLicenciaMedico.setEditable(false);
+		txtNombreMedico.setEditable(true);
+	}
+
+	@FXML
+	void actionRadioBtnEliminarMedico(ActionEvent event) {
+		btnEliminarMedico.setDisable(false);
+		btnModificarMedico.setDisable(true);
+		btnAgregarMedico.setDisable(true);
+
+		txtLicenciaMedico.setEditable(false);
+		txtNombreMedico.setEditable(false);
+	}
+
+	@FXML
+	void actionRadioBtnModifcarMedico(ActionEvent event) {
+		btnEliminarMedico.setDisable(true);
+		btnModificarMedico.setDisable(false);
+		btnAgregarMedico.setDisable(true);
+
+		txtLicenciaMedico.setEditable(false);
+		txtNombreMedico.setEditable(true);
+	}
+
+	@FXML
+	void actionLimpiarVenMedico(ActionEvent event) {
+		txtBuscarMedico.setText("");
+		txtLicenciaMedico.setText("");
+		txtNombreMedico.setText("");
+
+		ObservableList<Medico> items1 = FXCollections.observableArrayList();
+
+		tablaMedico.setItems(items1);
+	}
+
+	@FXML
+	void actionAgregarEspecialidadMedico(ActionEvent event) {
+		Alerta.mostrarAlerta("Confirmacion", "Alerta", "Funcion en mantenimiento.", AlertType.CONFIRMATION);
+	}
+
+	void mostrarMedico() {
+		ArrayList<Medico> lstMedico = controlador.principal.getControladorMedico().mostrarDatosMedico();
+
+		for (Medico m : lstMedico) {
+			columnaLicenciaMedico.setCellValueFactory(new PropertyValueFactory<Medico, String>("licencia"));
+			columnaNombreMedico.setCellValueFactory(new PropertyValueFactory<Medico, String>("nombre"));
+
+			tablaMedico.getItems().add(m);
+		}
+	}
+
+	private final ListChangeListener<Medico> selectorTablaMedico = new ListChangeListener<Medico>() {
+
+		@Override
+		public void onChanged(ListChangeListener.Change<? extends Medico> c) {
+			ponerMedicoSeleccionado();
+		}
+	};
+
+	public Medico getTablaMedicoSeleccionada() {
+		if (tablaMedico != null) {
+			List<Medico> tabla = tablaMedico.getSelectionModel().getSelectedItems();
+			if (tabla.size() == 1) {
+				final Medico competicionSeleccionada = tabla.get(0);
+				return competicionSeleccionada;
+			}
+		}
+		return null;
+	}
+
+	private void ponerMedicoSeleccionado() {
+		final Medico m = getTablaMedicoSeleccionada();
+
+		if (m != null) {
+			txtLicenciaMedico.setText(m.getLicencia());
+			txtNombreMedico.setText(m.getNombre());
+
+			txtLicenciaMedico.setEditable(false);
+			txtNombreMedico.setEditable(false);
+
+			btnLimpiarVenMedico.setDisable(false);
+			radioBtnEliminarMedico.setDisable(false);
+			radioBtnModifcarMedico.setDisable(false);
+		}
+	}
+	// FIN MEDICO
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-//PACIENTE
+		// PACIENTE
 		txtNombrePaciente.setEditable(false);
 		txtDireccionPaciente.setEditable(false);
 		txtDNIPaciente.setEditable(false);
@@ -664,6 +864,23 @@ public class VentanaCRUD implements Initializable {
 
 		final ObservableList<Eps> tablaEpsSel = tablaEps.getSelectionModel().getSelectedItems();
 		tablaEpsSel.addListener(selectorTablaEps);
+
+		// Medico
+		txtLicenciaMedico.setEditable(false);
+		txtNombreMedico.setEditable(false);
+
+		btnAgregarMedico.setDisable(true);
+		btnEliminarMedico.setDisable(true);
+		btnModificarMedico.setDisable(true);
+		radioBtnAgregarMedico.setDisable(true);
+		radioBtnEliminarMedico.setDisable(true);
+		radioBtnModifcarMedico.setDisable(true);
+		btnLimpiarVenMedico.setDisable(true);
+		btnAgregarEspecialidadMedico.setDisable(true);
+		//cmbEspecialidadMedico.setDisable(true);
+
+		final ObservableList<Medico> tablaMedicoSel = tablaMedico.getSelectionModel().getSelectedItems();
+		tablaMedicoSel.addListener(selectorTablaMedico);
 
 	}
 
