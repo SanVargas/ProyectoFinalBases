@@ -10,9 +10,11 @@ import javax.swing.JOptionPane;
 import conector.ConectorBD;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert.AlertType;
 import modelo.entidad.Eps;
 import modelo.entidad.HistoriaClinica;
 import modelo.entidad.Paciente;
+import modelo.entidad.TipoSangre;
 
 public class ControladorPaciente {
 	ConectorBD cc;
@@ -49,6 +51,9 @@ public class ControladorPaciente {
 			pst1.setString(5, dni);
 			pst1.setString(6, idGrupoS);
 
+			TipoSangre ts = new TipoSangre(rh, grupoS, idGrupoS);
+			hc = new HistoriaClinica(numero, "", peso, altura, ts, p);
+
 			String SQL2 = "INSERT INTO Paciente (nombre, dni, direccion, EPS_nit, HistoriaClinica_numero) values (?,?, ?, ?, ?)";
 
 			PreparedStatement pst2 = con.prepareStatement(SQL2);
@@ -72,7 +77,6 @@ public class ControladorPaciente {
 				p = new Paciente(nombre, dni, direccion, hc, null);
 			}
 
-			hc = new HistoriaClinica(numero, "", 70.2, 180.1, null, p);
 			pst2.execute();
 			pst1.execute();
 			agregarTelefono(numeroT, descripcionT, dni);
@@ -80,7 +84,7 @@ public class ControladorPaciente {
 
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null,
-					"No se agrego correctamente, verifique la informaci�n. error: " + e.getMessage());
+					"No se agrego correctamente, verifique la informacion. error: " + e.getMessage());
 			p = null;
 		}
 
@@ -99,10 +103,10 @@ public class ControladorPaciente {
 			pst1.setString(2, descripcion);
 			pst1.setString(3, dni);
 			pst1.execute();
-		} catch (SQLException e) {
 			
-			JOptionPane.showMessageDialog(null, "Error al agregar el telefono. error: " + e.getMessage());
-			e.printStackTrace();
+			Alerta.mostrarAlerta("Confirmacion", "Alerta", "El telefono se ingreso existosamente.", AlertType.CONFIRMATION);
+		} catch (SQLException e) {
+			Alerta.mostrarAlerta("Error", "Alerta", "Error al agregar el telefono.", AlertType.ERROR);
 		}
 
 	}
@@ -144,17 +148,37 @@ public class ControladorPaciente {
 	public void eliminarPaciente(String dni) {
 
 		PreparedStatement ps1;
+		PreparedStatement ps3;
 
 		try {
+			
+			String SQL11 = "SELECT * FROM TELEFONO_PACIENTE WHERE Paciente_dni = ?";
+			PreparedStatement ps11 = con.prepareStatement(SQL11);
+			ResultSet rs11;
+			ps11.setString(1, dni);
+			rs11 = ps11.executeQuery();
 
-			String SQL = "DELETE FROM Paciente WHERE dni = ?";
+			while (rs11.next()) {
+				String SQL22 = "DELETE FROM TELEFONO_PACIENTE WHERE numero = ?";
+				PreparedStatement ps22 = con.prepareStatement(SQL22);
+				ps22.setString(1, rs11.getString("numero"));
+				ps22.execute();
+			}
+
+			String SQL1 = "DELETE FROM HISTORIACLINICA WHERE Paciente_dni = ?";
+			ps1 = con.prepareStatement(SQL1);
+			ps1.setString(1, dni);
+			
+			String SQL2 = "DELETE FROM TELEFONO_PACIENTE WHERE Paciente_dni = ?";
+			ps3 = con.prepareStatement(SQL2);
+			ps3.setString(1, dni);
+
+			String SQL = "DELETE FROM PACIENTE WHERE dni = ?";
 			ps = con.prepareStatement(SQL);
 			ps.setString(1, dni);
 
-			String SQL1 = "DELETE FROM HistoriaClinica WHERE Paciente_dni = ?";
-			ps1 = con.prepareStatement(SQL1);
-			ps1.setString(1, dni);
-
+			
+			ps3.execute();
 			ps1.execute();
 			ps.execute();
 
@@ -242,12 +266,12 @@ public class ControladorPaciente {
 								rs1.getString("InformacionMedica"), rs1.getDouble("estatura"), rs1.getDouble("peso"),
 								null, p);
 						p.setHistoriaClinica(hc);
+						lstPaciente.add(p);
 
 					}
 
 				}
 
-				lstPaciente.add(p);
 			}
 
 		} catch (Exception e) {

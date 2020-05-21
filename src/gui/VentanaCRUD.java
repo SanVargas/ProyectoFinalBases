@@ -3,6 +3,7 @@ package gui;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 import java.util.ResourceBundle;
 import javax.swing.JOptionPane;
 import javafx.collections.FXCollections;
@@ -18,8 +19,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import modelo.Alerta;
 import modelo.entidad.Eps;
 import modelo.entidad.Paciente;
 
@@ -118,7 +121,7 @@ public class VentanaCRUD implements Initializable {
 
 			tablaPaciente.getItems().add(p);
 		}
-		
+
 		txtNombrePaciente.setEditable(false);
 		txtDireccionPaciente.setEditable(false);
 		txtDNIPaciente.setEditable(false);
@@ -190,6 +193,22 @@ public class VentanaCRUD implements Initializable {
 			radioBtnAgregarPaciente.setDisable(true);
 		} else {
 			JOptionPane.showMessageDialog(null, "Paciente no encontrado.");
+
+			if (radioBtnAgregarPaciente.isSelected()) {
+				btnAgregarPaciente.setDisable(false);
+				txtNombrePaciente.setEditable(true);
+				txtDireccionPaciente.setEditable(true);
+				txtDNIPaciente.setEditable(false);
+				txtPesoPaciente.setEditable(true);
+				txtEstaturaPaciente.setEditable(true);
+				cmbGrupoSnaguineo.setDisable(false);
+				cmbRH.setDisable(false);
+				cmbSeleccionarEPS.setDisable(false);
+				txtTelefonoPaciente.setDisable(false);
+				btnAgregarTelefonoPaciente.setDisable(true);
+				cmbDescTelefonoPaciente.setDisable(false);
+			}
+
 			txtDNIPaciente.setText(txtBuscarPaciente.getText());
 			txtBuscarPaciente.setText("");
 			txtNombrePaciente.setText("");
@@ -197,6 +216,8 @@ public class VentanaCRUD implements Initializable {
 			txtPesoPaciente.setText("");
 			txtEstaturaPaciente.setText("");
 			radioBtnAgregarPaciente.setDisable(false);
+
+			radioBtnAgregarPaciente.setFocusTraversable(false);
 			btnLimpiarVenPaciente.setDisable(false);
 			radioBtnEliminarPaciente.setDisable(true);
 			radioBtnModifcarPaciente.setDisable(true);
@@ -270,6 +291,10 @@ public class VentanaCRUD implements Initializable {
 	}
 
 	void mostrarPaciente() {
+
+		ObservableList<Paciente> items1 = FXCollections.observableArrayList();
+		tablaPaciente.setItems(items1);
+
 		ArrayList<Paciente> lstPaciente = controlador.principal.getControladorPaciente().mostrarDatos();
 
 		for (Paciente paciente : lstPaciente) {
@@ -321,6 +346,28 @@ public class VentanaCRUD implements Initializable {
 
 		if (paciente != null) {
 
+			if (radioBtnModifcarPaciente.isSelected()) {
+				txtNombrePaciente.setEditable(true);
+				txtDireccionPaciente.setEditable(true);
+				txtDNIPaciente.setEditable(false);
+				txtPesoPaciente.setEditable(true);
+				txtEstaturaPaciente.setEditable(true);
+				cmbGrupoSnaguineo.setDisable(false);
+				cmbRH.setDisable(false);
+				cmbSeleccionarEPS.setDisable(false);
+				txtTelefonoPaciente.setDisable(false);
+				cmbDescTelefonoPaciente.setDisable(false);
+			} else {
+				txtNombrePaciente.setEditable(false);
+				txtDNIPaciente.setEditable(false);
+				txtDireccionPaciente.setEditable(false);
+				txtPesoPaciente.setEditable(false);
+				txtEstaturaPaciente.setEditable(false);
+				txtPesoPaciente.setEditable(false);
+				cmbGrupoSnaguineo.setDisable(true);
+				cmbRH.setDisable(true);
+			}
+
 			txtNombrePaciente.setText(paciente.getNombre());
 			txtDNIPaciente.setText(paciente.getDni());
 			txtDireccionPaciente.setText(paciente.getDireccion());
@@ -329,15 +376,6 @@ public class VentanaCRUD implements Initializable {
 			txtPesoPaciente.setText(paciente.getHistoriaClinica().getPeso() + "");
 			cmbGrupoSnaguineo.getSelectionModel().select(0);
 			cmbRH.getSelectionModel().select(0);
-
-			txtNombrePaciente.setEditable(false);
-			txtDNIPaciente.setEditable(false);
-			txtDireccionPaciente.setEditable(false);
-			txtPesoPaciente.setEditable(false);
-			txtEstaturaPaciente.setEditable(false);
-			txtPesoPaciente.setEditable(false);
-			cmbGrupoSnaguineo.setDisable(true);
-			cmbRH.setDisable(true);
 
 			btnLimpiarVenPaciente.setDisable(false);
 			radioBtnEliminarPaciente.setDisable(false);
@@ -355,15 +393,19 @@ public class VentanaCRUD implements Initializable {
 	@FXML
 	void actionAgregarTelefonopaciente(ActionEvent event) {
 
-		if (!txtDNIPaciente.getText().equals("")) {
+		if (!txtDNIPaciente.getText().isEmpty()) {
 
 			String numero = txtTelefonoPaciente.getText();
 			String descripcion = cmbDescTelefonoPaciente.getValue();
 			String dni = txtDNIPaciente.getText();
 
 			controlador.principal.getControladorPaciente().agregarTelefono(numero, descripcion, dni);
-			JOptionPane.showMessageDialog(null, "Telefono agregado con exito.");
+
+		} else {
+			Alerta.mostrarAlerta("Error", "Alerta", "Ingrese un numero de telefono valido.", AlertType.ERROR);
 		}
+
+		txtTelefonoPaciente.setText("");
 
 	}
 

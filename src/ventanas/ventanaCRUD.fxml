@@ -6,6 +6,42 @@
 
 <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="445.0" prefWidth="673.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.VentanaCRUD">
   <tabs>
+    <Tab text="Eps">
+         <content>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <AnchorPane prefHeight="336.0" prefWidth="635.0">
+                     <children>
+                        <Button fx:id="btnAgregarEps" layoutX="20.0" layoutY="374.0" mnemonicParsing="false" onAction="#actionAgregarEps" prefHeight="20.0" prefWidth="120.0" text="Agregar" />
+                        <Button fx:id="btnEliminarEps" layoutX="188.0" layoutY="374.0" mnemonicParsing="false" onAction="#actionEliminarEps" prefHeight="20.0" prefWidth="120.0" text="Eliminar" />
+                        <Button fx:id="btnModificarEps" layoutX="359.0" layoutY="374.0" mnemonicParsing="false" onAction="#actionModificarEps" prefHeight="20.0" prefWidth="120.0" text="Modificar" />
+                        <Button fx:id="btnBuscarEps" layoutX="522.0" layoutY="30.0" mnemonicParsing="false" onAction="#actionBuscarEps" prefHeight="25.0" prefWidth="122.0" text="Buscar" />
+                        <Label layoutX="370.0" layoutY="107.0" text="NIT" />
+                        <TextField fx:id="txtNitEps" layoutX="405.0" layoutY="103.0" prefHeight="25.0" prefWidth="232.0" />
+                        <Label layoutX="23.0" layoutY="107.0" text="Nombre" />
+                        <TextField fx:id="txtNombreEps" layoutX="77.0" layoutY="103.0" prefHeight="25.0" prefWidth="281.0" />
+                        <TableView fx:id="tablaEps" layoutX="118.0" layoutY="142.0" prefHeight="206.0" prefWidth="453.0">
+                           <columns>
+                              <TableColumn fx:id="columnaNitEps" prefWidth="104.0" text="NIT" />
+                              <TableColumn fx:id="columnaNombreEps" prefWidth="348.0" text="NOMBRE" />
+                           </columns>
+                        </TableView>
+                        <TextField fx:id="txtBuscarEps" layoutX="225.0" layoutY="30.0" prefHeight="25.0" prefWidth="276.0" />
+                        <Label layoutX="23.0" layoutY="34.0" text="Ingrese el NIT de la EPS a buscar." />
+                        <RadioButton fx:id="radioBtnAgregarEps" layoutX="297.0" layoutY="69.0" mnemonicParsing="false" onAction="#actionRadioBtnAgregarEps" text="Agregar">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="radioGroupOpcionEps" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="radioBtnEliminarEps" layoutX="380.0" layoutY="69.0" mnemonicParsing="false" onAction="#actionRadioBtnEliminarEps" text="Eliminar" toggleGroup="$radioGroupOpcionEps" />
+                        <RadioButton fx:id="radioBtnModifcarEps" layoutX="460.0" layoutY="69.0" mnemonicParsing="false" onAction="#actionRadioBtnModifcarEps" text="Modificar" toggleGroup="$radioGroupOpcionEps" />
+                        <Label layoutX="113.0" layoutY="69.0" text="Seleccione la opción deseada" />
+                        <Button fx:id="btnLimpiarVenEps" layoutX="519.0" layoutY="374.0" mnemonicParsing="false" onAction="#actionLimpiarVenEps" prefHeight="25.0" prefWidth="120.0" text="Limpiar" />
+                        <Separator layoutX="328.0" layoutY="47.0" orientation="VERTICAL" prefHeight="633.0" prefWidth="15.0" rotate="90.0" />
+                     </children>
+                  </AnchorPane>
+               </children></AnchorPane>
+         </content></Tab>
     <Tab text="Paciente">
          <content>
             <AnchorPane prefHeight="336.0" prefWidth="635.0">
@@ -55,42 +91,6 @@
                   <Button fx:id="btnAgregarTelefonoPaciente" layoutX="30.0" layoutY="321.0" mnemonicParsing="false" onAction="#actionAgregarTelefonopaciente" prefHeight="16.0" prefWidth="300.0" text="Agregar Telefono" />
                </children>
             </AnchorPane>
-         </content></Tab>
-    <Tab text="Eps">
-         <content>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0">
-               <children>
-                  <AnchorPane prefHeight="336.0" prefWidth="635.0">
-                     <children>
-                        <Button fx:id="btnAgregarEps" layoutX="24.0" layoutY="312.0" mnemonicParsing="false" onAction="#actionAgregarEps" prefHeight="20.0" prefWidth="120.0" text="Agregar" />
-                        <Button fx:id="btnEliminarEps" layoutX="189.0" layoutY="312.0" mnemonicParsing="false" onAction="#actionEliminarEps" prefHeight="20.0" prefWidth="120.0" text="Eliminar" />
-                        <Button fx:id="btnModificarEps" layoutX="340.0" layoutY="312.0" mnemonicParsing="false" onAction="#actionModificarEps" prefHeight="20.0" prefWidth="120.0" text="Modificar" />
-                        <Button fx:id="btnBuscarEps" layoutX="496.0" layoutY="54.0" mnemonicParsing="false" onAction="#actionBuscarEps" prefHeight="25.0" prefWidth="92.0" text="Buscar" />
-                        <Label layoutX="38.0" layoutY="131.0" text="NIT" />
-                        <TextField fx:id="txtNitEps" layoutX="118.0" layoutY="127.0" prefHeight="25.0" prefWidth="163.0" />
-                        <Label layoutX="38.0" layoutY="175.0" text="Nombre" />
-                        <TextField fx:id="txtNombreEps" layoutX="118.0" layoutY="171.0" prefHeight="25.0" prefWidth="163.0" />
-                        <TableView fx:id="tablaEps" layoutX="318.0" layoutY="92.0" prefHeight="206.0" prefWidth="291.0">
-                           <columns>
-                              <TableColumn fx:id="columnaNitEps" prefWidth="144.0" text="NIT" />
-                              <TableColumn fx:id="columnaNombreEps" prefWidth="146.0" text="NOMBRE" />
-                           </columns>
-                        </TableView>
-                        <TextField fx:id="txtBuscarEps" layoutX="318.0" layoutY="54.0" prefHeight="25.0" prefWidth="163.0" />
-                        <Label layoutX="376.0" layoutY="23.0" text="Ingrese el NIT de la EPS a buscar." />
-                        <RadioButton fx:id="radioBtnAgregarEps" layoutX="47.0" layoutY="46.0" mnemonicParsing="false" onAction="#actionRadioBtnAgregarEps" text="Agregar">
-                           <toggleGroup>
-                              <ToggleGroup fx:id="radioGroupOpcionEps" />
-                           </toggleGroup>
-                        </RadioButton>
-                        <RadioButton fx:id="radioBtnEliminarEps" layoutX="126.0" layoutY="46.0" mnemonicParsing="false" onAction="#actionRadioBtnEliminarEps" text="Eliminar" toggleGroup="$radioGroupOpcionEps" />
-                        <RadioButton fx:id="radioBtnModifcarEps" layoutX="203.0" layoutY="46.0" mnemonicParsing="false" onAction="#actionRadioBtnModifcarEps" text="Modificar" toggleGroup="$radioGroupOpcionEps" />
-                        <Label layoutX="83.0" layoutY="23.0" text="Seleccione la opción deseada" />
-                        <Button fx:id="btnLimpiarVenEps" layoutX="492.0" layoutY="312.0" mnemonicParsing="false" onAction="#actionLimpiarVenEps" prefHeight="25.0" prefWidth="120.0" text="Limpiar" />
-                        <Separator layoutX="305.0" layoutY="19.0" orientation="VERTICAL" prefHeight="282.0" prefWidth="0.0" />
-                     </children>
-                  </AnchorPane>
-               </children></AnchorPane>
          </content></Tab>
   </tabs>
 </TabPane>
