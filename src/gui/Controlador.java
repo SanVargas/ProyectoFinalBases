@@ -37,6 +37,7 @@ public class Controlador {
 		vc.setVentanaPrincipal(primaryStage);
 		vc.mostrarPaciente();
 		vc.mostrarEps();
+		vc.mostrarMedico();
 	}
 
 }

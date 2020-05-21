@@ -50,11 +50,10 @@ public class ControladorMedico {
 
 	public void modificarMedico(String licencia, String nombre) {
 		try {
-			String SQL = "UPDATE Medico SET licencia = ? , nombre = ? WHERE licencia = ?";
+			String SQL = "UPDATE Medico SET nombre = ? WHERE licencia = ?";
 			ps = con.prepareStatement(SQL);
-			ps.setString(1, licencia);
-			ps.setString(2, nombre);
-			ps.setString(3, licencia);
+			ps.setString(1, nombre);
+			ps.setString(2, licencia);
 
 			ps.execute();
 
@@ -111,7 +110,7 @@ public class ControladorMedico {
 				String licencia = rs.getString("licencia");
 				String nombre = rs.getString("nombre");
 
-				Medico m = new Medico(licencia, nombre);
+				Medico m = new Medico(nombre, licencia);
 
 				lstMedico.add(m);
 			}

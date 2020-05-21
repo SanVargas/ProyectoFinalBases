@@ -655,7 +655,11 @@ public class VentanaCRUD implements Initializable {
 		txtLicenciaMedico.setText("");
 		txtNombreMedico.setText("");
 		btnAgregarMedico.setDisable(true);
-		radioBtnAgregarMedico.setDisable(false);// ojo
+		radioBtnAgregarMedico.setDisable(true);
+		
+		actionLimpiarVenMedico(event);
+		mostrarMedico();
+		
 	}
 
 	@FXML
@@ -672,7 +676,7 @@ public class VentanaCRUD implements Initializable {
 		String nombre = txtNombreMedico.getText();
 
 		controlador.principal.getControladorMedico().modificarMedico(licencia, nombre);
-
+		
 		actionLimpiarVenMedico(event);
 		mostrarMedico();
 	}
@@ -686,7 +690,7 @@ public class VentanaCRUD implements Initializable {
 		if (m != null) {
 			columnaNombreMedico.setCellValueFactory(new PropertyValueFactory<Medico, String>("nombre"));
 			columnaLicenciaMedico.setCellValueFactory(new PropertyValueFactory<Medico, String>("licencia"));
-			
+
 			tablaMedico.getItems().add(m);
 			radioBtnEliminarMedico.setDisable(false);
 			radioBtnModifcarMedico.setDisable(false);
@@ -707,6 +711,14 @@ public class VentanaCRUD implements Initializable {
 			btnModificarMedico.setDisable(true);
 			btnEliminarMedico.setDisable(true);
 			mostrarMedico();
+
+			if (radioBtnAgregarMedico.isSelected()) {
+				btnAgregarMedico.setDisable(false);
+				btnAgregarEspecialidadMedico.setDisable(false);
+				txtLicenciaMedico.setEditable(false);
+				txtNombreMedico.setEditable(true);
+			}
+
 		}
 	}
 
@@ -714,7 +726,7 @@ public class VentanaCRUD implements Initializable {
 	void actionRadioBtnAgregarMedico(ActionEvent event) {
 		btnAgregarMedico.setDisable(false);
 		btnAgregarEspecialidadMedico.setDisable(false);
-		
+
 		txtLicenciaMedico.setEditable(false);
 		txtNombreMedico.setEditable(true);
 	}
@@ -756,6 +768,7 @@ public class VentanaCRUD implements Initializable {
 	}
 
 	void mostrarMedico() {
+		
 		ArrayList<Medico> lstMedico = controlador.principal.getControladorMedico().mostrarDatosMedico();
 
 		for (Medico m : lstMedico) {
@@ -792,8 +805,13 @@ public class VentanaCRUD implements Initializable {
 			txtLicenciaMedico.setText(m.getLicencia());
 			txtNombreMedico.setText(m.getNombre());
 
-			txtLicenciaMedico.setEditable(false);
-			txtNombreMedico.setEditable(false);
+			if (radioBtnModifcarMedico.isSelected()) {
+				txtLicenciaMedico.setEditable(false);
+				txtNombreMedico.setEditable(true);
+			} else {
+				txtLicenciaMedico.setEditable(false);
+				txtNombreMedico.setEditable(false);
+			}
 
 			btnLimpiarVenMedico.setDisable(false);
 			radioBtnEliminarMedico.setDisable(false);
@@ -877,7 +895,7 @@ public class VentanaCRUD implements Initializable {
 		radioBtnModifcarMedico.setDisable(true);
 		btnLimpiarVenMedico.setDisable(true);
 		btnAgregarEspecialidadMedico.setDisable(true);
-		//cmbEspecialidadMedico.setDisable(true);
+		// cmbEspecialidadMedico.setDisable(true);
 
 		final ObservableList<Medico> tablaMedicoSel = tablaMedico.getSelectionModel().getSelectedItems();
 		tablaMedicoSel.addListener(selectorTablaMedico);
