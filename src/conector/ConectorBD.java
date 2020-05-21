@@ -3,14 +3,13 @@ package conector;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-import javax.swing.JOptionPane;
 
 
 public class ConectorBD {
 
 	public static final String URL = "jdbc:mysql://localhost:3306/Proyecto";
 	public static final String USER = "root";
-	public static final String PASSWORD = "1234";
+	public static final String PASSWORD = "root";
 
 	public static Connection establecerConexion() {
 		Connection c = null;

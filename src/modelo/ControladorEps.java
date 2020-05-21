@@ -7,7 +7,9 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+
 import conector.ConectorBD;
+import javafx.scene.control.Alert.AlertType;
 import modelo.entidad.Eps;
 
 public class ControladorEps {
@@ -54,10 +56,11 @@ public class ControladorEps {
 			ps.setString(3,nit);
 
 			ps.execute();
-
-			JOptionPane.showMessageDialog(null, "Se realizo la modificacion existosamente");
+			
+			Alerta.mostrarAlerta("Confirmacion", "Alerta", "Se realizo la modificacion existosamente", AlertType.CONFIRMATION);
+			
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "No se realizo modificacion" + e.getMessage());
+			Alerta.mostrarAlerta("Mensaje", "Error", "No se realizo modificacion", AlertType.ERROR);
 			e.printStackTrace();
 		}
 	}
@@ -83,10 +86,12 @@ public class ControladorEps {
 			ps.setString(1, nit);
 
 			ps.execute();
-
-			JOptionPane.showMessageDialog(null, "Se realizo la eliminacion existosamente.");
+			
+			Alerta.mostrarAlerta("Confirmacion", "Alerta", "Se realizo la eliminacion existosamente.", AlertType.CONFIRMATION);
+			
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "No se realizo eliminacion. error: " + e.getMessage());
+			
+			Alerta.mostrarAlerta("Error", "Alerta", "No se realizo la eliminacion existosamente.", AlertType.ERROR);
 			e.printStackTrace();
 		}
 	}
@@ -105,7 +110,8 @@ public class ControladorEps {
 
 			}
 		} catch (Exception a) {
-			JOptionPane.showMessageDialog(null, "No se realizo consulta." + a.getMessage());
+			
+			Alerta.mostrarAlerta("Error", "Alerta", "No se realizo consulta.", AlertType.ERROR);
 			a.printStackTrace();
 		}
 		return e;
@@ -125,7 +131,7 @@ public class ControladorEps {
 
 			}
 		} catch (Exception a) {
-			JOptionPane.showMessageDialog(null, "No se realizo consulta." + a.getMessage());
+			Alerta.mostrarAlerta("Error", "Alerta", "No se realizo consulta.", AlertType.ERROR);
 			a.printStackTrace();
 		}
 		return e;
@@ -149,7 +155,7 @@ public class ControladorEps {
 			}
 
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "Error al listar las Eps's. error: " + e.getMessage());
+			Alerta.mostrarAlerta("Error", "Alerta", "Error al listar las Eps's. error: ", AlertType.ERROR);
 		}
 		return lstEps;
 	}
