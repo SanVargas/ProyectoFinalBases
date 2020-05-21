@@ -29,7 +29,7 @@ public class ControladorEps {
 	public Eps insertarEps(String nit, String nombre) {
 		Eps e = null;
 		try {
-			String SQL = "insert into Eps (nit, nombre) values (?,?)";
+			String SQL = "INSERT INTO EPS (nit, nombre) VALUES (?,?)";
 			ps = con.prepareStatement(SQL);
 			ps.setString(1, nit);
 			ps.setString(2, nombre);
@@ -49,7 +49,7 @@ public class ControladorEps {
 
 	public void modificarEps(String nit, String nombre) {
 		try {
-			String SQL = "UPDATE Eps SET nit = ? , nombre = ? WHERE nit = ?";
+			String SQL = "UPDATE EPS SET nit = ? , nombre = ? WHERE nit = ?";
 			ps = con.prepareStatement(SQL);
 			ps.setString(1, nit);
 			ps.setString(2, nombre);
@@ -81,7 +81,7 @@ public class ControladorEps {
 				ps2.execute();
 			}
 
-			String SQL = "DELETE FROM Eps WHERE nit = ?";
+			String SQL = "DELETE FROM EPS WHERE nit = ?";
 			ps = con.prepareStatement(SQL);
 			ps.setString(1, nit);
 
@@ -100,7 +100,7 @@ public class ControladorEps {
 		Eps e = null;
 
 		try {
-			String SQL = "SELECT * FROM Eps WHERE nit = ?";
+			String SQL = "SELECT * FROM EPS WHERE nit = ?";
 			ps = con.prepareStatement(SQL);
 			ps.setString(1, nit);
 			rs = ps.executeQuery();
@@ -121,7 +121,7 @@ public class ControladorEps {
 		Eps e = null;
 
 		try {
-			String SQL = "SELECT * FROM Eps WHERE nombre = ?";
+			String SQL = "SELECT * FROM EPS WHERE nombre = ?";
 			ps = con.prepareStatement(SQL);
 			ps.setString(1, nombre);
 			rs = ps.executeQuery();
@@ -139,7 +139,7 @@ public class ControladorEps {
 
 	public ArrayList<Eps> mostrarDatosEps() {
 		ArrayList<Eps> lstEps = new ArrayList<Eps>();
-		String SQL = "Select * from Eps";
+		String SQL = "SELECT * FROM EPS";
 
 		try {
 			Statement st = con.createStatement();
@@ -156,6 +156,7 @@ public class ControladorEps {
 
 		} catch (Exception e) {
 			Alerta.mostrarAlerta("Error", "Alerta", "Error al listar las Eps's. error: ", AlertType.ERROR);
+			e.printStackTrace();
 		}
 		return lstEps;
 	}

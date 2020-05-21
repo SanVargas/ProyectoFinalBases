@@ -38,7 +38,7 @@ public class ControladorPaciente {
 
 		try {
 
-			String SQL1 = "insert into HistoriaClinica (numero, informacionMedica, estatura, peso, Paciente_dni, TipoSangre_id) values (?,?,?, ?, ?, ?)";
+			String SQL1 = "INSERT INTO HistoriaClinica (numero, informacionMedica, estatura, peso, Paciente_dni, TipoSangre_id) values (?,?,?, ?, ?, ?)";
 
 			PreparedStatement pst1 = con.prepareStatement(SQL1);
 
@@ -49,7 +49,7 @@ public class ControladorPaciente {
 			pst1.setString(5, dni);
 			pst1.setString(6, idGrupoS);
 
-			String SQL2 = "insert into Paciente (nombre, dni, direccion, EPS_nit, HistoriaClinica_numero) values (?,?, ?, ?, ?)";
+			String SQL2 = "INSERT INTO Paciente (nombre, dni, direccion, EPS_nit, HistoriaClinica_numero) values (?,?, ?, ?, ?)";
 
 			PreparedStatement pst2 = con.prepareStatement(SQL2);
 
@@ -90,7 +90,7 @@ public class ControladorPaciente {
 
 	public void agregarTelefono(String numero, String descripcion, String dni) {
 
-		String SQL1 = "insert into Telefono_Paciente (numero, descripcion, Paciente_dni) values (?,?,?)";
+		String SQL1 = "INSERT INTO Telefono_Paciente (numero, descripcion, Paciente_dni) values (?,?,?)";
 
 		try {
 			PreparedStatement pst1 = con.prepareStatement(SQL1);
@@ -216,7 +216,7 @@ public class ControladorPaciente {
 
 		ArrayList<Paciente> lstPaciente = new ArrayList<Paciente>();
 
-		String SQL = "Select * from Paciente";
+		String SQL = "SELECT * FROM Paciente";
 
 		try {
 
