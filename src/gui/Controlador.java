@@ -38,6 +38,7 @@ public class Controlador {
 		vc.mostrarPaciente();
 		vc.mostrarEps();
 		vc.mostrarMedico();
+		vc.mostrarEmpleado();
 	}
 
 }

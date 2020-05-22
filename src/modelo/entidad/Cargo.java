@@ -7,14 +7,24 @@ public class Cargo {
 	private String id;
 	private String nombre;
 	private String descripcion;
+	private Double salario;
 	ArrayList<Empleado> lstEmpleados;
 
-	public Cargo(String id, String nombre, String descripcion) {
+	public Cargo(String id, String nombre, String descripcion, Double salario) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
+		this.salario = salario;
 		lstEmpleados = new ArrayList<Empleado>();
+	}
+
+	public Double getSalario() {
+		return salario;
+	}
+
+	public void setSalario(Double salario) {
+		this.salario = salario;
 	}
 
 	public String getId() {
