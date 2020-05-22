@@ -1,4 +1,4 @@
-package modelo;
+package modelo.controladoresEntidades;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,6 +10,8 @@ import conector.ConectorBD;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert.AlertType;
+import modelo.Principal;
+import modelo.alertas.Alerta;
 import modelo.entidad.Eps;
 import modelo.entidad.HistoriaClinica;
 import modelo.entidad.Paciente;
@@ -278,9 +280,7 @@ public class ControladorPaciente {
 		for (Eps eps : lstEps) {
 			items3.add(eps.getNombre());
 		}
-
 		return items3;
-
 	}
 
 	public String determinarIdSanguineo(String rh, String grupoS) {

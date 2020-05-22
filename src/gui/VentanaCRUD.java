@@ -20,8 +20,9 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import modelo.Alerta;
+import modelo.alertas.Alerta;
 import modelo.entidad.Eps;
+import modelo.entidad.Especialidad;
 import modelo.entidad.Medico;
 import modelo.entidad.Paciente;
 
@@ -176,6 +177,7 @@ public class VentanaCRUD implements Initializable {
 
 		cmbSeleccionarEPS.setItems(controlador.principal.getControladorPaciente().verEPS());
 		cmbSeleccionarEPS.getSelectionModel().select(0);
+		
 
 		if (p != null) {
 			columnaNombrePaciente.setCellValueFactory(new PropertyValueFactory<Paciente, String>("nombre"));
@@ -441,6 +443,8 @@ public class VentanaCRUD implements Initializable {
 	private RadioButton radioBtnEliminarEps;
 	@FXML
 	private ToggleGroup radioGroupOpcionEps;
+    @FXML
+    private ComboBox<String> cmbEspecialidad;
 
 	@FXML
 	void actionAgregarEps(ActionEvent event) {
@@ -615,8 +619,7 @@ public class VentanaCRUD implements Initializable {
 	private TableColumn<Medico, String> columnaNombreMedico;
 	@FXML
 	private RadioButton radioBtnModifcarMedico;
-	@FXML
-	private ComboBox<?> cmbEspecialidadMedico;
+	
 	@FXML
 	private TextField txtLicenciaMedico;
 	@FXML
@@ -643,8 +646,9 @@ public class VentanaCRUD implements Initializable {
 		txtLicenciaMedico.setEditable(false);
 		String licencia = txtLicenciaMedico.getText();
 		String nombre = txtNombreMedico.getText();
+		String especialidad = cmbEspecialidad.getValue();
 
-		Medico m = controlador.principal.getControladorMedico().insertarMedico(licencia, nombre);
+		Medico m = controlador.principal.getControladorMedico().insertarMedico(licencia, nombre, especialidad);
 
 		if (m != null) {
 			columnaLicenciaMedico.setCellValueFactory(new PropertyValueFactory<Medico, String>("licencia"));
@@ -665,6 +669,7 @@ public class VentanaCRUD implements Initializable {
 	@FXML
 	void actionEliminarMedico(ActionEvent event) {
 		controlador.principal.getControladorMedico().eliminarMedico(txtLicenciaMedico.getText());
+		
 		actionLimpiarVenMedico(event);
 		mostrarMedico();
 	}
@@ -674,6 +679,7 @@ public class VentanaCRUD implements Initializable {
 		txtLicenciaMedico.setEditable(false);
 		String licencia = txtLicenciaMedico.getText();
 		String nombre = txtNombreMedico.getText();
+		btnAgregarEspecialidadMedico.setDisable(false);
 
 		controlador.principal.getControladorMedico().modificarMedico(licencia, nombre);
 		
@@ -686,6 +692,9 @@ public class VentanaCRUD implements Initializable {
 		Medico m = controlador.principal.getControladorMedico().buscarMedico(txtBuscarMedico.getText());
 		ObservableList<Medico> items1 = FXCollections.observableArrayList();
 		tablaMedico.setItems(items1);
+		
+		cmbEspecialidad.setItems(controlador.principal.getControladorMedico().verEspecialidades());
+		cmbEspecialidad.getSelectionModel().select(0);
 
 		if (m != null) {
 			columnaNombreMedico.setCellValueFactory(new PropertyValueFactory<Medico, String>("nombre"));
@@ -711,10 +720,9 @@ public class VentanaCRUD implements Initializable {
 			btnModificarMedico.setDisable(true);
 			btnEliminarMedico.setDisable(true);
 			mostrarMedico();
-
+			
 			if (radioBtnAgregarMedico.isSelected()) {
 				btnAgregarMedico.setDisable(false);
-				btnAgregarEspecialidadMedico.setDisable(false);
 				txtLicenciaMedico.setEditable(false);
 				txtNombreMedico.setEditable(true);
 			}
@@ -725,10 +733,10 @@ public class VentanaCRUD implements Initializable {
 	@FXML
 	void actionRadioBtnAgregarMedico(ActionEvent event) {
 		btnAgregarMedico.setDisable(false);
-		btnAgregarEspecialidadMedico.setDisable(false);
-
+		cmbEspecialidad.setDisable(false);
 		txtLicenciaMedico.setEditable(false);
 		txtNombreMedico.setEditable(true);
+		btnAgregarEspecialidadMedico.setDisable(true);
 	}
 
 	@FXML
@@ -736,7 +744,7 @@ public class VentanaCRUD implements Initializable {
 		btnEliminarMedico.setDisable(false);
 		btnModificarMedico.setDisable(true);
 		btnAgregarMedico.setDisable(true);
-
+		btnAgregarEspecialidadMedico.setDisable(true);
 		txtLicenciaMedico.setEditable(false);
 		txtNombreMedico.setEditable(false);
 	}
@@ -746,7 +754,7 @@ public class VentanaCRUD implements Initializable {
 		btnEliminarMedico.setDisable(true);
 		btnModificarMedico.setDisable(false);
 		btnAgregarMedico.setDisable(true);
-
+		btnAgregarEspecialidadMedico.setDisable(false);
 		txtLicenciaMedico.setEditable(false);
 		txtNombreMedico.setEditable(true);
 	}
@@ -764,7 +772,11 @@ public class VentanaCRUD implements Initializable {
 
 	@FXML
 	void actionAgregarEspecialidadMedico(ActionEvent event) {
-		Alerta.mostrarAlerta("Confirmacion", "Alerta", "Funcion en mantenimiento.", AlertType.CONFIRMATION);
+		
+		String especialidad = cmbEspecialidad.getValue();
+		String licencia = txtLicenciaMedico.getText();
+		
+		controlador.principal.getControladorMedico().insertarOtraEspecialidad(licencia, especialidad);
 	}
 
 	void mostrarMedico() {
@@ -895,8 +907,10 @@ public class VentanaCRUD implements Initializable {
 		radioBtnModifcarMedico.setDisable(true);
 		btnLimpiarVenMedico.setDisable(true);
 		btnAgregarEspecialidadMedico.setDisable(true);
-		// cmbEspecialidadMedico.setDisable(true);
+		cmbEspecialidad.setDisable(true);
+		
 
+		
 		final ObservableList<Medico> tablaMedicoSel = tablaMedico.getSelectionModel().getSelectedItems();
 		tablaMedicoSel.addListener(selectorTablaMedico);
 

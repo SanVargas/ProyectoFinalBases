@@ -1,10 +1,11 @@
-package modelo;
+package modelo.controladoresEntidades;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import conector.ConectorBD;
+import modelo.Principal;
 
 public class ControladorCargo {
 	ConectorBD cc;

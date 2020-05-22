@@ -1,5 +1,5 @@
 
-package modelo;
+package modelo.controladoresEntidades;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,6 +9,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import conector.ConectorBD;
 import javafx.scene.control.Alert.AlertType;
+import modelo.Principal;
+import modelo.alertas.Alerta;
 import modelo.entidad.Eps;
 
 /**
@@ -158,6 +160,9 @@ public class ControladorEps {
 			Alerta.mostrarAlerta("Error", "Alerta", "Error al listar.", AlertType.ERROR);
 			e.printStackTrace();
 		}
+		
+		
+		
 		return lstEps;
 	}
 

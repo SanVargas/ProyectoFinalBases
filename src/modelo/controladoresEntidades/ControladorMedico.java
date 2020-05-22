@@ -1,4 +1,4 @@
-package modelo;
+package modelo.controladoresEntidades;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,10 +7,18 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import conector.ConectorBD;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Alert.AlertType;
+import modelo.Principal;
+import modelo.alertas.Alerta;
+import modelo.entidad.Eps;
+import modelo.entidad.Especialidad;
 import modelo.entidad.Medico;
+
 /**
  * Clase encargada de controlar lo relacionado con medico.
+ * 
  * @author Diego riveros - Lissete Quebrada - Santiago Vargas
  *
  */
@@ -18,8 +26,6 @@ public class ControladorMedico {
 	ConectorBD cc;
 	Connection con;
 	Principal principal;
-	private PreparedStatement ps;
-	private ResultSet rs;
 
 	public ControladorMedico(ConectorBD cc, Connection con, Principal principal) {
 		super();
@@ -28,17 +34,57 @@ public class ControladorMedico {
 		this.principal = principal;
 	}
 
-	public Medico insertarMedico(String licencia, String nombre) {
+	public void insertarOtraEspecialidad(String licencia, String especialidad) {
+
+		try {
+			ResultSet rs1 = principal.getControladorEspecialidad().buscarEspecialidad(especialidad);
+
+			PreparedStatement ps1;
+			String SQL1 = "INSERT INTO MEDICO_HAS_ESPECIALIDAD (Medico_licencia, Especialidad_id) VALUES (?,?)";
+			ps1 = con.prepareStatement(SQL1);
+			ps1.setString(1, licencia);
+
+			while (rs1.next()) {
+				ps1.setString(2, rs1.getString("id"));
+			}
+
+			Alerta.mostrarAlerta("Confirmacion", "Alerta", "Se agrego existosamente la especialidad.",
+					AlertType.CONFIRMATION);
+			ps1.execute();
+
+		} catch (SQLException e) {
+
+			Alerta.mostrarAlerta("Error", "Alerta", "Error al agregar la especialidad.", AlertType.ERROR);
+
+		}
+
+	}
+
+	public Medico insertarMedico(String licencia, String nombre, String especialidad) {
 		Medico m = null;
+		PreparedStatement ps;
+		ResultSet rs;
 		try {
 			String SQL = "INSERT INTO Medico (licencia, nombre) VALUES (?,?)";
 			ps = con.prepareStatement(SQL);
 			ps.setString(1, licencia);
 			ps.setString(2, nombre);
+			ps.execute();
+
+			ResultSet rs1 = principal.getControladorEspecialidad().buscarEspecialidad(especialidad);
+
+			PreparedStatement ps1;
+			String SQL1 = "INSERT INTO MEDICO_HAS_ESPECIALIDAD (Medico_licencia, Especialidad_id) VALUES (?,?)";
+			ps1 = con.prepareStatement(SQL1);
+			ps1.setString(1, licencia);
+
+			while (rs1.next()) {
+				ps1.setString(2, rs1.getString("id"));
+			}
+
+			ps1.execute();
 
 			m = new Medico(licencia, nombre);
-
-			ps.execute();
 
 			Alerta.mostrarAlerta("Confirmacion", "Alerta", "Se agrego existosamente.", AlertType.CONFIRMATION);
 		} catch (SQLException e) {
@@ -50,6 +96,8 @@ public class ControladorMedico {
 
 	public void modificarMedico(String licencia, String nombre) {
 		try {
+			PreparedStatement ps;
+
 			String SQL = "UPDATE Medico SET nombre = ? WHERE licencia = ?";
 			ps = con.prepareStatement(SQL);
 			ps.setString(1, nombre);
@@ -64,12 +112,23 @@ public class ControladorMedico {
 	}
 
 	public void eliminarMedico(String licencia) {
+
+		PreparedStatement ps;
+		PreparedStatement ps1;
+
 		try {
+			
+			String SQL1 = "DELETE FROM MEDICO_HAS_ESPECIALIDAD WHERE Medico_licencia = ?";
+			ps1 = con.prepareStatement(SQL1);
+			ps1.setString(1, licencia);
+
 			String SQL = "DELETE FROM Medico WHERE licencia = ?";
 			ps = con.prepareStatement(SQL);
 			ps.setString(1, licencia);
 
+			ps1.execute();
 			ps.execute();
+			
 
 			Alerta.mostrarAlerta("Confirmacion", "Alerta", "Se elimino existosamente.", AlertType.CONFIRMATION);
 		} catch (Exception e) {
@@ -80,13 +139,15 @@ public class ControladorMedico {
 
 	public Medico buscarMedico(String licencia) {
 		Medico m = null;
+		PreparedStatement ps;
+		ResultSet rs;
 
 		try {
 			String SQL = "SELECT * FROM Medico WHERE licencia = ?";
 			ps = con.prepareStatement(SQL);
 			ps.setString(1, licencia);
 			rs = ps.executeQuery();
-			
+
 			if (rs.next()) {
 				m = new Medico(rs.getNString("licencia"), rs.getNString("nombre"));
 			}
@@ -96,6 +157,18 @@ public class ControladorMedico {
 			a.printStackTrace();
 		}
 		return m;
+	}
+
+	public ObservableList<String> verEspecialidades() {
+
+		ObservableList<String> items3 = FXCollections.observableArrayList();
+
+		ArrayList<Especialidad> lstEspecialidades = principal.getControladorEspecialidad().mostrarEspecialidades();
+
+		for (Especialidad eps : lstEspecialidades) {
+			items3.add(eps.getNombre());
+		}
+		return items3;
 	}
 
 	public ArrayList<Medico> mostrarDatosMedico() {
