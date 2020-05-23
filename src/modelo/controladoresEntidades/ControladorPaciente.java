@@ -146,21 +146,15 @@ public class ControladorPaciente {
 
 		PreparedStatement ps1;
 		PreparedStatement ps3;
+		PreparedStatement ps2;
 
 		try {
 
-			String SQL11 = "SELECT * FROM TELEFONO_PACIENTE WHERE Paciente_dni = ?";
-			PreparedStatement ps11 = con.prepareStatement(SQL11);
-			ResultSet rs11;
-			ps11.setString(1, dni);
-			rs11 = ps11.executeQuery();
-
-			while (rs11.next()) {
-				String SQL22 = "DELETE FROM TELEFONO_PACIENTE WHERE numero = ?";
-				PreparedStatement ps22 = con.prepareStatement(SQL22);
-				ps22.setString(1, rs11.getString("numero"));
-				ps22.execute();
-			}
+			String SQL3 = "UPDATE Cita SET Paciente_dni = ? WHERE Paciente_dni = ?";
+			ps2 = con.prepareStatement(SQL3);
+			ps2.setString(1, null);
+			ps2.setString(1, dni);
+			
 
 			String SQL1 = "DELETE FROM HISTORIACLINICA WHERE Paciente_dni = ?";
 			ps1 = con.prepareStatement(SQL1);
@@ -174,6 +168,7 @@ public class ControladorPaciente {
 			ps = con.prepareStatement(SQL);
 			ps.setString(1, dni);
 
+			ps2.execute();
 			ps3.execute();
 			ps1.execute();
 			ps.execute();

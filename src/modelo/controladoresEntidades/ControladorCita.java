@@ -8,9 +8,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import conector.ConectorBD;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Alert.AlertType;
 import modelo.Principal;
 import modelo.alertas.Alerta;
+import modelo.entidad.Cargo;
 import modelo.entidad.Cita;
 import modelo.entidad.Medico;
 import modelo.entidad.Paciente;
@@ -42,7 +45,7 @@ public class ControladorCita {
 		Paciente p = null;
 
 		try {
-			String SQL = "INSERT INTO Cita (fechaHora, id, Medico_licencia, Paciente_dni) VALUES (?,?,?,?,?)";
+			String SQL = "INSERT INTO Cita (fechaHora, id, Medico_licencia, Paciente_dni) VALUES (?,?,?,?)";
 			ps = con.prepareStatement(SQL);
 			ps.setDate(1, fechaHora);
 			ps.setString(2, id);
@@ -54,7 +57,6 @@ public class ControladorCita {
 			p = principal.getControladorPaciente().buscarPaciente(Paciente_dni);
 			c = new Cita(fechaHora, id, m, p);
 
-			Alerta.mostrarAlerta("Confirmacion", "Alerta", "Se agrego existosamente.", AlertType.CONFIRMATION);
 		} catch (SQLException e) {
 			Alerta.mostrarAlerta("Error", "Alerta", "Error al agregar.", AlertType.ERROR);
 		}
@@ -141,5 +143,7 @@ public class ControladorCita {
 		}
 		return lstCita;
 	}
+	
+
 
 }

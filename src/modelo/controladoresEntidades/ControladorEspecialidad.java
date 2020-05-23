@@ -20,7 +20,6 @@ public class ControladorEspecialidad {
 	ConectorBD cc;
 	Connection con;
 	Principal principal;
-	 
 
 	public ControladorEspecialidad(ConectorBD cc, Connection con, Principal principal) {
 		super();
@@ -28,12 +27,11 @@ public class ControladorEspecialidad {
 		this.con = con;
 		this.principal = principal;
 	}
-	
-	public ResultSet buscarEspecialidad(String nombre)
-	{
+
+	public ResultSet buscarEspecialidad(String nombre) {
 		ResultSet rs1 = null;
 		PreparedStatement ps;
-		
+
 		try {
 			String SQL = "SELECT * FROM ESPECIALIDAD WHERE nombre = ?";
 			ps = con.prepareStatement(SQL);
@@ -44,12 +42,9 @@ public class ControladorEspecialidad {
 			Alerta.mostrarAlerta("Error", "Alerta", "Error al buscar.", AlertType.ERROR);
 			a.printStackTrace();
 		}
-		
-		
+
 		return rs1;
-		
 	}
-	
 
 	public void insertarEspecialidad() {
 
@@ -72,7 +67,7 @@ public class ControladorEspecialidad {
 			pst3.setString(1, "00003");
 			pst3.setString(2, "Cardiologo");
 			pst3.setString(3, "Estudia al sistema cardiaco  y sus enfermedades.");
-			
+
 			String SQL5 = "INSERT INTO Especialidad (id, nombre, descripcion) values (?,?,?)";
 			PreparedStatement pst5 = con.prepareStatement(SQL5);
 			pst5.setString(1, "00005");
@@ -84,49 +79,50 @@ public class ControladorEspecialidad {
 			pst6.setString(1, "00006");
 			pst6.setString(2, "Dermatologo");
 			pst6.setString(3, "Estudia la epidermis y sus enfermedades.");
-			
+
 			String SQL7 = "INSERT INTO Especialidad (id, nombre, descripcion) values (?,?,?)";
 			PreparedStatement pst7 = con.prepareStatement(SQL7);
 			pst7.setString(1, "00007");
 			pst7.setString(2, "Reumatologo");
 			pst7.setString(3, "Estudia traumas y sus enfermedades relacionadas.");
-			
+
 			String SQL8 = "INSERT INTO Especialidad (id, nombre, descripcion) values (?,?,?)";
 			PreparedStatement pst8 = con.prepareStatement(SQL8);
 			pst8.setString(1, "00008");
 			pst8.setString(2, "otorrinolaringologo");
-			pst8.setString(3, "Estudia las estructuras relacionadas con cuello y cabeza y sus respectivas enfermedades.");
-			
+			pst8.setString(3,
+					"Estudia las estructuras relacionadas con cuello y cabeza y sus respectivas enfermedades.");
+
 			String SQL9 = "INSERT INTO Especialidad (id, nombre, descripcion) values (?,?,?)";
 			PreparedStatement pst9 = con.prepareStatement(SQL9);
 			pst9.setString(1, "00009");
 			pst9.setString(2, "Cirugia Plastica");
 			pst9.setString(3, "Realiza procedimientos quirurgicos de caracter esteticos.");
-			
+
 			String SQL10 = "INSERT INTO Especialidad (id, nombre, descripcion) values (?,?,?)";
 			PreparedStatement pst10 = con.prepareStatement(SQL10);
 			pst10.setString(1, "000010");
 			pst10.setString(2, "Cirujano General");
 			pst10.setString(3, "Realiza procedimientos quirurgicos.");
-			
+
 			String SQL11 = "INSERT INTO Especialidad (id, nombre, descripcion) values (?,?,?)";
 			PreparedStatement pst11 = con.prepareStatement(SQL11);
 			pst11.setString(1, "000011");
 			pst11.setString(2, "Cirujano Pediatra");
 			pst11.setString(3, "Realiza procedimientos quirurgicos a personas menores de 16 anios.");
-			
+
 			String SQL13 = "INSERT INTO Especialidad (id, nombre, descripcion) values (?,?,?)";
 			PreparedStatement pst13 = con.prepareStatement(SQL13);
 			pst13.setString(1, "000013");
 			pst13.setString(2, "Oncologo");
 			pst13.setString(3, "Estudia y trata los diferentes tipos de cancer existentes.");
-			
+
 			String SQL15 = "INSERT INTO Especialidad (id, nombre, descripcion) values (?,?,?)";
 			PreparedStatement pst15 = con.prepareStatement(SQL15);
 			pst15.setString(1, "000014");
 			pst15.setString(2, "Gastroenterologo");
 			pst15.setString(3, "Estudia el sistema digestivo y sus enfermedades");
-			
+
 			pst1.execute();
 			pst2.execute();
 			pst3.execute();
@@ -145,11 +141,11 @@ public class ControladorEspecialidad {
 		}
 
 	}
-	
+
 	public ArrayList<Especialidad> mostrarEspecialidades() {
 		String SQL = "SELECT * FROM ESPECIALIDAD";
 		ArrayList<Especialidad> lstEspecialidad = new ArrayList<Especialidad>();
-		
+
 		try {
 			Statement st = con.createStatement();
 			ResultSet rs = st.executeQuery(SQL);
@@ -167,8 +163,41 @@ public class ControladorEspecialidad {
 			Alerta.mostrarAlerta("Error", "Alerta", "Error al listar.", AlertType.ERROR);
 			e.printStackTrace();
 		}
-		
+
 		return lstEspecialidad;
 	}
-	
+
+	public int devolverNumeroCMBEspecialidad(String nombre) {
+		int l = 0;
+
+		if (nombre.equals("Pediatra")) {
+			l = 0;
+		} else if (nombre.equals("Neurologo")) {
+			l = 1;
+		} else if (nombre.equals("Cardiologo")) {
+			l = 2;
+		} else if (nombre.equals("Endocrinologo")) {
+			l = 3;
+		} else if (nombre.equals("Dermatologo")) {
+			l = 4;
+		} else if (nombre.equals("Reumatologo")) {
+			l = 5;
+		} else if (nombre.equals("otorrinolaringologo")) {
+			l = 6;
+		} else if (nombre.equals("Cirugia Plastica")) {
+			l = 7;
+		} else if (nombre.equals("Cirujano General")) {
+			l = 8;
+		} else if (nombre.equals("Cirujano Pediatra")) {
+			l = 9;
+		} else if (nombre.equals("Oncologo")) {
+			l = 10;
+		} else {
+			l = 11;
+		}
+
+		return l;
+
+	}
+
 }

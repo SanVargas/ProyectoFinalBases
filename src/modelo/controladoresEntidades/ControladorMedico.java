@@ -113,9 +113,15 @@ public class ControladorMedico {
 	public void eliminarMedico(String licencia) {
 		PreparedStatement ps;
 		PreparedStatement ps1;
+		PreparedStatement ps2;
 
 		try {
-			
+
+			String SQL2 = "UPDATE Cita SET Medico_licencia = ? WHERE Medico_licencia = ?";
+			ps2 = con.prepareStatement(SQL2);
+			ps2.setString(1, null);
+			ps2.setString(1, licencia);
+
 			String SQL1 = "DELETE FROM MEDICO_HAS_ESPECIALIDAD WHERE Medico_licencia = ?";
 			ps1 = con.prepareStatement(SQL1);
 			ps1.setString(1, licencia);
@@ -124,9 +130,9 @@ public class ControladorMedico {
 			ps = con.prepareStatement(SQL);
 			ps.setString(1, licencia);
 
+			ps2.execute();
 			ps1.execute();
 			ps.execute();
-			
 
 			Alerta.mostrarAlerta("Confirmacion", "Alerta", "Se elimino existosamente.", AlertType.CONFIRMATION);
 		} catch (Exception e) {
@@ -167,6 +173,90 @@ public class ControladorMedico {
 			items3.add(eps.getNombre());
 		}
 		return items3;
+	}
+
+	public String buscarEspecialidadDelMedico(String licencia) {
+		
+		ResultSet rs1 = null;
+		PreparedStatement ps;
+		ResultSet rs2 = null;
+		PreparedStatement ps1;
+		String numEsp = "";
+
+		try {
+			String SQL = "SELECT * FROM Medico_Has_Especialidad WHERE Medico_licencia = ?";
+			ps = con.prepareStatement(SQL);
+			ps.setString(1, licencia);
+			rs1 = ps.executeQuery();
+
+			while (rs1.next()) {
+
+				String SQL1 = "SELECT * FROM Especialidad WHERE id = ?";
+				ps1 = con.prepareStatement(SQL1);
+				ps1.setString(1, rs1.getString("Especialidad_id"));
+				rs2 = ps.executeQuery();
+
+				while (rs2.next()) {
+
+					numEsp = rs2.getString("nombre");
+				}
+
+			}
+
+		} catch (Exception a) {
+			Alerta.mostrarAlerta("Error", "Alerta", "Error al buscar.", AlertType.ERROR);
+			a.printStackTrace();
+		}
+		
+		return numEsp;
+	}
+
+	public ArrayList<Medico> mostrarDatosMedicoPorEspecialidad(String especialidad) {
+		ArrayList<Medico> lstMedico = new ArrayList<Medico>();
+
+		try {
+
+			ResultSet rs;
+			ResultSet rs1 = principal.getControladorEspecialidad().buscarEspecialidad(especialidad);
+			ResultSet rs2;
+			PreparedStatement ps;
+			PreparedStatement ps1;
+
+			while (rs1.next()) {
+
+				String SQL = "SELECT * FROM Medico_Has_Especialidad WHERE Especialidad_id = ?";
+				ps = con.prepareStatement(SQL);
+				ps.setString(1, rs1.getString("id"));
+				rs = ps.executeQuery();
+
+				while (rs.next()) {
+
+					String SQL1 = "SELECT * FROM Medico WHERE licencia = ?";
+					ps1 = con.prepareStatement(SQL1);
+					ps1.setString(1, rs.getString("Medico_licencia"));
+					rs2 = ps1.executeQuery();
+
+					while (rs2.next()) {
+
+						String licencia = rs2.getString("licencia");
+						String nombre = rs2.getString("nombre");
+
+						Medico m = new Medico(nombre, licencia);
+
+						lstMedico.add(m);
+
+					}
+
+				}
+
+			}
+
+		} catch (Exception e) {
+			Alerta.mostrarAlerta("Error", "Alerta", "Error al listar.", AlertType.ERROR);
+			e.printStackTrace();
+		}
+		return lstMedico;
+
 	}
 
 	public ArrayList<Medico> mostrarDatosMedico() {

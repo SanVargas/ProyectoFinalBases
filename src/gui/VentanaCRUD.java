@@ -1,7 +1,11 @@
 package gui;
 
 import java.net.URL;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -22,6 +26,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import modelo.alertas.Alerta;
+import modelo.entidad.Cita;
 import modelo.entidad.Empleado;
 import modelo.entidad.Eps;
 import modelo.entidad.Medico;
@@ -84,7 +89,7 @@ public class VentanaCRUD implements Initializable {
 	private TextField txtTelefonoPaciente;
 	@FXML
 	private Button btnAgregarTelefonoPaciente;
-	
+
 	@FXML
 	void actionAgregarPaciente(ActionEvent event) {
 
@@ -1230,7 +1235,7 @@ public class VentanaCRUD implements Initializable {
 	private DatePicker calendarCita;
 
 	@FXML
-	private TableView<?> tablaCita;
+	private TableView<Cita> tablaCita;
 
 	@FXML
 	private RadioButton radioBtnModifcarCita;
@@ -1242,13 +1247,13 @@ public class VentanaCRUD implements Initializable {
 	private Button btnModificarCita;
 
 	@FXML
-	private TableColumn<?, ?> columnaIdCita;
+	private TableColumn<Cita, String> columnaIdCita;
 
 	@FXML
 	private TextField txtIdCita;
 
 	@FXML
-	private TableColumn<?, ?> columnaMedicoCita;
+	private TableColumn<Medico, String> columnaMedicoCita;
 
 	@FXML
 	private Button btnEliminarCita;
@@ -1266,19 +1271,19 @@ public class VentanaCRUD implements Initializable {
 	private Button btnFiltrarEspecialidadCita;
 
 	@FXML
-	private ComboBox<?> cmbEspecialidadCita;
+	private ComboBox<String> cmbEspecialidadCita;
 
 	@FXML
 	private ToggleGroup radioGroupOpcionCita;
 
 	@FXML
-	private TableView<?> tablaMedicoCita;
+	private TableView<Medico> tablaMedicoCita;
 
 	@FXML
-	private TableColumn<?, ?> columnaFechaCita;
+	private TableColumn<Cita, Date> columnaFechaCita;
 
 	@FXML
-	private TableColumn<?, ?> columnaLicenciaCita;
+	private TableColumn<Medico, String> columnaLicenciaCita;
 
 	@FXML
 	private Button btnBuscarCita;
@@ -1286,49 +1291,344 @@ public class VentanaCRUD implements Initializable {
 	@FXML
 	private TextField txtPacienteCita;
 
+	private Medico MEDIOCITA;
+
 	@FXML
 	void actionAgregarCita(ActionEvent event) {
+
+		String id = txtIdCita.getText();
+		LocalDate f = calendarCita.getValue();
+		String idPaciente = txtPacienteCita.getText();
+
+		java.sql.Date fechaHora = convertDateSql(asDate(f));
+		Date actual = new Date();
+
+		java.sql.Date fecha = new java.sql.Date(actual.getTime());
+
+		if (fechaHora.after(fecha)) {
+
+			Paciente p = controlador.principal.getControladorPaciente().buscarPaciente(idPaciente);
+
+			if (p != null) {
+				if (MEDIOCITA != null) {
+					controlador.principal.getControladorCita().insertarCita(fechaHora, id, MEDIOCITA.getLicencia(),
+							p.getDni());
+
+					Alerta.mostrarAlerta("Confirmacion", "Alerta", "Cita Registrada.", AlertType.CONFIRMATION);
+					mostrarCita();
+					
+					cmbEspecialidadCita.setItems(controlador.principal.getControladorMedico().verEspecialidades());
+					
+					txtBuscarCita.setText("");
+					txtIdCita.setText("");
+					txtPacienteCita.setText("");
+
+					txtIdEmpleado.setEditable(false);
+					txtPacienteCita.setEditable(false);
+					calendarCita.setDisable(true);
+					cmbEspecialidadCita.setDisable(true);
+					btnFiltrarEspecialidadCita.setDisable(true);
+					
+					
+				} else {
+
+					Alerta.mostrarAlerta("Confirmacion", "Alerta", "Medico no seleccionado, verifique.",
+							AlertType.ERROR);
+				}
+			} else {
+				Alerta.mostrarAlerta("Confirmacion", "Alerta", "Paciente no encontrado, verifique.", AlertType.ERROR);
+			}
+
+		} else
+
+		{
+			Alerta.mostrarAlerta("Confirmacion", "Alerta", "Fecha Incorrecta, verifique.", AlertType.ERROR);
+		}
 
 	}
 
 	@FXML
 	void actionEliminarCita(ActionEvent event) {
-
+		
+		
+		String id = txtIdCita.getText();
+		controlador.principal.getControladorCita().eliminarCita(id);
+		mostrarCita();
 	}
 
 	@FXML
 	void actionModificarCita(ActionEvent event) {
+		LocalDate f = calendarCita.getValue();
+		java.sql.Date fechaHora = convertDateSql(asDate(f));
+		Date actual = new Date();
+
+		java.sql.Date fecha = new java.sql.Date(actual.getTime());
+
+		if (fechaHora.after(fecha)) {
+			
+			String id = txtIdCita.getText();
+			String medicolicencia = MEDIOCITA.getLicencia();
+			controlador.principal.getControladorCita().modificarCita(fechaHora, id, medicolicencia);
+			mostrarCita();
+
+		} else
+
+		{
+			Alerta.mostrarAlerta("Confirmacion", "Alerta", "Fecha Incorrecta, verifique.", AlertType.ERROR);
+		}
 
 	}
 
 	@FXML
 	void actionBuscarCita(ActionEvent event) {
+		txtIdCita.setText("");
+		txtPacienteCita.setText("");
+
+		if (!txtBuscarCita.getText().trim().isEmpty()) {
+
+			Cita c = controlador.principal.getControladorCita().buscarCita(txtBuscarCita.getText());
+
+			if (c != null) {
+
+				ObservableList<Cita> items1 = FXCollections.observableArrayList();
+				tablaCita.setItems(items1);
+				columnaIdCita.setCellValueFactory(new PropertyValueFactory<Cita, String>("id"));
+				columnaFechaCita.setCellValueFactory(new PropertyValueFactory<Cita, Date>("fechaHora"));
+				tablaCita.getItems().add(c);
+
+			} else {
+
+				Alerta.mostrarAlerta("Confirmacion", "Alerta", "Busqueda no encontrada.", AlertType.CONFIRMATION);
+				
+				cmbEspecialidadCita.setItems(controlador.principal.getControladorMedico().verEspecialidades());
+				cmbEspecialidadCita.getSelectionModel().select(0);
+
+				radioBtnAgregarCita.setDisable(false);
+				radioBtnEliminarCita.setDisable(true);
+				radioBtnModifcarCita.setDisable(true);
+				txtIdCita.setText(txtBuscarCita.getText());
+
+				if (radioBtnAgregarCita.isSelected()) {
+					calendarCita.setDisable(false);
+					txtIdCita.setEditable(false);
+					txtPacienteCita.setEditable(true);
+					cmbEspecialidadCita.setDisable(false);
+					btnFiltrarEspecialidadCita.setDisable(false);
+					btnAgregarCita.setDisable(false);
+					btnLimpiarCita.setDisable(false);
+
+				}
+
+			}
+
+		} else {
+			Alerta.mostrarAlerta("Error", "Alerta", "Ingrese un valor valido.", AlertType.ERROR);
+		}
 
 	}
 
 	@FXML
 	void actionRadioBtnAgregarCita(ActionEvent event) {
 
+		calendarCita.setDisable(false);
+		txtIdCita.setEditable(false);
+		txtPacienteCita.setEditable(true);
+		cmbEspecialidadCita.setDisable(false);
+		btnFiltrarEspecialidadCita.setDisable(false);
+		btnAgregarCita.setDisable(false);
+		btnLimpiarCita.setDisable(false);
+
 	}
 
 	@FXML
 	void actionRadioBtnEliminarCita(ActionEvent event) {
+		
+		btnEliminarCita.setDisable(false);
+		btnAgregarCita.setDisable(true);
+		btnModificarCita.setDisable(true);
+		calendarCita.setDisable(true);
+		txtIdCita.setEditable(false);
+		txtPacienteCita.setEditable(false);
+		btnFiltrarEspecialidadCita.setDisable(true);
+		cmbEspecialidadCita.setDisable(true);
+		tablaMedicoCita.setDisable(true);
 
 	}
 
 	@FXML
 	void actionRadioBtnModifcarCita(ActionEvent event) {
-
+		calendarCita.setDisable(false);
+		txtIdCita.setEditable(false);
+		txtPacienteCita.setEditable(false);
+		cmbEspecialidadCita.setDisable(false);
+		btnFiltrarEspecialidadCita.setDisable(false);
+		btnAgregarCita.setDisable(true);
+		btnEliminarCita.setDisable(true);
+		btnModificarCita.setDisable(false);
+		btnLimpiarCita.setDisable(false);
 	}
 
 	@FXML
 	void actionLimpiarVenCita(ActionEvent event) {
+		
+		ObservableList<Medico> items1 = FXCollections.observableArrayList();
+		tablaMedicoCita.setItems(items1);
+		
+		ObservableList<Cita> items2 = FXCollections.observableArrayList();
+		tablaCita.setItems(items2);
+		
+		cmbEspecialidadCita.setItems(controlador.principal.getControladorMedico().verEspecialidades());
+		
+		txtBuscarCita.setText("");
+		txtIdCita.setText("");
+		txtPacienteCita.setText("");
 
 	}
 
 	@FXML
 	void actionFiltrarEspecialidadCita(ActionEvent event) {
+		tablaMedicoCita.setDisable(false);
+		ObservableList<Medico> items1 = FXCollections.observableArrayList();
+		tablaMedicoCita.setItems(items1);
 
+		String especialidad = cmbEspecialidadCita.getValue();
+
+		ArrayList<Medico> lstMedico = controlador.principal.getControladorMedico()
+				.mostrarDatosMedicoPorEspecialidad(especialidad);
+
+		for (Medico m : lstMedico) {
+			columnaLicenciaCita.setCellValueFactory(new PropertyValueFactory<Medico, String>("licencia"));
+			columnaMedicoCita.setCellValueFactory(new PropertyValueFactory<Medico, String>("nombre"));
+
+			tablaMedicoCita.getItems().add(m);
+		}
+
+	}
+
+	void mostrarCita() {
+		ObservableList<Cita> items1 = FXCollections.observableArrayList();
+
+		tablaCita.setItems(items1);
+
+		ArrayList<Cita> lstCita = controlador.principal.getControladorCita().mostrarDatosCita();
+
+		for (Cita c : lstCita) {
+
+			columnaFechaCita.setCellValueFactory(new PropertyValueFactory<Cita, Date>("fechaHora"));
+			columnaIdCita.setCellValueFactory(new PropertyValueFactory<Cita, String>("id"));
+
+			tablaCita.getItems().add(c);
+		}
+	}
+
+	private final ListChangeListener<Cita> selectorTablaCita = new ListChangeListener<Cita>() {
+
+		@Override
+		public void onChanged(ListChangeListener.Change<? extends Cita> c) {
+			ponerCitaSeleccionado();
+		}
+	};
+
+	public Cita getTablaCitaSeleccionada() {
+		if (tablaCita != null) {
+			List<Cita> tabla = tablaCita.getSelectionModel().getSelectedItems();
+			if (tabla.size() == 1) {
+				final Cita competicionSeleccionada = tabla.get(0);
+				return competicionSeleccionada;
+			}
+		}
+		return null;
+	}
+
+	private void ponerCitaSeleccionado() {
+
+		cmbEspecialidadCita.setItems(controlador.principal.getControladorMedico().verEspecialidades());
+
+		Cita c = getTablaCitaSeleccionada();
+
+		if (c != null) {
+
+			Cita cita = controlador.principal.getControladorCita().buscarCita(c.getId());
+
+			if (radioBtnModifcarCita.isSelected()) {
+
+				calendarCita.setDisable(false);
+				btnModificarCita.setDisable(false);
+				btnAgregarCita.setDisable(true);
+				txtIdCita.setEditable(false);
+				txtPacienteCita.setEditable(false);
+				cmbEspecialidadCita.setDisable(false);
+				btnFiltrarEspecialidadCita.setDisable(false);
+			} else {
+				radioBtnAgregarCita.setDisable(true);
+				txtIdCita.setEditable(false);
+				txtPacienteCita.setEditable(false);
+				calendarCita.setDisable(true);
+				cmbEspecialidadCita.setDisable(true);
+				btnFiltrarEspecialidadCita.setDisable(true);
+				radioBtnModifcarCita.setDisable(false);
+				radioBtnEliminarCita.setDisable(false);
+			}
+
+			txtIdCita.setText(cita.getId());
+
+			Date fecha = cita.getFechaHora();
+			LocalDate fechaHora = asLocalDate(fecha);
+			calendarCita.setValue(fechaHora);
+			txtPacienteCita.setText(cita.getPaciente().getDni());
+
+			Medico medico = cita.getMedico();
+
+			ObservableList<Medico> items1 = FXCollections.observableArrayList();
+			tablaMedicoCita.setItems(items1);
+			columnaLicenciaCita.setCellValueFactory(new PropertyValueFactory<Medico, String>("licencia"));
+			columnaMedicoCita.setCellValueFactory(new PropertyValueFactory<Medico, String>("nombre"));
+			tablaMedicoCita.getItems().add(medico);
+			MEDIOCITA = medico;
+			tablaMedicoCita.setDisable(true);
+
+		}
+	}
+
+	private final ListChangeListener<Medico> selectorTablaMedicoCita = new ListChangeListener<Medico>() {
+
+		@Override
+		public void onChanged(ListChangeListener.Change<? extends Medico> c) {
+			ponerMedicoCitaSeleccionado();
+		}
+	};
+
+	public Medico getTablaMedicoCitaSeleccionada() {
+		if (tablaMedicoCita != null) {
+			List<Medico> tabla = tablaMedicoCita.getSelectionModel().getSelectedItems();
+			if (tabla.size() == 1) {
+				final Medico competicionSeleccionada = tabla.get(0);
+				return competicionSeleccionada;
+			}
+		}
+		return null;
+	}
+
+	private void ponerMedicoCitaSeleccionado() {
+		cmbEspecialidadCita.setItems(controlador.principal.getControladorMedico().verEspecialidades());
+		cmbEspecialidadCita.getSelectionModel().select(0);
+
+		final Medico medico = getTablaMedicoCitaSeleccionada();
+
+		if (medico != null) {
+
+			MEDIOCITA = medico;
+
+			Alerta.mostrarAlerta("Confirmacion", "Alerta", "Medico Seleccionado.", AlertType.CONFIRMATION);
+			tablaMedicoCita.setDisable(true);
+
+		}
+
+	}
+
+	public void borrarTablaMedicoCita() {
+		ObservableList<Medico> items1 = FXCollections.observableArrayList();
+		tablaMedicoCita.setItems(items1);
 	}
 
 	// FIN CITA
@@ -1411,6 +1711,9 @@ public class VentanaCRUD implements Initializable {
 		btnAgregarEspecialidadMedico.setDisable(true);
 		cmbEspecialidad.setDisable(true);
 
+		final ObservableList<Medico> tablaMedicoSel = tablaMedico.getSelectionModel().getSelectedItems();
+		tablaMedicoSel.addListener(selectorTablaMedico);
+
 		// EMPLEADO
 		txtNombreEmpleado.setEditable(false);
 		txtIdEmpleado.setEditable(false);
@@ -1429,9 +1732,41 @@ public class VentanaCRUD implements Initializable {
 		final ObservableList<Empleado> tablaEmpleadoSel = tablaEmpleado.getSelectionModel().getSelectedItems();
 		tablaEmpleadoSel.addListener(selectorTablaEmpleado);
 
-		final ObservableList<Medico> tablaMedicoSel = tablaMedico.getSelectionModel().getSelectedItems();
-		tablaMedicoSel.addListener(selectorTablaMedico);
+		// CITA
 
+		radioBtnAgregarCita.setDisable(true);
+		radioBtnEliminarCita.setDisable(true);
+		radioBtnModifcarCita.setDisable(true);
+		calendarCita.setDisable(true);
+		txtIdCita.setEditable(false);
+		txtPacienteCita.setEditable(false);
+		cmbEspecialidadCita.setDisable(true);
+		btnFiltrarEspecialidadCita.setDisable(true);
+		btnAgregarCita.setDisable(true);
+		btnEliminarCita.setDisable(true);
+		btnModificarCita.setDisable(true);
+		btnEliminarCita.setDisable(true);
+		btnLimpiarCita.setDisable(true);
+
+		final ObservableList<Cita> tablaCitaSel = tablaCita.getSelectionModel().getSelectedItems();
+		tablaCitaSel.addListener(selectorTablaCita);
+
+		final ObservableList<Medico> tablaMedicoCitaSel = tablaMedicoCita.getSelectionModel().getSelectedItems();
+		tablaMedicoCitaSel.addListener(selectorTablaMedicoCita);
+
+	}
+
+	public static LocalDate asLocalDate(Date date) {
+		return Instant.ofEpochMilli(date.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+	}
+
+	public static Date asDate(LocalDate localDate) {
+		return (Date) Date.from(localDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+	}
+
+	private static java.sql.Date convertDateSql(java.util.Date uDate) {
+		java.sql.Date sDate = new java.sql.Date(uDate.getTime());
+		return sDate;
 	}
 
 	public Controlador getControlador() {
