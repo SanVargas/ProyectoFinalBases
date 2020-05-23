@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -23,12 +24,10 @@ import javafx.stage.Stage;
 import modelo.alertas.Alerta;
 import modelo.entidad.Empleado;
 import modelo.entidad.Eps;
-import modelo.entidad.Especialidad;
 import modelo.entidad.Medico;
 import modelo.entidad.Paciente;
 
 public class VentanaCRUD implements Initializable {
-
 	@FXML
 	Stage stage;
 	Controlador controlador;
@@ -79,16 +78,13 @@ public class VentanaCRUD implements Initializable {
 	private TableColumn<Paciente, String> columnaDNIPaciente;
 	@FXML
 	private TableColumn<Paciente, String> columnaDireccionPaciente;
-
 	@FXML
 	private ComboBox<String> cmbDescTelefonoPaciente;
-
 	@FXML
 	private TextField txtTelefonoPaciente;
-
 	@FXML
 	private Button btnAgregarTelefonoPaciente;
-
+	
 	@FXML
 	void actionAgregarPaciente(ActionEvent event) {
 
@@ -325,9 +321,13 @@ public class VentanaCRUD implements Initializable {
 
 	}
 
-	private final ListChangeListener<Paciente> selectorTablaPaciente=new ListChangeListener<Paciente>(){
+	private final ListChangeListener<Paciente> selectorTablaPaciente = new ListChangeListener<Paciente>() {
 
-	@Override public void onChanged(ListChangeListener.Change<?extends Paciente>c){ponerPacienteSeleccionado();}};
+		@Override
+		public void onChanged(ListChangeListener.Change<? extends Paciente> c) {
+			ponerPacienteSeleccionado();
+		}
+	};
 
 	public Paciente getTablaPacienteSeleccionada() {
 
@@ -575,9 +575,13 @@ public class VentanaCRUD implements Initializable {
 		}
 	}
 
-	private final ListChangeListener<Eps> selectorTablaEps=new ListChangeListener<Eps>(){
+	private final ListChangeListener<Eps> selectorTablaEps = new ListChangeListener<Eps>() {
 
-	@Override public void onChanged(ListChangeListener.Change<?extends Eps>c){ponerEpsSeleccionado();}};
+		@Override
+		public void onChanged(ListChangeListener.Change<? extends Eps> c) {
+			ponerEpsSeleccionado();
+		}
+	};
 
 	public Eps getTablaEpsSeleccionada() {
 		if (tablaEps != null) {
@@ -805,9 +809,13 @@ public class VentanaCRUD implements Initializable {
 		}
 	}
 
-	private final ListChangeListener<Medico> selectorTablaMedico=new ListChangeListener<Medico>(){
+	private final ListChangeListener<Medico> selectorTablaMedico = new ListChangeListener<Medico>() {
 
-	@Override public void onChanged(ListChangeListener.Change<?extends Medico>c){ponerMedicoSeleccionado();}};
+		@Override
+		public void onChanged(ListChangeListener.Change<? extends Medico> c) {
+			ponerMedicoSeleccionado();
+		}
+	};
 
 	public Medico getTablaMedicoSeleccionada() {
 		if (tablaMedico != null) {
@@ -840,10 +848,10 @@ public class VentanaCRUD implements Initializable {
 			radioBtnModifcarMedico.setDisable(false);
 		}
 	}
+
 	// FIN MEDICO
-
+	// -----------------------------------
 	// EMPLEADO
-
 	@FXML
 	private Button btnBuscarEmpleado;
 
@@ -884,7 +892,7 @@ public class VentanaCRUD implements Initializable {
 	private ComboBox<String> cmbCargoEmpleado;
 
 	@FXML
-	private ToggleGroup radioGroupOpcionPaciente1;
+	private ToggleGroup radioGroupOpcionEmpleado;
 
 	@FXML
 	private Button btnEliminarEmpleado;
@@ -1132,9 +1140,13 @@ public class VentanaCRUD implements Initializable {
 		}
 	}
 
-	private final ListChangeListener<Empleado> selectorTablaEmpleado=new ListChangeListener<Empleado>(){
+	private final ListChangeListener<Empleado> selectorTablaEmpleado = new ListChangeListener<Empleado>() {
 
-	@Override public void onChanged(ListChangeListener.Change<?extends Empleado>c){ponerEmpleadoSeleccionado();}};
+		@Override
+		public void onChanged(ListChangeListener.Change<? extends Empleado> c) {
+			ponerEmpleadoSeleccionado();
+		}
+	};
 
 	public Empleado getTablaEmpleadoSeleccionada() {
 		if (tablaEmpleado != null) {
@@ -1209,7 +1221,117 @@ public class VentanaCRUD implements Initializable {
 	}
 
 	// FIN EMPLEADO
+//-------------------
+	// CITA
+	@FXML
+	private Button btnAgregarCita;
 
+	@FXML
+	private DatePicker calendarCita;
+
+	@FXML
+	private TableView<?> tablaCita;
+
+	@FXML
+	private RadioButton radioBtnModifcarCita;
+
+	@FXML
+	private RadioButton radioBtnAgregarCita;
+
+	@FXML
+	private Button btnModificarCita;
+
+	@FXML
+	private TableColumn<?, ?> columnaIdCita;
+
+	@FXML
+	private TextField txtIdCita;
+
+	@FXML
+	private TableColumn<?, ?> columnaMedicoCita;
+
+	@FXML
+	private Button btnEliminarCita;
+
+	@FXML
+	private TextField txtBuscarCita;
+
+	@FXML
+	private RadioButton radioBtnEliminarCita;
+
+	@FXML
+	private Button btnLimpiarCita;
+
+	@FXML
+	private Button btnFiltrarEspecialidadCita;
+
+	@FXML
+	private ComboBox<?> cmbEspecialidadCita;
+
+	@FXML
+	private ToggleGroup radioGroupOpcionCita;
+
+	@FXML
+	private TableView<?> tablaMedicoCita;
+
+	@FXML
+	private TableColumn<?, ?> columnaFechaCita;
+
+	@FXML
+	private TableColumn<?, ?> columnaLicenciaCita;
+
+	@FXML
+	private Button btnBuscarCita;
+
+	@FXML
+	private TextField txtPacienteCita;
+
+	@FXML
+	void actionAgregarCita(ActionEvent event) {
+
+	}
+
+	@FXML
+	void actionEliminarCita(ActionEvent event) {
+
+	}
+
+	@FXML
+	void actionModificarCita(ActionEvent event) {
+
+	}
+
+	@FXML
+	void actionBuscarCita(ActionEvent event) {
+
+	}
+
+	@FXML
+	void actionRadioBtnAgregarCita(ActionEvent event) {
+
+	}
+
+	@FXML
+	void actionRadioBtnEliminarCita(ActionEvent event) {
+
+	}
+
+	@FXML
+	void actionRadioBtnModifcarCita(ActionEvent event) {
+
+	}
+
+	@FXML
+	void actionLimpiarVenCita(ActionEvent event) {
+
+	}
+
+	@FXML
+	void actionFiltrarEspecialidadCita(ActionEvent event) {
+
+	}
+
+	// FIN CITA
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// PACIENTE
@@ -1290,7 +1412,6 @@ public class VentanaCRUD implements Initializable {
 		cmbEspecialidad.setDisable(true);
 
 		// EMPLEADO
-
 		txtNombreEmpleado.setEditable(false);
 		txtIdEmpleado.setEditable(false);
 		txtLicenciaEmpleado.setEditable(false);

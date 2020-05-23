@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import conector.ConectorBD;
 import modelo.controladoresEntidades.ControladorCargo;
+import modelo.controladoresEntidades.ControladorCita;
 import modelo.controladoresEntidades.ControladorEmpleado;
 import modelo.controladoresEntidades.ControladorEps;
 import modelo.controladoresEntidades.ControladorEspecialidad;
@@ -25,6 +26,7 @@ public class Principal {
 	private ControladorMedico controladorMedico;
 	private ControladorEspecialidad controladorEspecialidad;
 	private ControladorEmpleado controladorEmpleado;
+	private ControladorCita controladorCita;
 
 	public Principal() {
 		controladorTipoSangre = new ControladorTipoSangre(cc, con, this);
@@ -37,6 +39,7 @@ public class Principal {
 		controladorEspecialidad = new ControladorEspecialidad(cc, con, this);
 		controladorEspecialidad.insertarEspecialidad();
 		controladorEmpleado = new ControladorEmpleado(cc, con, this);
+		controladorCita = new ControladorCita(cc, con, this);
 	}
 
 	public ControladorEmpleado getControladorEmpleado() {
@@ -111,4 +114,12 @@ public class Principal {
 		this.controladorEspecialidad = controladorEspecialidad;
 	}
 
+	public ControladorCita getControladorCita() {
+		return controladorCita;
+	}
+
+	public void setControladorCita(ControladorCita controladorCita) {
+		this.controladorCita = controladorCita;
+	}
+	
 }

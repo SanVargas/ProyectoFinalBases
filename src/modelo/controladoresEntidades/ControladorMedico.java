@@ -12,7 +12,6 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.Alert.AlertType;
 import modelo.Principal;
 import modelo.alertas.Alerta;
-import modelo.entidad.Eps;
 import modelo.entidad.Especialidad;
 import modelo.entidad.Medico;
 
@@ -112,7 +111,6 @@ public class ControladorMedico {
 	}
 
 	public void eliminarMedico(String licencia) {
-
 		PreparedStatement ps;
 		PreparedStatement ps1;
 

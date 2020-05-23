@@ -5,18 +5,15 @@ import java.sql.Date;
 public class Cita {
 	private Date fechaHora;
 	private String id;
-	//solo es un comentario
 	private Medico medico;
 	private Paciente paciente;
-	private Empleado empleado;
 
-	public Cita(Date fechaHora, String id, Medico medico, Paciente paciente, Empleado empleado) {
+	public Cita(Date fechaHora, String id, Medico medico, Paciente paciente) {
 		super();
 		this.fechaHora = fechaHora;
 		this.id = id;
 		this.medico = medico;
 		this.paciente = paciente;
-		this.empleado = empleado;
 	}
 
 	public Date getFechaHora() {
@@ -49,14 +46,6 @@ public class Cita {
 
 	public void setPaciente(Paciente paciente) {
 		this.paciente = paciente;
-	}
-
-	public Empleado getEmpleado() {
-		return empleado;
-	}
-
-	public void setEmpleado(Empleado empleado) {
-		this.empleado = empleado;
 	}
 
 }

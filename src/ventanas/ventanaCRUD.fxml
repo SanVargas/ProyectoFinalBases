@@ -153,11 +153,11 @@
                   <Label layoutX="359.0" layoutY="23.0" text="Ingrese el ID del Empleado a buscar." />
                   <RadioButton fx:id="radioBtnAgregarEmpleado" layoutX="30.0" layoutY="46.0" mnemonicParsing="false" onAction="#actionRadioBtnAgregarEmpleado" text="Agregar">
                      <toggleGroup>
-                        <ToggleGroup fx:id="radioGroupOpcionPaciente1" />
+                        <ToggleGroup fx:id="radioGroupOpcionEmpleado" />
                      </toggleGroup>
                   </RadioButton>
-                  <RadioButton fx:id="radioBtnEliminarEmpleado" layoutX="151.0" layoutY="46.0" mnemonicParsing="false" onAction="#actionRadioBtnEliminarEmpleado" text="Eliminar" toggleGroup="$radioGroupOpcionPaciente1" />
-                  <RadioButton fx:id="radioBtnModifcarEmpleado" layoutX="258.0" layoutY="46.0" mnemonicParsing="false" onAction="#actionRadioBtnModifcarEmpleado" text="Modificar" toggleGroup="$radioGroupOpcionPaciente1" />
+                  <RadioButton fx:id="radioBtnEliminarEmpleado" layoutX="151.0" layoutY="46.0" mnemonicParsing="false" onAction="#actionRadioBtnEliminarEmpleado" text="Eliminar" toggleGroup="$radioGroupOpcionEmpleado" />
+                  <RadioButton fx:id="radioBtnModifcarEmpleado" layoutX="258.0" layoutY="46.0" mnemonicParsing="false" onAction="#actionRadioBtnModifcarEmpleado" text="Modificar" toggleGroup="$radioGroupOpcionEmpleado" />
                   <Label layoutX="105.0" layoutY="23.0" text="Seleccione la opción deseada" />
                   <Button fx:id="btnLimpiarEmpleado" layoutX="519.0" layoutY="374.0" mnemonicParsing="false" onAction="#actionLimpiarVenEmpleado" prefHeight="25.0" prefWidth="140.0" text="Limpiar" />
                   <Separator layoutX="346.0" layoutY="24.0" orientation="VERTICAL" prefHeight="326.0" prefWidth="4.0" />
@@ -170,7 +170,7 @@
                   <TextField fx:id="txtLicenciaEmpleado" layoutX="225.0" layoutY="111.0" prefHeight="25.0" prefWidth="113.0" />
                   <Label layoutX="20.0" layoutY="148.0" text="Cargo" />
                   <ComboBox fx:id="cmbCargoEmpleado" layoutX="62.0" layoutY="144.0" prefHeight="25.0" prefWidth="276.0" />
-                  <TextField fx:id="txtMostrarSalario" editable="false" layoutX="71.0" layoutY="178.0" prefHeight="25.0" prefWidth="269.0" />
+                  <TextField fx:id="txtMostrarSalario" editable="false" layoutX="62.0" layoutY="178.0" prefHeight="25.0" prefWidth="275.0" />
                   <Label layoutX="20.0" layoutY="182.0" text="Salario" />
                   <Label layoutX="20.0" layoutY="217.0" text="Descripcion" />
                   <TextField fx:id="txtMostrarDescripcion" editable="false" layoutX="88.0" layoutY="213.0" prefHeight="25.0" prefWidth="249.0" />
@@ -181,6 +181,56 @@
                </children>
             </AnchorPane>
          </content>
+      </Tab>
+      <Tab text="Cita">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <AnchorPane prefHeight="336.0" prefWidth="635.0">
+                     <children>
+                        <Button fx:id="btnAgregarCita" layoutX="20.0" layoutY="374.0" mnemonicParsing="false" onAction="#actionAgregarCita" prefHeight="20.0" prefWidth="140.0" text="Agregar" />
+                        <Button fx:id="btnEliminarCita" layoutX="188.0" layoutY="374.0" mnemonicParsing="false" onAction="#actionEliminarCita" prefHeight="20.0" prefWidth="140.0" text="Eliminar" />
+                        <Button fx:id="btnModificarCita" layoutX="359.0" layoutY="374.0" mnemonicParsing="false" onAction="#actionModificarCita" prefHeight="20.0" prefWidth="140.0" text="Modificar" />
+                        <Button fx:id="btnBuscarCita" layoutX="557.0" layoutY="60.0" mnemonicParsing="false" onAction="#actionBuscarCita" prefHeight="25.0" prefWidth="92.0" text="Buscar" />
+                        <TableView fx:id="tablaCita" layoutX="359.0" layoutY="95.0" prefHeight="255.0" prefWidth="290.0">
+                           <columns>
+                              <TableColumn fx:id="columnaFechaCita" prefWidth="142.0" text="FECHA" />
+                              <TableColumn fx:id="columnaIdCita" prefWidth="147.0" text="ID" />
+                           </columns>
+                        </TableView>
+                        <TextField fx:id="txtBuscarCita" layoutX="359.0" layoutY="60.0" prefHeight="25.0" prefWidth="187.0" />
+                        <Label layoutX="359.0" layoutY="38.0" text="Ingrese el ID de la cita." />
+                        <RadioButton fx:id="radioBtnAgregarCita" layoutX="30.0" layoutY="38.0" mnemonicParsing="false" onAction="#actionRadioBtnAgregarCita" text="Agregar">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="radioGroupOpcionCita" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="radioBtnEliminarCita" layoutX="148.0" layoutY="38.0" mnemonicParsing="false" onAction="#actionRadioBtnEliminarCita" text="Eliminar" toggleGroup="$radioGroupOpcionCita" />
+                        <RadioButton fx:id="radioBtnModifcarCita" layoutX="259.0" layoutY="38.0" mnemonicParsing="false" onAction="#actionRadioBtnModifcarCita" text="Modificar" toggleGroup="$radioGroupOpcionCita" />
+                        <Label layoutX="30.0" layoutY="16.0" text="Seleccione la opción deseada" />
+                        <Button fx:id="btnLimpiarCita" layoutX="519.0" layoutY="374.0" mnemonicParsing="false" onAction="#actionLimpiarVenCita" prefHeight="25.0" prefWidth="140.0" text="Limpiar" />
+                        <Separator layoutX="342.0" layoutY="24.0" orientation="VERTICAL" prefHeight="326.0" prefWidth="4.0" />
+                        <Separator layoutX="328.0" layoutY="47.0" orientation="VERTICAL" prefHeight="633.0" prefWidth="15.0" rotate="90.0" />
+                        <DatePicker fx:id="calendarCita" layoutX="95.0" layoutY="96.0" prefHeight="25.0" prefWidth="232.0" />
+                        <Label layoutX="28.0" layoutY="100.0" text="Fecha:" />
+                        <TextField fx:id="txtIdCita" layoutX="95.0" layoutY="60.0" prefHeight="25.0" prefWidth="232.0" />
+                        <Label layoutX="30.0" layoutY="64.0" text="ID:" />
+                        <ComboBox fx:id="cmbEspecialidadCita" layoutX="28.0" layoutY="193.0" prefHeight="25.0" prefWidth="218.0" />
+                        <Label layoutX="30.0" layoutY="170.0" text="Seleccione la especialidad de la cita:" />
+                        <Button fx:id="btnFiltrarEspecialidadCita" layoutX="260.0" layoutY="193.0" mnemonicParsing="false" onAction="#actionFiltrarEspecialidadCita" prefHeight="25.0" prefWidth="70.0" text="Filtrar" />
+                        <TableView fx:id="tablaMedicoCita" layoutX="28.0" layoutY="223.0" prefHeight="130.0" prefWidth="301.0">
+                          <columns>
+                            <TableColumn fx:id="columnaLicenciaCita" prefWidth="143.0" text="LICENCIA" />
+                            <TableColumn fx:id="columnaMedicoCita" prefWidth="157.0" text="MEDICO" />
+                          </columns>
+                        </TableView>
+                        <TextField fx:id="txtPacienteCita" layoutX="95.0" layoutY="132.0" prefHeight="25.0" prefWidth="233.0" />
+                        <Label layoutX="30.0" layoutY="136.0" text="Paciente" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+        </content>
       </Tab>
   </tabs>
 </TabPane>
