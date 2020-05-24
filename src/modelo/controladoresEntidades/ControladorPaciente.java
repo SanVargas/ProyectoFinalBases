@@ -108,7 +108,7 @@ public class ControladorPaciente {
 			Alerta.mostrarAlerta("Error", "Alerta", "Error al agregar.", AlertType.ERROR);
 		}
 
-	}
+	} 
 
 	public void modificarPaciente(String dni, String nombre, String direccion, double peso, double estatura, String rh,
 			String grupoS, String eps) {
@@ -156,15 +156,15 @@ public class ControladorPaciente {
 			ps2.setString(1, dni);
 			
 
-			String SQL1 = "DELETE FROM HISTORIACLINICA WHERE Paciente_dni = ?";
+			String SQL1 = "DELETE FROM HistoriaClinica WHERE Paciente_dni = ?";
 			ps1 = con.prepareStatement(SQL1);
 			ps1.setString(1, dni);
 
-			String SQL2 = "DELETE FROM TELEFONO_PACIENTE WHERE Paciente_dni = ?";
+			String SQL2 = "DELETE FROM Telefono_Paciente WHERE Paciente_dni = ?";
 			ps3 = con.prepareStatement(SQL2);
 			ps3.setString(1, dni);
 
-			String SQL = "DELETE FROM PACIENTE WHERE dni = ?";
+			String SQL = "DELETE FROM Paciente WHERE dni = ?";
 			ps = con.prepareStatement(SQL);
 			ps.setString(1, dni);
 

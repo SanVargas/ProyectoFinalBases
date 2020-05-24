@@ -22,7 +22,7 @@ public class ControladorEspecialidad {
 	Principal principal;
 
 	public ControladorEspecialidad(ConectorBD cc, Connection con, Principal principal) {
-		super();
+		super(); 
 		this.cc = cc;
 		this.con = con;
 		this.principal = principal;
@@ -33,7 +33,7 @@ public class ControladorEspecialidad {
 		PreparedStatement ps;
 
 		try {
-			String SQL = "SELECT * FROM ESPECIALIDAD WHERE nombre = ?";
+			String SQL = "SELECT * FROM Especialidad WHERE nombre = ?";
 			ps = con.prepareStatement(SQL);
 			ps.setString(1, nombre);
 			rs1 = ps.executeQuery();
@@ -54,7 +54,7 @@ public class ControladorEspecialidad {
 			PreparedStatement pst1 = con.prepareStatement(SQL1);
 			pst1.setString(1, "00001");
 			pst1.setString(2, "Pediatra");
-			pst1.setString(3, "Estudia al niño y sus enfermedades.");
+			pst1.setString(3, "Estudia al niï¿½o y sus enfermedades.");
 
 			String SQL2 = "INSERT INTO Especialidad (id, nombre, descripcion) values (?,?,?)";
 			PreparedStatement pst2 = con.prepareStatement(SQL2);
@@ -89,7 +89,7 @@ public class ControladorEspecialidad {
 			String SQL8 = "INSERT INTO Especialidad (id, nombre, descripcion) values (?,?,?)";
 			PreparedStatement pst8 = con.prepareStatement(SQL8);
 			pst8.setString(1, "00008");
-			pst8.setString(2, "otorrinolaringologo");
+			pst8.setString(2, "Otorrinolaringologo");
 			pst8.setString(3,
 					"Estudia las estructuras relacionadas con cuello y cabeza y sus respectivas enfermedades.");
 
@@ -143,7 +143,7 @@ public class ControladorEspecialidad {
 	}
 
 	public ArrayList<Especialidad> mostrarEspecialidades() {
-		String SQL = "SELECT * FROM ESPECIALIDAD";
+		String SQL = "SELECT * FROM Especialidad";
 		ArrayList<Especialidad> lstEspecialidad = new ArrayList<Especialidad>();
 
 		try {
@@ -182,7 +182,7 @@ public class ControladorEspecialidad {
 			l = 4;
 		} else if (nombre.equals("Reumatologo")) {
 			l = 5;
-		} else if (nombre.equals("otorrinolaringologo")) {
+		} else if (nombre.equals("Otorrinolaringologo")) {
 			l = 6;
 		} else if (nombre.equals("Cirugia Plastica")) {
 			l = 7;

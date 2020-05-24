@@ -39,7 +39,7 @@ public class ControladorMedico {
 			ResultSet rs1 = principal.getControladorEspecialidad().buscarEspecialidad(especialidad);
 
 			PreparedStatement ps1;
-			String SQL1 = "INSERT INTO MEDICO_HAS_ESPECIALIDAD (Medico_licencia, Especialidad_id) VALUES (?,?)";
+			String SQL1 = "INSERT INTO Medico_has_Especialidad (Medico_licencia, Especialidad_id) VALUES (?,?)";
 			ps1 = con.prepareStatement(SQL1);
 			ps1.setString(1, licencia);
 
@@ -60,20 +60,20 @@ public class ControladorMedico {
 	}
 
 	public Medico insertarMedico(String licencia, String nombre, String especialidad) {
-		Medico m = null;
+		Medico m = null; 
 		PreparedStatement ps;
 		ResultSet rs;
 		try {
 			String SQL = "INSERT INTO Medico (licencia, nombre) VALUES (?,?)";
 			ps = con.prepareStatement(SQL);
-			ps.setString(1, licencia);
+			ps.setString(1, licencia); 
 			ps.setString(2, nombre);
 			ps.execute();
 
 			ResultSet rs1 = principal.getControladorEspecialidad().buscarEspecialidad(especialidad);
 
 			PreparedStatement ps1;
-			String SQL1 = "INSERT INTO MEDICO_HAS_ESPECIALIDAD (Medico_licencia, Especialidad_id) VALUES (?,?)";
+			String SQL1 = "INSERT INTO Medico_has_Especialidad (Medico_licencia, Especialidad_id) VALUES (?,?)";
 			ps1 = con.prepareStatement(SQL1);
 			ps1.setString(1, licencia);
 
@@ -88,7 +88,7 @@ public class ControladorMedico {
 			Alerta.mostrarAlerta("Confirmacion", "Alerta", "Se agrego existosamente.", AlertType.CONFIRMATION);
 		} catch (SQLException e) {
 			Alerta.mostrarAlerta("Error", "Alerta", "Error al agregar.", AlertType.ERROR);
-			m = null;
+			e.printStackTrace();
 		}
 		return m;
 	}
@@ -107,6 +107,7 @@ public class ControladorMedico {
 			Alerta.mostrarAlerta("Confirmacion", "Alerta", "Se modifico existosamente.", AlertType.CONFIRMATION);
 		} catch (Exception e) {
 			Alerta.mostrarAlerta("Error", "Alerta", "Error al modificar.", AlertType.ERROR);
+			e.printStackTrace();
 		}
 	}
 
@@ -122,7 +123,7 @@ public class ControladorMedico {
 			ps2.setString(1, null);
 			ps2.setString(1, licencia);
 
-			String SQL1 = "DELETE FROM MEDICO_HAS_ESPECIALIDAD WHERE Medico_licencia = ?";
+			String SQL1 = "DELETE FROM Medico_has_Especialidad WHERE Medico_licencia = ?";
 			ps1 = con.prepareStatement(SQL1);
 			ps1.setString(1, licencia);
 
@@ -184,7 +185,7 @@ public class ControladorMedico {
 		String numEsp = "";
 
 		try {
-			String SQL = "SELECT * FROM Medico_Has_Especialidad WHERE Medico_licencia = ?";
+			String SQL = "SELECT * FROM Medico_has_Especialidad WHERE Medico_licencia = ?";
 			ps = con.prepareStatement(SQL);
 			ps.setString(1, licencia);
 			rs1 = ps.executeQuery();
@@ -224,7 +225,7 @@ public class ControladorMedico {
 
 			while (rs1.next()) {
 
-				String SQL = "SELECT * FROM Medico_Has_Especialidad WHERE Especialidad_id = ?";
+				String SQL = "SELECT * FROM Medico_has_Especialidad WHERE Especialidad_id = ?";
 				ps = con.prepareStatement(SQL);
 				ps.setString(1, rs1.getString("id"));
 				rs = ps.executeQuery();

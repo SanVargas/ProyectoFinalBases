@@ -30,42 +30,42 @@ public class ControladorCargo {
 
 		try {
 
-			String SQL1 = "insert into Cargo (id, nombre, descripcion, salario) values (?,?,?, ?)";
+			String SQL1 = "INSERT INTO Cargo (id, nombre, descripcion, salario) values (?,?,?, ?)";
 			PreparedStatement pst1 = con.prepareStatement(SQL1);
 			pst1.setString(1, "0001");
 			pst1.setString(2, "Cajero");
 			pst1.setString(3, "Atiende caja");
 			pst1.setDouble(4, 1000000);
 
-			String SQL2 = "insert into Cargo (id, nombre, descripcion, salario) values (?,?,?, ?)";
+			String SQL2 = "INSERT INTO Cargo (id, nombre, descripcion, salario) values (?,?,?, ?)";
 			PreparedStatement pst2 = con.prepareStatement(SQL2);
 			pst2.setString(1, "0002");
 			pst2.setString(2, "Farmaceuta");
 			pst2.setString(3, "Atiende drogueria");
 			pst2.setDouble(4, 1230000);
 
-			String SQL3 = "insert into Cargo (id, nombre, descripcion, salario) values (?,?,?, ?)";
+			String SQL3 = "INSERT INTO Cargo (id, nombre, descripcion, salario) values (?,?,?, ?)";
 			PreparedStatement pst3 = con.prepareStatement(SQL3);
 			pst3.setString(1, "0003");
 			pst3.setString(2, "Enfermero");
 			pst3.setString(3, "Atiende pacientes");
 			pst3.setDouble(4, 2300000);
 
-			String SQL4 = "insert into Cargo (id, nombre, descripcion, salario) values (?,?,?, ?)";
+			String SQL4 = "INSERT INTO Cargo (id, nombre, descripcion, salario) values (?,?,?, ?)";
 			PreparedStatement pst4 = con.prepareStatement(SQL4);
 			pst4.setString(1, "0004");
 			pst4.setString(2, "Oficinista");
 			pst4.setString(3, "Trabaja en oficina");
 			pst4.setDouble(4, 1500000);
 
-			String SQL5 = "insert into Cargo (id, nombre, descripcion, salario) values (?,?,?, ?)";
+			String SQL5 = "INSERT INTO Cargo (id, nombre, descripcion, salario) values (?,?,?, ?)";
 			PreparedStatement pst5 = con.prepareStatement(SQL5);
 			pst5.setString(1, "0005");
 			pst5.setString(2, "Paramedico");
 			pst5.setString(3, "Trabaja ambulancia");
 			pst5.setDouble(4, 2700000);
 
-			String SQL6 = "insert into Cargo (id, nombre, descripcion, salario) values (?,?,?, ?)";
+			String SQL6 = "INSERT INTO Cargo (id, nombre, descripcion, salario) values (?,?,?, ?)";
 			PreparedStatement pst6 = con.prepareStatement(SQL6);
 			pst6.setString(1, "0006");
 			pst6.setString(2, "Otro");

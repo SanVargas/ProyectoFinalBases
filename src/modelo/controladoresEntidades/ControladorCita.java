@@ -125,7 +125,7 @@ public class ControladorCita {
 		ArrayList<Cita> lstCita = new ArrayList<Cita>();
 		String SQL = "SELECT * FROM Cita";
 
-		try {
+		try { 
 			Statement st = con.createStatement();
 			ResultSet rs = st.executeQuery(SQL);
 

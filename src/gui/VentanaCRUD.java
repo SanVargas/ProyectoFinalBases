@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.RenderingHints.Key;
 import java.net.URL;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -24,6 +25,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import modelo.alertas.Alerta;
 import modelo.entidad.Cita;
@@ -90,7 +92,7 @@ public class VentanaCRUD implements Initializable {
 	@FXML
 	private Button btnAgregarTelefonoPaciente;
 
-	@FXML
+	@FXML 
 	void actionAgregarPaciente(ActionEvent event) {
 
 		txtDNIPaciente.setEditable(false);
@@ -662,7 +664,7 @@ public class VentanaCRUD implements Initializable {
 
 		Medico m = controlador.principal.getControladorMedico().insertarMedico(licencia, nombre, especialidad);
 
-		if (m != null) {
+		if (m != null) { 
 			columnaLicenciaMedico.setCellValueFactory(new PropertyValueFactory<Medico, String>("licencia"));
 			columnaNombreMedico.setCellValueFactory(new PropertyValueFactory<Medico, String>("nombre"));
 
@@ -928,7 +930,7 @@ public class VentanaCRUD implements Initializable {
 
 	@FXML
 	void actionAgregarEmpleado(ActionEvent event) {
-
+		
 		txtDNIPaciente.setEditable(false);
 		String nombre = txtNombreEmpleado.getText();
 		String id = txtIdEmpleado.getText();
@@ -1635,11 +1637,16 @@ public class VentanaCRUD implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// PACIENTE
+		txtBuscarPaciente.addEventHandler(KeyEvent.KEY_TYPED, event -> soloNumeros(event));
 		txtNombrePaciente.setEditable(false);
+		txtNombrePaciente.addEventHandler(KeyEvent.KEY_TYPED, event -> soloLetras(event));
 		txtDireccionPaciente.setEditable(false);
 		txtDNIPaciente.setEditable(false);
+		txtDNIPaciente.addEventHandler(KeyEvent.KEY_TYPED, event -> soloNumeros(event));
 		txtPesoPaciente.setEditable(false);
+		txtPesoPaciente.addEventHandler(KeyEvent.KEY_TYPED, event -> soloNumeros(event));
 		txtEstaturaPaciente.setEditable(false);
+		txtEstaturaPaciente.addEventHandler(KeyEvent.KEY_TYPED, event -> soloNumeros(event));
 		cmbGrupoSnaguineo.setDisable(true);
 		cmbRH.setDisable(true);
 		btnAgregarPaciente.setDisable(true);
@@ -1652,6 +1659,7 @@ public class VentanaCRUD implements Initializable {
 		btnLimpiarVenPaciente.setDisable(true);
 		btnAgregarPaciente.setDisable(true);
 		txtTelefonoPaciente.setDisable(true);
+		txtTelefonoPaciente.addEventHandler(KeyEvent.KEY_TYPED, event -> soloNumeros(event));
 		btnAgregarTelefonoPaciente.setDisable(true);
 		cmbDescTelefonoPaciente.setDisable(true);
 
@@ -1684,8 +1692,9 @@ public class VentanaCRUD implements Initializable {
 
 		// EPS
 		txtNitEps.setEditable(false);
+		txtNitEps.addEventHandler(KeyEvent.KEY_TYPED, event -> soloNumeros(event));
 		txtNombreEps.setEditable(false);
-
+		txtNombreEps.addEventHandler(KeyEvent.KEY_TYPED, event -> soloLetras(event));
 		btnAgregarEps.setDisable(true);
 		btnEliminarEps.setDisable(true);
 		btnModificarEps.setDisable(true);
@@ -1698,9 +1707,11 @@ public class VentanaCRUD implements Initializable {
 		tablaEpsSel.addListener(selectorTablaEps);
 
 		// Medico
+		txtBuscarMedico.addEventHandler(KeyEvent.KEY_TYPED, event -> soloNumeros(event));
 		txtLicenciaMedico.setEditable(false);
+		txtLicenciaMedico.addEventHandler(KeyEvent.KEY_TYPED, event -> soloNumeros(event));
 		txtNombreMedico.setEditable(false);
-
+		txtNombreMedico.addEventHandler(KeyEvent.KEY_TYPED, event -> soloLetras(event));
 		btnAgregarMedico.setDisable(true);
 		btnEliminarMedico.setDisable(true);
 		btnModificarMedico.setDisable(true);
@@ -1715,14 +1726,19 @@ public class VentanaCRUD implements Initializable {
 		tablaMedicoSel.addListener(selectorTablaMedico);
 
 		// EMPLEADO
+		txtBuscarEmpleado.addEventHandler(KeyEvent.KEY_TYPED, event -> soloNumeros(event));
 		txtNombreEmpleado.setEditable(false);
+		txtNombreEmpleado.addEventHandler(KeyEvent.KEY_TYPED, event -> soloLetras(event));
 		txtIdEmpleado.setEditable(false);
+		txtIdEmpleado.addEventHandler(KeyEvent.KEY_TYPED, event -> soloNumeros(event));
 		txtLicenciaEmpleado.setEditable(false);
+		txtLicenciaEmpleado.addEventHandler(KeyEvent.KEY_TYPED, event -> soloNumeros(event));
 		radioBtnAgregarEmpleado.setDisable(true);
 		radioBtnEliminarEmpleado.setDisable(true);
 		radioBtnModifcarEmpleado.setDisable(true);
 		cmbTelefonoEmpleado.setDisable(true);
 		txtTelefonoEmpleado.setEditable(false);
+		txtTelefonoEmpleado.addEventHandler(KeyEvent.KEY_TYPED, event -> soloNumeros(event));
 		btnAgregarEmpleado.setDisable(true);
 		btnEliminarEmpleado.setDisable(true);
 		btnModificarEmpleado.setDisable(true);
@@ -1733,12 +1749,13 @@ public class VentanaCRUD implements Initializable {
 		tablaEmpleadoSel.addListener(selectorTablaEmpleado);
 
 		// CITA
-
+		txtBuscarCita.addEventFilter(KeyEvent.KEY_TYPED, event -> soloNumeros(event));
 		radioBtnAgregarCita.setDisable(true);
 		radioBtnEliminarCita.setDisable(true);
 		radioBtnModifcarCita.setDisable(true);
 		calendarCita.setDisable(true);
 		txtIdCita.setEditable(false);
+		txtIdCita.addEventHandler(KeyEvent.KEY_TYPED, event -> soloNumeros(event));
 		txtPacienteCita.setEditable(false);
 		cmbEspecialidadCita.setDisable(true);
 		btnFiltrarEspecialidadCita.setDisable(true);
@@ -1754,6 +1771,30 @@ public class VentanaCRUD implements Initializable {
 		final ObservableList<Medico> tablaMedicoCitaSel = tablaMedicoCita.getSelectionModel().getSelectedItems();
 		tablaMedicoCitaSel.addListener(selectorTablaMedicoCita);
 
+	}
+	
+	public void soloNumeros (KeyEvent event) {
+		try {
+			char key = event.getCharacter().charAt(0);
+			if (!Character.isDigit(key)) {
+				event.consume();
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+	}
+	
+	public void soloLetras (KeyEvent event) {
+		try {
+			char key = event.getCharacter().charAt(0);
+			if (Character.isDigit(key)) {
+				event.consume();
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
 	}
 
 	public static LocalDate asLocalDate(Date date) {

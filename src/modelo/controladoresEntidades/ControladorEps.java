@@ -77,7 +77,7 @@ public class ControladorEps {
 			ps1.setString(1, nit);
 			rs1 = ps1.executeQuery();
 
-			while (rs1.next()) {
+			while (rs1.next()) { 
 				String SQL2 = "UPDATE Paciente SET EPS_nit = ? WHERE dni = ?";
 				PreparedStatement ps2 = con.prepareStatement(SQL2);
 				ps2.setString(1, null);
