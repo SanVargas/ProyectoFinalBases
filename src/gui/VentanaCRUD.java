@@ -92,7 +92,7 @@ public class VentanaCRUD implements Initializable {
 	@FXML
 	private Button btnAgregarTelefonoPaciente;
 
-	@FXML 
+	@FXML
 	void actionAgregarPaciente(ActionEvent event) {
 
 		txtDNIPaciente.setEditable(false);
@@ -469,6 +469,7 @@ public class VentanaCRUD implements Initializable {
 		}
 		txtNitEps.setText("");
 		txtNombreEps.setText("");
+		txtNombreEps.setEditable(false);
 		btnAgregarEps.setDisable(true);
 	}
 
@@ -486,6 +487,8 @@ public class VentanaCRUD implements Initializable {
 		String nombre = txtNombreEps.getText();
 
 		controlador.principal.getControladorEps().modificarEps(nit, nombre);
+
+		txtNombreEps.setEditable(false);
 
 		actionLimpiarVenEps(event);
 		mostrarEps();
@@ -516,6 +519,12 @@ public class VentanaCRUD implements Initializable {
 				Alerta.mostrarAlerta("Confirmacion", "Alerta", "Busqueda no encontrada.", AlertType.CONFIRMATION);
 				txtNitEps.setText(txtBuscarEps.getText());
 				txtBuscarEps.setText("");
+
+				if (radioBtnAgregarEps.isSelected()) {
+					btnAgregarEps.setDisable(false);
+					txtNitEps.setEditable(false);
+					txtNombreEps.setEditable(true);
+				}
 
 				radioBtnAgregarEps.setDisable(false);
 				btnLimpiarVenEps.setDisable(false);
@@ -553,7 +562,7 @@ public class VentanaCRUD implements Initializable {
 		btnEliminarEps.setDisable(true);
 		btnModificarEps.setDisable(false);
 		btnAgregarEps.setDisable(true);
-
+		txtNombreEps.setEditable(true);
 		txtNitEps.setEditable(false);
 		txtNombreEps.setEditable(true);
 	}
@@ -609,11 +618,21 @@ public class VentanaCRUD implements Initializable {
 			txtNombreEps.setText(eps.getNombre());
 
 			txtNitEps.setEditable(false);
-			txtNombreEps.setEditable(false);
 
-			btnLimpiarVenEps.setDisable(false);
-			radioBtnEliminarEps.setDisable(false);
-			radioBtnModifcarEps.setDisable(false);
+			if (radioBtnModifcarEps.isSelected()) {
+				btnModificarEps.setDisable(false);
+				btnAgregarEps.setDisable(true);
+				txtNombreEps.setEditable(true);
+				radioBtnEliminarEps.setDisable(false);
+				radioBtnModifcarEps.setDisable(false);
+			} else {
+				txtNombreEps.setEditable(false);
+				btnLimpiarVenEps.setDisable(true);
+				radioBtnAgregarEps.setDisable(true);
+				radioBtnEliminarEps.setDisable(false);
+				radioBtnModifcarEps.setDisable(false);
+			}
+
 		}
 	}
 
@@ -664,7 +683,7 @@ public class VentanaCRUD implements Initializable {
 
 		Medico m = controlador.principal.getControladorMedico().insertarMedico(licencia, nombre, especialidad);
 
-		if (m != null) { 
+		if (m != null) {
 			columnaLicenciaMedico.setCellValueFactory(new PropertyValueFactory<Medico, String>("licencia"));
 			columnaNombreMedico.setCellValueFactory(new PropertyValueFactory<Medico, String>("nombre"));
 
@@ -930,7 +949,7 @@ public class VentanaCRUD implements Initializable {
 
 	@FXML
 	void actionAgregarEmpleado(ActionEvent event) {
-		
+
 		txtDNIPaciente.setEditable(false);
 		String nombre = txtNombreEmpleado.getText();
 		String id = txtIdEmpleado.getText();
@@ -1293,7 +1312,7 @@ public class VentanaCRUD implements Initializable {
 	@FXML
 	private TextField txtPacienteCita;
 
-	private Medico MEDIOCITA;
+	private Medico CITA_MEDICO;
 
 	@FXML
 	void actionAgregarCita(ActionEvent event) {
@@ -1312,15 +1331,15 @@ public class VentanaCRUD implements Initializable {
 			Paciente p = controlador.principal.getControladorPaciente().buscarPaciente(idPaciente);
 
 			if (p != null) {
-				if (MEDIOCITA != null) {
-					controlador.principal.getControladorCita().insertarCita(fechaHora, id, MEDIOCITA.getLicencia(),
+				if (CITA_MEDICO != null) {
+					controlador.principal.getControladorCita().insertarCita(fechaHora, id, CITA_MEDICO.getLicencia(),
 							p.getDni());
 
 					Alerta.mostrarAlerta("Confirmacion", "Alerta", "Cita Registrada.", AlertType.CONFIRMATION);
 					mostrarCita();
-					
+
 					cmbEspecialidadCita.setItems(controlador.principal.getControladorMedico().verEspecialidades());
-					
+
 					txtBuscarCita.setText("");
 					txtIdCita.setText("");
 					txtPacienteCita.setText("");
@@ -1330,8 +1349,9 @@ public class VentanaCRUD implements Initializable {
 					calendarCita.setDisable(true);
 					cmbEspecialidadCita.setDisable(true);
 					btnFiltrarEspecialidadCita.setDisable(true);
-					
-					
+
+					ModificarMedicoCita(null);
+
 				} else {
 
 					Alerta.mostrarAlerta("Confirmacion", "Alerta", "Medico no seleccionado, verifique.",
@@ -1351,8 +1371,7 @@ public class VentanaCRUD implements Initializable {
 
 	@FXML
 	void actionEliminarCita(ActionEvent event) {
-		
-		
+
 		String id = txtIdCita.getText();
 		controlador.principal.getControladorCita().eliminarCita(id);
 		mostrarCita();
@@ -1366,17 +1385,24 @@ public class VentanaCRUD implements Initializable {
 
 		java.sql.Date fecha = new java.sql.Date(actual.getTime());
 
-		if (fechaHora.after(fecha)) {
-			
-			String id = txtIdCita.getText();
-			String medicolicencia = MEDIOCITA.getLicencia();
-			controlador.principal.getControladorCita().modificarCita(fechaHora, id, medicolicencia);
-			mostrarCita();
+		if (CITA_MEDICO != null) {
+			if (fechaHora.after(fecha)) {
 
-		} else
+				String id = txtIdCita.getText();
+				String medicolicencia = CITA_MEDICO.getLicencia();
+				controlador.principal.getControladorCita().modificarCita(fechaHora, id, medicolicencia);
+				mostrarCita();
+				ModificarMedicoCita(null);
 
-		{
-			Alerta.mostrarAlerta("Confirmacion", "Alerta", "Fecha Incorrecta, verifique.", AlertType.ERROR);
+				txtBuscarCita.setText("");
+				txtIdCita.setText("");
+				txtPacienteCita.setText("");
+
+			} else {
+				Alerta.mostrarAlerta("Confirmacion", "Alerta", "Fecha Incorrecta, verifique.", AlertType.ERROR);
+			}
+		} else {
+			Alerta.mostrarAlerta("Confirmacion", "Alerta", "Medico no seleccionado, verifique.", AlertType.ERROR);
 		}
 
 	}
@@ -1385,6 +1411,7 @@ public class VentanaCRUD implements Initializable {
 	void actionBuscarCita(ActionEvent event) {
 		txtIdCita.setText("");
 		txtPacienteCita.setText("");
+		btnModificarCita.setDisable(true);
 
 		if (!txtBuscarCita.getText().trim().isEmpty()) {
 
@@ -1401,7 +1428,7 @@ public class VentanaCRUD implements Initializable {
 			} else {
 
 				Alerta.mostrarAlerta("Confirmacion", "Alerta", "Busqueda no encontrada.", AlertType.CONFIRMATION);
-				
+
 				cmbEspecialidadCita.setItems(controlador.principal.getControladorMedico().verEspecialidades());
 				cmbEspecialidadCita.getSelectionModel().select(0);
 
@@ -1422,7 +1449,6 @@ public class VentanaCRUD implements Initializable {
 				}
 
 			}
-
 		} else {
 			Alerta.mostrarAlerta("Error", "Alerta", "Ingrese un valor valido.", AlertType.ERROR);
 		}
@@ -1438,13 +1464,15 @@ public class VentanaCRUD implements Initializable {
 		cmbEspecialidadCita.setDisable(false);
 		btnFiltrarEspecialidadCita.setDisable(false);
 		btnAgregarCita.setDisable(false);
+		btnModificarCita.setDisable(true);
+		btnEliminarCita.setDisable(true);
 		btnLimpiarCita.setDisable(false);
 
 	}
 
 	@FXML
 	void actionRadioBtnEliminarCita(ActionEvent event) {
-		
+
 		btnEliminarCita.setDisable(false);
 		btnAgregarCita.setDisable(true);
 		btnModificarCita.setDisable(true);
@@ -1472,15 +1500,15 @@ public class VentanaCRUD implements Initializable {
 
 	@FXML
 	void actionLimpiarVenCita(ActionEvent event) {
-		
+
 		ObservableList<Medico> items1 = FXCollections.observableArrayList();
 		tablaMedicoCita.setItems(items1);
-		
+
 		ObservableList<Cita> items2 = FXCollections.observableArrayList();
 		tablaCita.setItems(items2);
-		
+
 		cmbEspecialidadCita.setItems(controlador.principal.getControladorMedico().verEspecialidades());
-		
+
 		txtBuscarCita.setText("");
 		txtIdCita.setText("");
 		txtPacienteCita.setText("");
@@ -1579,6 +1607,7 @@ public class VentanaCRUD implements Initializable {
 			calendarCita.setValue(fechaHora);
 			txtPacienteCita.setText(cita.getPaciente().getDni());
 
+			btnAgregarCita.setDisable(true);
 			Medico medico = cita.getMedico();
 
 			ObservableList<Medico> items1 = FXCollections.observableArrayList();
@@ -1586,7 +1615,7 @@ public class VentanaCRUD implements Initializable {
 			columnaLicenciaCita.setCellValueFactory(new PropertyValueFactory<Medico, String>("licencia"));
 			columnaMedicoCita.setCellValueFactory(new PropertyValueFactory<Medico, String>("nombre"));
 			tablaMedicoCita.getItems().add(medico);
-			MEDIOCITA = medico;
+
 			tablaMedicoCita.setDisable(true);
 
 		}
@@ -1618,9 +1647,7 @@ public class VentanaCRUD implements Initializable {
 		final Medico medico = getTablaMedicoCitaSeleccionada();
 
 		if (medico != null) {
-
-			MEDIOCITA = medico;
-
+			ModificarMedicoCita(medico);
 			Alerta.mostrarAlerta("Confirmacion", "Alerta", "Medico Seleccionado.", AlertType.CONFIRMATION);
 			tablaMedicoCita.setDisable(true);
 
@@ -1631,6 +1658,10 @@ public class VentanaCRUD implements Initializable {
 	public void borrarTablaMedicoCita() {
 		ObservableList<Medico> items1 = FXCollections.observableArrayList();
 		tablaMedicoCita.setItems(items1);
+	}
+
+	public void ModificarMedicoCita(Medico m) {
+		CITA_MEDICO = m;
 	}
 
 	// FIN CITA
@@ -1647,6 +1678,7 @@ public class VentanaCRUD implements Initializable {
 		txtPesoPaciente.addEventHandler(KeyEvent.KEY_TYPED, event -> soloNumeros(event));
 		txtEstaturaPaciente.setEditable(false);
 		txtEstaturaPaciente.addEventHandler(KeyEvent.KEY_TYPED, event -> soloNumeros(event));
+		txtPacienteCita.addEventHandler(KeyEvent.KEY_TYPED, event -> soloNumeros(event));
 		cmbGrupoSnaguineo.setDisable(true);
 		cmbRH.setDisable(true);
 		btnAgregarPaciente.setDisable(true);
@@ -1772,8 +1804,8 @@ public class VentanaCRUD implements Initializable {
 		tablaMedicoCitaSel.addListener(selectorTablaMedicoCita);
 
 	}
-	
-	public void soloNumeros (KeyEvent event) {
+
+	public void soloNumeros(KeyEvent event) {
 		try {
 			char key = event.getCharacter().charAt(0);
 			if (!Character.isDigit(key)) {
@@ -1784,8 +1816,8 @@ public class VentanaCRUD implements Initializable {
 			e.printStackTrace();
 		}
 	}
-	
-	public void soloLetras (KeyEvent event) {
+
+	public void soloLetras(KeyEvent event) {
 		try {
 			char key = event.getCharacter().charAt(0);
 			if (Character.isDigit(key)) {
