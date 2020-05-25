@@ -29,17 +29,17 @@ public class ControladorAdministrador {
 
 			String SQL1 = "INSERT INTO Administrador (correo, clave) values (?,?)";
 			PreparedStatement pst1 = con.prepareStatement(SQL1);
-			pst1.setString(1, "LissetteQ@gmail.com");
+			pst1.setString(1, "lissetteq@gmail.com");
 			pst1.setString(2, "123456");
 
 			String SQL2 = "INSERT INTO Administrador (correo, clave) values (?,?)";
 			PreparedStatement pst2 = con.prepareStatement(SQL2);
-			pst2.setString(1, "SantiagoV@gmail.com");
+			pst2.setString(1, "santiagov@gmail.com");
 			pst2.setString(2, "123456");
 
 			String SQL3 = "INSERT INTO Administrador (correo, clave) values (?,?)";
 			PreparedStatement pst3 = con.prepareStatement(SQL3);
-			pst3.setString(1, "DiegoR@gmail.com");
+			pst3.setString(1, "diegor@gmail.com");
 			pst3.setString(2, "123456");
 
 			
@@ -63,7 +63,7 @@ public class ControladorAdministrador {
 			SQL = "SELECT * FROM Administrador WHERE correo = ? AND clave = ?";
 			ps = con.prepareStatement(SQL);
 			ps.setString(1, correo);
-			ps.setString(1, clave);
+			ps.setString(2, clave);
 			
 			rs = ps.executeQuery();
 

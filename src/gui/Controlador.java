@@ -41,5 +41,23 @@ public class Controlador {
 		vc.mostrarEmpleado();
 		vc.mostrarCita();
 	}
+	
+	/**
+	 * Controlador De la Ventana Loggeo en JavaFx
+	 * @throws Exception
+	 */
+	public void ventanaIngresar() throws Exception {
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/ventanas/ventanaIngreso.fxml"));
+		Parent root = fxmlLoader.load();
+		Scene scene = new Scene(root);
+		Stage primaryStage = new Stage();
+		primaryStage.setScene(scene);
+		primaryStage.show();
+		primaryStage.setResizable(false);
+
+		VentanaIngresar vc = fxmlLoader.getController();
+		vc.setControlador(this);
+		vc.setStage(primaryStage);
+	}
 
 }
