@@ -28,7 +28,7 @@ public class Principal {
 	private ControladorEspecialidad controladorEspecialidad;
 	private ControladorEmpleado controladorEmpleado;
 	private ControladorCita controladorCita;
-	private ControladorAdministrador contraladorAdmin;
+	private ControladorAdministrador controladorAdmin;
 
 	public Principal() {
 		controladorTipoSangre = new ControladorTipoSangre(cc, con, this);
@@ -42,8 +42,8 @@ public class Principal {
 		controladorEspecialidad.insertarEspecialidad();
 		controladorEmpleado = new ControladorEmpleado(cc, con, this);
 		controladorCita = new ControladorCita(cc, con, this);
-		contraladorAdmin = new ControladorAdministrador(cc, con, this);
-		contraladorAdmin.insertarAdministradores();
+		controladorAdmin = new ControladorAdministrador(cc, con, this);
+		controladorAdmin.insertarAdministradores();
 	}
 
 	public ControladorEmpleado getControladorEmpleado() {
@@ -125,5 +125,14 @@ public class Principal {
 	public void setControladorCita(ControladorCita controladorCita) {
 		this.controladorCita = controladorCita;
 	}
+
+	public ControladorAdministrador getControladorAdmin() {
+		return controladorAdmin;
+	}
+
+	public void setControladorAdmin(ControladorAdministrador contraladorAdmin) {
+		this.controladorAdmin = contraladorAdmin;
+	}
+	
 	
 }
