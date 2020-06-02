@@ -16,7 +16,12 @@ import modelo.entidad.Eps;
 import modelo.entidad.HistoriaClinica;
 import modelo.entidad.Paciente;
 import modelo.entidad.TipoSangre;
-
+/**
+ * Clase encargada de controlar lo relacionado con paciente.
+ * 
+ * @author Diego riveros - Lissete Quebrada - Santiago Vargas
+ *
+ */
 public class ControladorPaciente {
 	ConectorBD cc;
 	Connection con;
