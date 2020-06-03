@@ -13,6 +13,12 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import modelo.alertas.Alerta;
 import modelo.entidad.Administrador;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 public class VentanaIngresar implements Initializable {
 	@FXML
@@ -33,6 +39,22 @@ public class VentanaIngresar implements Initializable {
 
 	@FXML
 	void actionBtnSalir(ActionEvent event) {
+		
+//		try {
+//		
+//		JasperReport reporte = null;
+//		String path = "src/reportes/Citas.jasper";
+//		reporte = (JasperReport) JRLoader.loadObjectFromFile(path);
+//		JasperPrint jprint = JasperFillManager.fillReport(path, null, controlador.principal.con);
+//		JasperViewer view = new JasperViewer(jprint, false);
+//		
+//		view.setVisible(true);
+//		
+//	} catch (JRException e) {
+//		// TODO Auto-generated catch block
+//		e.printStackTrace();
+//	}
+
 		System.exit(0);
 	}
 

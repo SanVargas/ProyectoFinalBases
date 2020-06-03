@@ -1,0 +1,9 @@
+eclipse.preferences.version=1
+encoding//src/reportes/Cita.jrxml=UTF-8
+encoding//src/reportes/Empleado.jrxml=UTF-8
+encoding//src/reportes/EmpleadoPorCargo.jrxml=UTF-8
+encoding//src/reportes/Medico.jrxml=UTF-8
+encoding//src/reportes/MedicoPorEspecialidad.jrxml=UTF-8
+encoding//src/reportes/Paciente.jrxml=UTF-8
+encoding//src/reportes/PacientePorTipoSangre.jrxml=UTF-8
+encoding//src/reportes/PacientesPorEPS.jrxml=UTF-8

@@ -3,6 +3,7 @@ import java.net.URL;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -1317,6 +1318,9 @@ public class VentanaCRUD implements Initializable {
 
 		String id = txtIdCita.getText();
 		LocalDate f = calendarCita.getValue();
+		DateTimeFormatter isoFecha = DateTimeFormatter.ISO_LOCAL_DATE;
+		f.format(isoFecha);
+	
 		String idPaciente = txtPacienteCita.getText();
 
 		java.sql.Date fechaHora = convertDateSql(asDate(f));

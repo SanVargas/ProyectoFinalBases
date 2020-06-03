@@ -46,19 +46,18 @@ public class ControladorPaciente {
 
 		try {
 
-			String SQL1 = "INSERT INTO HistoriaClinica (numero, informacionMedica, estatura, peso, Paciente_dni, TipoSangre_id) values (?,?,?, ?, ?, ?)";
+			String SQL1 = "INSERT INTO HistoriaClinica (numero, estatura, peso, Paciente_dni, TipoSangre_id) values (?,?, ?, ?, ?)";
 
 			PreparedStatement pst1 = con.prepareStatement(SQL1);
 
 			pst1.setString(1, numero);
-			pst1.setString(2, "");
-			pst1.setDouble(3, altura);
-			pst1.setDouble(4, peso);
-			pst1.setString(5, dni);
-			pst1.setString(6, idGrupoS);
+			pst1.setDouble(2, altura);
+			pst1.setDouble(3, peso);
+			pst1.setString(4, dni);
+			pst1.setString(5, idGrupoS);
 
 			TipoSangre ts = new TipoSangre(rh, grupoS, idGrupoS);
-			hc = new HistoriaClinica(numero, "", peso, altura, ts, p);
+			hc = new HistoriaClinica(numero, peso, altura, ts, p);
 
 			String SQL2 = "INSERT INTO Paciente (nombre, dni, direccion, EPS_nit, HistoriaClinica_numero) values (?,?, ?, ?, ?)";
 
@@ -213,7 +212,7 @@ public class ControladorPaciente {
 
 					if (rs1.getString("numero").equals(rs.getString("HistoriaClinica_numero"))) {
 						HistoriaClinica hc = new HistoriaClinica(rs1.getString("numero"),
-								rs1.getString("InformacionMedica"), rs1.getDouble("estatura"), rs1.getDouble("peso"),
+								 rs1.getDouble("estatura"), rs1.getDouble("peso"),
 								null, p);
 						p.setHistoriaClinica(hc);
 
@@ -257,7 +256,7 @@ public class ControladorPaciente {
 
 					if (rs1.getString("numero").equals(rs.getString("HistoriaClinica_numero"))) {
 						HistoriaClinica hc = new HistoriaClinica(rs1.getString("numero"),
-								rs1.getString("InformacionMedica"), rs1.getDouble("estatura"), rs1.getDouble("peso"),
+								 rs1.getDouble("estatura"), rs1.getDouble("peso"),
 								null, p);
 						p.setHistoriaClinica(hc);
 						lstPaciente.add(p);

@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Medico" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ced95029-b569-4027-895c-af2843a4e088">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Proyecto "/>
+	<property name="com.jaspersoft.studio.data.sql.tables">
+		<![CDATA[cHJveWVjdG8ucGFjaWVudGUgQVMgLDUxLDQ1LDY2MDY4ZmM3LTNiMzYtNGQ1Ni05ZTk1LWNhMzk5
+ZWYxZDFmODtwcm95ZWN0by5lcHMgQVMgLDI3NCwxMDgsZDRjM2I2MzctZDdkYi00OGRlLWFiYmYt
+YzkzM2FkYTYxNmQ2Ow==]]>
+	</property>
+	<style name="Title" fontName="Times New Roman" fontSize="50" isBold="true"/>
+	<style name="SubTitle" forecolor="#736343" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<style name="Row" mode="Transparent">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style backcolor="#E6DAC3"/>
+		</conditionalStyle>
+	</style>
+	<queryString>
+		<![CDATA[SELECT proyecto.paciente.dni,
+	proyecto.paciente.nombre,
+	proyecto.paciente.`HistoriaClinica_numero`,
+	proyecto.eps.nombre
+FROM proyecto.paciente
+	INNER JOIN proyecto.eps ON 
+	 proyecto.paciente.`EPS_nit` = proyecto.eps.nit]]>
+	</queryString>
+	<field name="dni" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="dni"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="paciente"/>
+	</field>
+	<field name="nombre" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="nombre"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="paciente"/>
+	</field>
+	<field name="HistoriaClinica_numero" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="HistoriaClinica_numero"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="paciente"/>
+	</field>
+	<field name="COLUMN_4" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="nombre"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="eps"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="136" splitType="Stretch">
+			<image>
+				<reportElement x="30" y="5" width="164" height="94" uuid="ddc15723-2728-421f-b95e-2df9faf64ce1"/>
+				<imageExpression><![CDATA["/files/Imagenes/LogoHSJD.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement style="Title" x="227" y="8" width="263" height="62" uuid="1a652692-054a-40f3-ade5-68d8da36626d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="26"/>
+				</textElement>
+				<text><![CDATA[Hospital Universitarios San Juan de Dios]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="227" y="70" width="263" height="22" forecolor="#2A541D" uuid="88d4231e-f014-4b0d-b871-1737ba63a1ae"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="16"/>
+				</textElement>
+				<text><![CDATA[Control Pacientes]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="97" width="554" height="36" forecolor="#064203" uuid="f0bfb1ea-a85a-47cd-a1a4-43f22b45e80f"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[A continuacion se mostrara los pacientes registrados en el hospital, con el numero de historia clinica y su respectiva servicio de salud.]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<staticText>
+				<reportElement x="10" y="0" width="90" height="30" uuid="2df9b92c-89fc-4369-bd0c-168c72d4f09e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3f1439fd-03a1-4b64-b4bc-46966d96cc50"/>
+				</reportElement>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DNI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="110" y="0" width="139" height="30" uuid="a0c53661-cfa4-43f3-b1fd-c8b535fb6685">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d11203ac-cbd8-452f-ad36-f9754193c9b0"/>
+				</reportElement>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="260" y="0" width="110" height="30" uuid="45900e04-1fd5-4afb-8bbd-8d7f93e32fe3">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e4bf3acc-5177-4637-9f06-bfd6df3b36e8"/>
+				</reportElement>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Afiliacion Salud]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="380" y="0" width="175" height="30" uuid="32da13de-4fff-471a-b714-51705a62f27f">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f3e344c2-8d7b-4e08-b0ef-33db5e6da681"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Numero de Historia Clinica]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<frame>
+				<reportElement style="Row" mode="Opaque" x="0" y="0" width="555" height="30" backcolor="#FFFFFF" uuid="a98495d8-3c8d-4fa0-81f5-30c3efc2f766"/>
+				<line>
+					<reportElement positionType="FixRelativeToBottom" x="0" y="0" width="555" height="1" uuid="1a61a836-d137-48b1-ad67-6ff64600bf93"/>
+					<graphicElement>
+						<pen lineWidth="0.5" lineColor="#999999"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement positionType="FixRelativeToBottom" x="-3" y="-30" width="555" height="1" uuid="563c3867-b3e8-4254-9e21-518544befbe5"/>
+					<graphicElement>
+						<pen lineWidth="0.5" lineColor="#999999"/>
+					</graphicElement>
+				</line>
+				<textField>
+					<reportElement x="380" y="0" width="175" height="30" uuid="3840ccab-cfd3-42a1-8978-0410d9189b1b">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d76ca0e0-b336-467b-815c-9140084edf4a"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="11"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{HistoriaClinica_numero}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="10" y="0" width="90" height="30" uuid="9f492f80-1380-44d8-9f87-6969826c23a4">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f46b0994-afb2-47a3-b116-c3ac82f1b730"/>
+					</reportElement>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font size="11"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dni}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="110" y="0" width="139" height="30" uuid="df43f86d-03df-4e27-be83-9144c6a9f38d">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="10fc547e-ca1d-48a8-af1a-785b0d558b98"/>
+					</reportElement>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font size="11"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="260" y="0" width="110" height="30" uuid="98c01774-5bf3-4126-af46-d827264ed3e0">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8985dabb-2d59-4283-a660-2f2d3783b488"/>
+					</reportElement>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font size="11"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{COLUMN_4}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="fa45a887-615a-4d84-a2d7-8a2219671b3c"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="-21" y="1" width="597" height="24" forecolor="#000000" backcolor="#8CE690" uuid="183682bc-d976-4756-83e0-6625a3f98ed1"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="533" y="0" width="40" height="20" forecolor="#736343" uuid="0193f9b3-1559-491a-8580-b6988863b6a1"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="453" y="0" width="80" height="20" forecolor="#736343" uuid="d00b105e-494b-418b-8ac9-8b1b4824f4f0"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement style="Column header" x="22" y="1" width="197" height="20" forecolor="#736343" uuid="0616f3fe-0354-456f-8911-ec30ec51a5ae"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

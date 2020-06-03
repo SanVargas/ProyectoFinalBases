@@ -54,7 +54,7 @@ public class ControladorEspecialidad {
 			PreparedStatement pst1 = con.prepareStatement(SQL1);
 			pst1.setString(1, "00001");
 			pst1.setString(2, "Pediatra");
-			pst1.setString(3, "Estudia al ni�o y sus enfermedades.");
+			pst1.setString(3, "Estudia a los infantes y sus enfermedades.");
 
 			String SQL2 = "INSERT INTO Especialidad (id, nombre, descripcion) values (?,?,?)";
 			PreparedStatement pst2 = con.prepareStatement(SQL2);

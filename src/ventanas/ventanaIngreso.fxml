@@ -5,7 +5,6 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="270.0" prefWidth="442.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.VentanaIngresar">
    <children>
       <Label layoutX="140.0" layoutY="21.0" text="HOSPITAL">
@@ -13,7 +12,7 @@
             <Font size="40.0" />
          </font>
       </Label>
-      <Label layoutX="84.0" layoutY="113.0" text="Correo" />
+      <Label layoutX="84.0" layoutY="113.0" text="Usuario" />
       <Label layoutX="84.0" layoutY="162.0" text="Clave" />
       <TextField fx:id="txtCorreo" layoutX="140.0" layoutY="109.0" prefHeight="25.0" prefWidth="179.0" />
       <PasswordField fx:id="txtClave" layoutX="140.0" layoutY="158.0" prefHeight="25.0" prefWidth="179.0" />

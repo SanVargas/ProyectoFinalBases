@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class HistoriaClinica {
 	private String numero;
-	private String informacionMedica;
 	private double peso;
 	private double estatura;
 	private TipoSangre tipoSangre;
@@ -12,11 +11,10 @@ public class HistoriaClinica {
 	private ArrayList<Examen> lstExamen;
 	private ArrayList<Diagnostico> lstDiagnostico;
 
-	public HistoriaClinica(String numero, String informacionMedica, double peso, double estatura, TipoSangre tipoSangre,
+	public HistoriaClinica(String numero, double peso, double estatura, TipoSangre tipoSangre,
 			Paciente paciente) {
 		super();
 		this.numero = numero;
-		this.informacionMedica = informacionMedica;
 		this.peso = peso;
 		this.estatura = estatura;
 		this.tipoSangre = tipoSangre;
@@ -33,14 +31,6 @@ public class HistoriaClinica {
 
 	public void setNumero(String numero) {
 		this.numero = numero;
-	}
-
-	public String getInformacionMedica() {
-		return informacionMedica;
-	}
-
-	public void setInformacionMedica(String informacionMedica) {
-		this.informacionMedica = informacionMedica;
 	}
 
 	public double getPeso() {

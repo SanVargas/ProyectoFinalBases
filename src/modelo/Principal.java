@@ -16,8 +16,8 @@ import modelo.controladoresEntidades.ControladorTipoSangre;
 
 public class Principal {
 
-	ConectorBD cc = new ConectorBD();
-	Connection con = cc.establecerConexion();
+	public ConectorBD cc = new ConectorBD();
+	public Connection con = cc.establecerConexion();
 	private PreparedStatement ps;
 	private ResultSet rs;
 	private ControladorPaciente controladorPaciente;

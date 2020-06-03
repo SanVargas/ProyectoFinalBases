@@ -27,19 +27,19 @@ public class ControladorAdministrador {
 
 		try {
 
-			String SQL1 = "INSERT INTO Administrador (correo, clave) values (?,?)";
+			String SQL1 = "INSERT INTO Administrador (usuario, clave) values (?,?)";
 			PreparedStatement pst1 = con.prepareStatement(SQL1);
-			pst1.setString(1, "lissetteq@gmail.com");
+			pst1.setString(1, "lissette");
 			pst1.setString(2, "123456");
 
-			String SQL2 = "INSERT INTO Administrador (correo, clave) values (?,?)";
+			String SQL2 = "INSERT INTO Administrador (usuario, clave) values (?,?)";
 			PreparedStatement pst2 = con.prepareStatement(SQL2);
-			pst2.setString(1, "santiagov@gmail.com");
+			pst2.setString(1, "santiago");
 			pst2.setString(2, "123456");
 
-			String SQL3 = "INSERT INTO Administrador (correo, clave) values (?,?)";
+			String SQL3 = "INSERT INTO Administrador (usuario, clave) values (?,?)";
 			PreparedStatement pst3 = con.prepareStatement(SQL3);
-			pst3.setString(1, "diegor@gmail.com");
+			pst3.setString(1, "diego");
 			pst3.setString(2, "123456");
 
 			
@@ -60,7 +60,7 @@ public class ControladorAdministrador {
 		Administrador a = null;
 		
 		try {
-			SQL = "SELECT * FROM Administrador WHERE correo = ? AND clave = ?";
+			SQL = "SELECT * FROM Administrador WHERE usuario = ? AND clave = ?";
 			ps = con.prepareStatement(SQL);
 			ps.setString(1, correo);
 			ps.setString(2, clave);
@@ -68,7 +68,7 @@ public class ControladorAdministrador {
 			rs = ps.executeQuery();
 
 			if (rs.next()) {
-				a = new Administrador(rs.getString("correo"), rs.getString("clave"));
+				a = new Administrador(rs.getString("usuario"), rs.getString("clave"));
 			}
 		} catch (Exception e) {
 			Alerta.mostrarAlerta("Error", "Alerta", "Administrador no encontrado.", AlertType.ERROR);
