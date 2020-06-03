@@ -1,7 +1,6 @@
 package gui;
 
 import java.net.URL;
-import java.security.Principal;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,16 +12,11 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import modelo.alertas.Alerta;
 import modelo.entidad.Administrador;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.util.JRLoader;
-import net.sf.jasperreports.view.JasperViewer;
 
 public class VentanaIngresar implements Initializable {
 	@FXML
 	Stage stage;
+	
 	Controlador controlador;
 
 	@FXML
@@ -60,16 +54,13 @@ public class VentanaIngresar implements Initializable {
 
 	@FXML
 	void actionBtnIngresar(ActionEvent event) {
-
 		String correo = txtCorreo.getText().toLowerCase();
 		String clave = txtClave.getText().toLowerCase();
-
 		Administrador a = controlador.principal.getControladorAdmin().buscarAdministrador(correo, clave);
 
 		if (a != null) {
-
 			try {
-				controlador.ventanaCRUD();
+				controlador.ventanaAdministrador();
 				stage.close();
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -79,7 +70,6 @@ public class VentanaIngresar implements Initializable {
 		{
 			Alerta.mostrarAlerta("Error", "Alerta", "Administrador no encontrado.", AlertType.ERROR);
 		}
-
 	}
 
 	@Override

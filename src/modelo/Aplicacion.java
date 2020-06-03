@@ -2,6 +2,7 @@ package modelo;
 
 import gui.Controlador;
 import javafx.application.Application;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class Aplicacion extends Application {
@@ -25,6 +26,7 @@ public class Aplicacion extends Application {
 		Principal principal = new Principal();
 		Controlador controlador = new Controlador(principal);
 		controlador.ventanaIngresar();
+		
 	}
 	
 

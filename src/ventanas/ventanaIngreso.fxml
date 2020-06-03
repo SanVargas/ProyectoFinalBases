@@ -1,22 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="270.0" prefWidth="442.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.VentanaIngresar">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="380.0" prefWidth="442.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.VentanaIngresar">
    <children>
-      <Label layoutX="140.0" layoutY="21.0" text="HOSPITAL">
+      <ImageView fitHeight="454.0" fitWidth="513.0" layoutX="-30.0" layoutY="-27.0">
+         <image>
+            <Image url="@verde.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="103.0" fitWidth="221.0" layoutX="120.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@LogoHSJD.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="87.0" layoutY="182.0" text="Usuario">
          <font>
-            <Font size="40.0" />
-         </font>
-      </Label>
-      <Label layoutX="84.0" layoutY="113.0" text="Usuario" />
-      <Label layoutX="84.0" layoutY="162.0" text="Clave" />
-      <TextField fx:id="txtCorreo" layoutX="140.0" layoutY="109.0" prefHeight="25.0" prefWidth="179.0" />
-      <PasswordField fx:id="txtClave" layoutX="140.0" layoutY="158.0" prefHeight="25.0" prefWidth="179.0" />
-      <Button fx:id="btnSalir" layoutX="271.0" layoutY="212.0" mnemonicParsing="false" onAction="#actionBtnSalir" prefHeight="25.0" prefWidth="100.0" text="Salir" />
-      <Button fx:id="btnIngresar" layoutX="69.0" layoutY="212.0" mnemonicParsing="false" onAction="#actionBtnIngresar" prefHeight="25.0" prefWidth="100.0" text="Ingresar" />
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label layoutX="87.0" layoutY="236.0" text="Clave">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <TextField fx:id="txtCorreo" layoutX="163.0" layoutY="178.0" prefHeight="25.0" prefWidth="179.0" />
+      <PasswordField fx:id="txtClave" layoutX="163.0" layoutY="232.0" prefHeight="25.0" prefWidth="179.0" />
+      <Button fx:id="btnSalir" layoutX="269.0" layoutY="321.0" mnemonicParsing="false" onAction="#actionBtnSalir" prefHeight="25.0" prefWidth="100.0" text="Salir">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button fx:id="btnIngresar" layoutX="63.0" layoutY="321.0" mnemonicParsing="false" onAction="#actionBtnIngresar" prefHeight="25.0" prefWidth="100.0" text="Ingresar">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
    </children>
 </AnchorPane>

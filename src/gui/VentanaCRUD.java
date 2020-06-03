@@ -1806,6 +1806,30 @@ public class VentanaCRUD implements Initializable {
 		tablaMedicoCitaSel.addListener(selectorTablaMedicoCita);
 
 	}
+	
+	// BOTONES ATRAS
+	@FXML
+	private Button btnVolverEps;
+	
+	@FXML
+	void actionbtnVolverEps(ActionEvent e) {
+		Alerta.mostrarAlerta("Confirmacion", "Alerta", "Mantenimiento.", AlertType.CONFIRMATION);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	public void soloNumeros(KeyEvent event) {
 		try {

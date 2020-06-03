@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="445.0" prefWidth="673.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.VentanaCRUD">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="485.0" prefWidth="673.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.VentanaCRUD">
   <tabs>
     <Tab text="Eps">
          <content>
@@ -12,13 +14,36 @@
                <children>
                   <AnchorPane layoutX="7.0" prefHeight="336.0" prefWidth="635.0">
                      <children>
-                        <Button fx:id="btnAgregarEps" layoutX="20.0" layoutY="374.0" mnemonicParsing="false" onAction="#actionAgregarEps" prefHeight="20.0" prefWidth="140.0" text="Agregar" />
-                        <Button fx:id="btnEliminarEps" layoutX="188.0" layoutY="374.0" mnemonicParsing="false" onAction="#actionEliminarEps" prefHeight="20.0" prefWidth="140.0" text="Eliminar" />
-                        <Button fx:id="btnModificarEps" layoutX="359.0" layoutY="374.0" mnemonicParsing="false" onAction="#actionModificarEps" prefHeight="20.0" prefWidth="140.0" text="Modificar" />
-                        <Button fx:id="btnBuscarEps" layoutX="519.0" layoutY="30.0" mnemonicParsing="false" onAction="#actionBuscarEps" prefHeight="25.0" prefWidth="140.0" text="Buscar" />
-                        <Label layoutX="350.0" layoutY="107.0" text="NIT" />
+                        <ImageView fitHeight="485.0" fitWidth="727.0" layoutX="-38.0">
+                           <image>
+                              <Image url="@verde.jpg" />
+                           </image>
+                        </ImageView>
+                        <Button fx:id="btnAgregarEps" layoutX="20.0" layoutY="374.0" mnemonicParsing="false" onAction="#actionAgregarEps" prefHeight="20.0" prefWidth="140.0" text="Agregar">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></Button>
+                        <Button fx:id="btnEliminarEps" layoutX="188.0" layoutY="374.0" mnemonicParsing="false" onAction="#actionEliminarEps" prefHeight="20.0" prefWidth="140.0" text="Eliminar">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></Button>
+                        <Button fx:id="btnModificarEps" layoutX="359.0" layoutY="374.0" mnemonicParsing="false" onAction="#actionModificarEps" prefHeight="20.0" prefWidth="140.0" text="Modificar">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></Button>
+                        <Button fx:id="btnBuscarEps" layoutX="519.0" layoutY="30.0" mnemonicParsing="false" onAction="#actionBuscarEps" prefHeight="25.0" prefWidth="140.0" text="Buscar">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></Button>
+                        <Label layoutX="350.0" layoutY="107.0" text="NIT">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></Label>
                         <TextField fx:id="txtNitEps" layoutX="380.0" layoutY="103.0" prefHeight="25.0" prefWidth="270.0" />
-                        <Label layoutX="14.0" layoutY="107.0" text="Nombre" />
+                        <Label layoutX="14.0" layoutY="107.0" text="Nombre">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></Label>
                         <TextField fx:id="txtNombreEps" layoutX="63.0" layoutY="103.0" prefHeight="25.0" prefWidth="270.0" />
                         <TableView fx:id="tablaEps" layoutX="118.0" layoutY="142.0" prefHeight="206.0" prefWidth="453.0">
                            <columns>
@@ -27,17 +52,44 @@
                            </columns>
                         </TableView>
                         <TextField fx:id="txtBuscarEps" layoutX="234.0" layoutY="30.0" prefHeight="25.0" prefWidth="270.0" />
-                        <Label layoutX="23.0" layoutY="34.0" text="Ingrese el NIT de la EPS a buscar." />
+                        <Label layoutX="23.0" layoutY="34.0" text="Ingrese el NIT de la EPS a buscar.">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></Label>
                         <RadioButton fx:id="radioBtnAgregarEps" layoutX="297.0" layoutY="69.0" mnemonicParsing="false" onAction="#actionRadioBtnAgregarEps" text="Agregar">
                            <toggleGroup>
                               <ToggleGroup fx:id="radioGroupOpcionEps" />
                            </toggleGroup>
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
                         </RadioButton>
-                        <RadioButton fx:id="radioBtnEliminarEps" layoutX="380.0" layoutY="69.0" mnemonicParsing="false" onAction="#actionRadioBtnEliminarEps" text="Eliminar" toggleGroup="$radioGroupOpcionEps" />
-                        <RadioButton fx:id="radioBtnModifcarEps" layoutX="460.0" layoutY="69.0" mnemonicParsing="false" onAction="#actionRadioBtnModifcarEps" text="Modificar" toggleGroup="$radioGroupOpcionEps" />
-                        <Label layoutX="113.0" layoutY="69.0" text="Seleccione la opción deseada" />
-                        <Button fx:id="btnLimpiarVenEps" layoutX="519.0" layoutY="374.0" mnemonicParsing="false" onAction="#actionLimpiarVenEps" prefHeight="25.0" prefWidth="140.0" text="Limpiar" />
+                        <RadioButton fx:id="radioBtnEliminarEps" layoutX="380.0" layoutY="69.0" mnemonicParsing="false" onAction="#actionRadioBtnEliminarEps" text="Eliminar" toggleGroup="$radioGroupOpcionEps">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></RadioButton>
+                        <RadioButton fx:id="radioBtnModifcarEps" layoutX="460.0" layoutY="69.0" mnemonicParsing="false" onAction="#actionRadioBtnModifcarEps" text="Modificar" toggleGroup="$radioGroupOpcionEps">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></RadioButton>
+                        <Label layoutX="113.0" layoutY="69.0" text="Seleccione la opción deseada">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></Label>
+                        <Button fx:id="btnLimpiarVenEps" layoutX="519.0" layoutY="374.0" mnemonicParsing="false" onAction="#actionLimpiarVenEps" prefHeight="25.0" prefWidth="140.0" text="Limpiar">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></Button>
                         <Separator layoutX="328.0" layoutY="47.0" orientation="VERTICAL" prefHeight="633.0" prefWidth="15.0" rotate="90.0" />
+                        <Button fx:id="btnVolverEps" layoutX="618.0" layoutY="410.0" mnemonicParsing="false" onAction="#actionbtnVolverEps" prefHeight="25.0" prefWidth="25.0">
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="25.0">
+                                 <image>
+                                    <Image url="@atras.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
                      </children>
                   </AnchorPane>
                </children></AnchorPane>
