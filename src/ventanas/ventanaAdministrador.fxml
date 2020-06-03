@@ -6,14 +6,14 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="419.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.VentanaAdministrador">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.VentanaAdministrador">
    <children>
-      <ImageView fitHeight="469.0" fitWidth="628.0" layoutX="-14.0" layoutY="-26.0" pickOnBounds="true" smooth="false">
+      <ImageView fitHeight="460.0" fitWidth="610.0" pickOnBounds="true" smooth="false">
          <image>
-            <Image url="@verde.jpg" />
+            <Image url="@fondo3.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="104.0" fitWidth="263.0" layoutX="169.0" layoutY="14.0" pickOnBounds="true" smooth="false">
+      <ImageView fitHeight="104.0" fitWidth="263.0" layoutX="174.0" layoutY="31.0" pickOnBounds="true" smooth="false">
          <image>
             <Image url="@LogoHSJD.png" />
          </image></ImageView>
