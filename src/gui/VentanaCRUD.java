@@ -1813,6 +1813,13 @@ public class VentanaCRUD implements Initializable {
 	private Button btnVolverEps;
 	@FXML
 	private Button btnVolverMedico;
+	@FXML
+	private Button btnVolverPaciente;
+	@FXML
+	private Button btnVolverEmpleado;
+	@FXML
+	private Button btnVolverCita;
+	
 	
 	@FXML
 	void actionBtnVolverEps(ActionEvent e) throws IOException {
@@ -1828,6 +1835,42 @@ public class VentanaCRUD implements Initializable {
 	
 	@FXML
 	void actionBtnVolverMedico(ActionEvent e) throws IOException {
+		try {
+			controlador.ventanaAdministrador();
+			stage.close();
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+	}	
+	
+	@FXML
+	void actionBtnVolverEmpleado(ActionEvent e) throws IOException {
+		try {
+			controlador.ventanaAdministrador();
+			stage.close();
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+	}	
+	
+	@FXML
+	void actionBtnVolverPaciente(ActionEvent e) throws IOException {
+		try {
+			controlador.ventanaAdministrador();
+			stage.close();
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+	}	
+	
+	@FXML
+	void actionBtnVolverCita(ActionEvent e) throws IOException {
 		try {
 			controlador.ventanaAdministrador();
 			stage.close();

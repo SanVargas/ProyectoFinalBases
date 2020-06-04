@@ -25,7 +25,7 @@
                <children>
                   <AnchorPane maxHeight="500.0" maxWidth="750.0" minHeight="500.0" minWidth="750.0" prefHeight="500.0" prefWidth="750.0">
                      <children>
-                        <ImageView fitHeight="500.0" fitWidth="750.0">
+                        <ImageView fitHeight="481.0" fitWidth="760.0">
                            <image>
                               <Image url="@fondo2.png" />
                            </image>
@@ -46,7 +46,7 @@
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font></Button>
-                        <Label layoutX="390.0" layoutY="107.0" text="NIT">
+                        <Label layoutX="401.0" layoutY="107.0" text="NIT">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font></Label>
@@ -62,7 +62,7 @@
                               <TableColumn fx:id="columnaNombreEps" prefWidth="350.0" text="NOMBRE" />
                            </columns>
                         </TableView>
-                        <TextField fx:id="txtBuscarEps" layoutX="255.0" layoutY="30.0" prefHeight="25.0" prefWidth="270.0" />
+                        <TextField fx:id="txtBuscarEps" layoutX="266.0" layoutY="30.0" prefHeight="25.0" prefWidth="270.0" />
                         <Label layoutX="43.0" layoutY="34.0" text="Ingrese el NIT de la EPS a buscar">
                            <font>
                               <Font name="System Bold" size="12.0" />
@@ -111,7 +111,7 @@
                <children>
                   <AnchorPane maxHeight="500.0" maxWidth="750.0" minHeight="500.0" minWidth="750.0" prefHeight="500.0" prefWidth="750.0">
                      <children>
-                        <ImageView fitHeight="500.0" fitWidth="750.0">
+                        <ImageView fitHeight="481.0" fitWidth="760.0">
                            <image>
                               <Image url="@fondo2.png" />
                            </image>
@@ -205,146 +205,344 @@
       </Tab>
     <Tab text="Paciente">
          <content>
-            <AnchorPane prefHeight="336.0" prefWidth="635.0">
+            <AnchorPane maxHeight="500.0" maxWidth="750.0" minHeight="500.0" minWidth="750.0" prefHeight="500.0" prefWidth="750.0">
                <children>
-                  <Button fx:id="btnAgregarPaciente" layoutX="20.0" layoutY="374.0" mnemonicParsing="false" onAction="#actionAgregarPaciente" prefHeight="20.0" prefWidth="140.0" text="Agregar" />
-                  <Button fx:id="btnEliminarPaciente" layoutX="188.0" layoutY="374.0" mnemonicParsing="false" onAction="#actionEliminarPaciente" prefHeight="20.0" prefWidth="140.0" text="Eliminar" />
-                  <Button fx:id="btnModificarPaciente" layoutX="359.0" layoutY="374.0" mnemonicParsing="false" onAction="#actionModificarPaciente" prefHeight="20.0" prefWidth="140.0" text="Modificar" />
-                  <Button fx:id="btnBuscarPaciente" layoutX="555.0" layoutY="51.0" mnemonicParsing="false" onAction="#actionBuscarPaciente" prefHeight="25.0" prefWidth="92.0" text="Buscar" />
-                  <Label layoutX="30.0" layoutY="83.0" text="Nombre" />
-                  <TextField fx:id="txtNombrePaciente" layoutX="84.0" layoutY="79.0" prefHeight="25.0" prefWidth="246.0" />
-                  <Label layoutX="30.0" layoutY="118.0" text="DNI" />
-                  <TextField fx:id="txtDNIPaciente" layoutX="83.0" layoutY="114.0" prefHeight="25.0" prefWidth="246.0" />
-                  <TextField fx:id="txtDireccionPaciente" layoutX="83.0" layoutY="153.0" prefHeight="25.0" prefWidth="246.0" />
-                  <Label layoutX="30.0" layoutY="157.0" text="Direccion" />
-                  <TableView fx:id="tablaPaciente" layoutX="359.0" layoutY="82.0" prefHeight="267.0" prefWidth="300.0">
+                  <ImageView fitHeight="481.0" fitWidth="760.0" pickOnBounds="true" smooth="false">
+                     <image>
+                        <Image url="@fondo2.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="btnAgregarPaciente" layoutX="43.0" layoutY="374.0" mnemonicParsing="false" onAction="#actionAgregarPaciente" prefHeight="20.0" prefWidth="140.0" text="Agregar">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Button>
+                  <Button fx:id="btnEliminarPaciente" layoutX="227.0" layoutY="374.0" mnemonicParsing="false" onAction="#actionEliminarPaciente" prefHeight="20.0" prefWidth="140.0" text="Eliminar">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Button>
+                  <Button fx:id="btnModificarPaciente" layoutX="390.0" layoutY="374.0" mnemonicParsing="false" onAction="#actionModificarPaciente" prefHeight="20.0" prefWidth="140.0" text="Modificar">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Button>
+                  <Button fx:id="btnBuscarPaciente" layoutX="569.0" layoutY="51.0" mnemonicParsing="false" onAction="#actionBuscarPaciente" prefHeight="20.0" prefWidth="140.0" text="Buscar">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Button>
+                  <Label layoutX="51.0" layoutY="83.0" text="Nombre">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <TextField fx:id="txtNombrePaciente" layoutX="110.0" layoutY="80.0" prefHeight="25.0" prefWidth="220.0" />
+                  <Label layoutX="52.0" layoutY="118.0" text="DNI">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <TextField fx:id="txtDNIPaciente" layoutX="110.0" layoutY="115.0" prefHeight="25.0" prefWidth="220.0" />
+                  <TextField fx:id="txtDireccionPaciente" layoutX="111.0" layoutY="155.0" prefHeight="25.0" prefWidth="218.0" />
+                  <Label layoutX="52.0" layoutY="157.0" text="Direccion">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <TableView fx:id="tablaPaciente" layoutX="368.0" layoutY="83.0" prefHeight="267.0" prefWidth="341.0">
                     <columns>
-                      <TableColumn fx:id="columnaNombrePaciente" prefWidth="117.0" text="NOMBRE" />
-                      <TableColumn fx:id="columnaDNIPaciente" prefWidth="77.0" text="DNI" />
-                        <TableColumn fx:id="columnaDireccionPaciente" prefWidth="105.0" text="DIRECCION" />
+                      <TableColumn fx:id="columnaNombrePaciente" prefWidth="121.0" text="NOMBRE" />
+                      <TableColumn fx:id="columnaDNIPaciente" prefWidth="99.0" text="DNI" />
+                        <TableColumn fx:id="columnaDireccionPaciente" prefWidth="120.0" text="DIRECCION" />
                     </columns>
                   </TableView>
-                  <TextField fx:id="txtBuscarPaciente" layoutX="358.0" layoutY="51.0" prefHeight="25.0" prefWidth="187.0" />
-                  <Label layoutX="359.0" layoutY="23.0" text="Ingrese el DNI del paciente a buscar." />
-                  <RadioButton fx:id="radioBtnAgregarPaciente" layoutX="30.0" layoutY="46.0" mnemonicParsing="false" onAction="#actionRadioBtnAgregarPaciente" text="Agregar">
+                  <TextField fx:id="txtBuscarPaciente" layoutX="367.0" layoutY="51.0" prefHeight="25.0" prefWidth="187.0" />
+                  <Label layoutX="368.0" layoutY="32.0" text="Ingrese el DNI del paciente a buscar.">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <RadioButton fx:id="radioBtnAgregarPaciente" layoutX="52.0" layoutY="55.0" mnemonicParsing="false" onAction="#actionRadioBtnAgregarPaciente" text="Agregar">
                      <toggleGroup>
                         <ToggleGroup fx:id="radioGroupOpcionPaciente" />
                      </toggleGroup>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
                   </RadioButton>
-                  <RadioButton fx:id="radioBtnEliminarPaciente" layoutX="151.0" layoutY="46.0" mnemonicParsing="false" onAction="#actionRadioBtnEliminarPaciente" text="Eliminar" toggleGroup="$radioGroupOpcionPaciente" />
-                  <RadioButton fx:id="radioBtnModifcarPaciente" layoutX="258.0" layoutY="46.0" mnemonicParsing="false" onAction="#actionRadioBtnModifcarPaciente" text="Modificar" toggleGroup="$radioGroupOpcionPaciente" />
-                  <Label layoutX="30.0" layoutY="23.0" text="Seleccione la opción deseada" />
-                  <Button fx:id="btnLimpiarVenPaciente" layoutX="519.0" layoutY="374.0" mnemonicParsing="false" onAction="#actionLimpiarVenPaciente" prefHeight="25.0" prefWidth="140.0" text="Limpiar" />
-                  <Label layoutX="30.0" layoutY="189.0" text="Peso" />
-                  <TextField fx:id="txtEstaturaPaciente" layoutX="231.0" layoutY="185.0" prefHeight="25.0" prefWidth="99.0" promptText="0.0" />
-                  <Label layoutX="183.0" layoutY="189.0" text="Estatura" />
-                  <TextField fx:id="txtPesoPaciente" layoutX="66.0" layoutY="185.0" prefHeight="25.0" prefWidth="105.0" promptText="0.0" />
-                  <Label layoutX="30.0" layoutY="228.0" text="Grupo Sanguineo" />
-                  <ComboBox fx:id="cmbGrupoSnaguineo" layoutX="134.0" layoutY="224.0" prefHeight="25.0" prefWidth="80.0" />
+                  <RadioButton fx:id="radioBtnEliminarPaciente" layoutX="167.0" layoutY="55.0" mnemonicParsing="false" onAction="#actionRadioBtnEliminarPaciente" text="Eliminar" toggleGroup="$radioGroupOpcionPaciente">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></RadioButton>
+                  <RadioButton fx:id="radioBtnModifcarPaciente" layoutX="257.0" layoutY="55.0" mnemonicParsing="false" onAction="#actionRadioBtnModifcarPaciente" text="Modificar" toggleGroup="$radioGroupOpcionPaciente">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></RadioButton>
+                  <Label layoutX="56.0" layoutY="32.0" text="Seleccione la opción deseada">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <Button fx:id="btnLimpiarVenPaciente" layoutX="569.0" layoutY="374.0" mnemonicParsing="false" onAction="#actionLimpiarVenPaciente" prefHeight="25.0" prefWidth="140.0" text="Limpiar">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Button>
+                  <Label layoutX="53.0" layoutY="189.0" text="Peso">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <TextField fx:id="txtEstaturaPaciente" layoutX="256.0" layoutY="185.0" prefHeight="25.0" prefWidth="73.0" promptText="0.0" />
+                  <Label layoutX="191.0" layoutY="189.0" text="Estatura">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <TextField fx:id="txtPesoPaciente" layoutX="110.0" layoutY="185.0" prefHeight="25.0" prefWidth="73.0" promptText="0.0" />
+                  <Label layoutX="52.0" layoutY="228.0" text="Grupo Sanguineo">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <ComboBox fx:id="cmbGrupoSnaguineo" layoutX="162.0" layoutY="224.0" prefHeight="25.0" prefWidth="52.0" />
                   <ComboBox fx:id="cmbRH" layoutX="223.0" layoutY="224.0" prefHeight="25.0" prefWidth="107.0" />
-                  <Separator layoutX="346.0" layoutY="24.0" orientation="VERTICAL" prefHeight="326.0" prefWidth="4.0" />
-                  <Label layoutX="30.0" layoutY="261.0" text="EPS" />
-                  <ComboBox fx:id="cmbSeleccionarEPS" layoutX="66.0" layoutY="257.0" prefHeight="25.0" prefWidth="265.0" />
-                  <Label layoutX="30.0" layoutY="293.0" text="Telefono" />
+                  <Separator layoutX="346.0" layoutY="36.0" orientation="VERTICAL" prefHeight="314.0" prefWidth="5.0" />
+                  <Label layoutX="54.0" layoutY="261.0" text="EPS">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <ComboBox fx:id="cmbSeleccionarEPS" layoutX="108.0" layoutY="257.0" prefHeight="25.0" prefWidth="223.0" />
+                  <Label layoutX="51.0" layoutY="293.0" text="Telefono">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
                   <TextField fx:id="txtTelefonoPaciente" layoutX="205.0" layoutY="289.0" prefHeight="25.0" prefWidth="127.0" />
-                  <ComboBox fx:id="cmbDescTelefonoPaciente" layoutX="90.0" layoutY="289.0" prefHeight="25.0" prefWidth="103.0" />
-                  <Separator layoutX="328.0" layoutY="47.0" orientation="VERTICAL" prefHeight="633.0" prefWidth="15.0" rotate="90.0" />
-                  <Button fx:id="btnAgregarTelefonoPaciente" layoutX="30.0" layoutY="321.0" mnemonicParsing="false" onAction="#actionAgregarTelefonopaciente" prefHeight="16.0" prefWidth="300.0" text="Agregar Telefono" />
+                  <ComboBox fx:id="cmbDescTelefonoPaciente" layoutX="108.0" layoutY="289.0" prefHeight="25.0" prefWidth="85.0" />
+                  <Separator layoutX="368.0" layoutY="50.0" orientation="VERTICAL" prefHeight="633.0" prefWidth="15.0" rotate="90.0" />
+                  <Button fx:id="btnAgregarTelefonoPaciente" layoutX="52.0" layoutY="325.0" mnemonicParsing="false" onAction="#actionAgregarTelefonopaciente" prefHeight="25.0" prefWidth="280.0" text="Agregar Telefono">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Button>
+                  <Button fx:id="btnVolverPaciente" layoutX="668.0" layoutY="413.0" mnemonicParsing="false" onAction="#actionBtnVolverPaciente" prefHeight="25.0" prefWidth="25.0">
+                     <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="25.0">
+                           <image>
+                              <Image url="@atras.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
                </children>
             </AnchorPane>
          </content></Tab>
       <Tab text="Empleado">
          <content>
-            <AnchorPane prefHeight="336.0" prefWidth="635.0">
+            <AnchorPane maxHeight="500.0" maxWidth="750.0" minHeight="500.0" minWidth="750.0" prefHeight="500.0" prefWidth="750.0">
                <children>
-                  <Button fx:id="btnAgregarEmpleado" layoutX="20.0" layoutY="374.0" mnemonicParsing="false" onAction="#actionAgregarEmpleado" prefHeight="20.0" prefWidth="140.0" text="Agregar" />
-                  <Button fx:id="btnEliminarEmpleado" layoutX="188.0" layoutY="374.0" mnemonicParsing="false" onAction="#actionEliminarEmpleado" prefHeight="20.0" prefWidth="140.0" text="Eliminar" />
-                  <Button fx:id="btnModificarEmpleado" layoutX="359.0" layoutY="374.0" mnemonicParsing="false" onAction="#actionModificarEmpleado" prefHeight="20.0" prefWidth="140.0" text="Modificar" />
-                  <Button fx:id="btnBuscarEmpleado" layoutX="555.0" layoutY="51.0" mnemonicParsing="false" onAction="#actionBuscarEmpleado" prefHeight="25.0" prefWidth="92.0" text="Buscar" />
-                  <TableView fx:id="tablaEmpleado" layoutX="359.0" layoutY="83.0" prefHeight="267.0" prefWidth="300.0">
+                  <ImageView fitHeight="481.0" fitWidth="760.0" pickOnBounds="true" smooth="false">
+                     <image>
+                        <Image url="@fondo2.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="btnAgregarEmpleado" layoutX="43.0" layoutY="374.0" mnemonicParsing="false" onAction="#actionAgregarEmpleado" prefHeight="20.0" prefWidth="140.0" text="Agregar">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Button>
+                  <Button fx:id="btnEliminarEmpleado" layoutX="227.0" layoutY="374.0" mnemonicParsing="false" onAction="#actionEliminarEmpleado" prefHeight="20.0" prefWidth="140.0" text="Eliminar">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Button>
+                  <Button fx:id="btnModificarEmpleado" layoutX="390.0" layoutY="374.0" mnemonicParsing="false" onAction="#actionModificarEmpleado" prefHeight="20.0" prefWidth="140.0" text="Modificar">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Button>
+                  <Button fx:id="btnBuscarEmpleado" layoutX="569.0" layoutY="51.0" mnemonicParsing="false" onAction="#actionBuscarEmpleado" prefHeight="20.0" prefWidth="140.0" text="Buscar">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Button>
+                  <TableView fx:id="tablaEmpleado" layoutX="368.0" layoutY="84.0" prefHeight="267.0" prefWidth="341.0">
                      <columns>
-                        <TableColumn fx:id="columnaNombreEmpleado" prefWidth="117.0" text="NOMBRE" />
-                        <TableColumn fx:id="columnaIdEmpleado" prefWidth="77.0" text="ID" />
-                        <TableColumn fx:id="columnaCargoEmpleado" prefWidth="105.0" text="LICENCIA" />
+                        <TableColumn fx:id="columnaNombreEmpleado" prefWidth="129.0" text="NOMBRE" />
+                        <TableColumn fx:id="columnaIdEmpleado" prefWidth="102.0" text="ID" />
+                        <TableColumn fx:id="columnaCargoEmpleado" prefWidth="109.0" text="LICENCIA" />
                      </columns>
                   </TableView>
-                  <TextField fx:id="txtBuscarEmpleado" layoutX="358.0" layoutY="51.0" prefHeight="25.0" prefWidth="187.0" />
-                  <Label layoutX="359.0" layoutY="23.0" text="Ingrese el ID del Empleado a buscar." />
-                  <RadioButton fx:id="radioBtnAgregarEmpleado" layoutX="30.0" layoutY="46.0" mnemonicParsing="false" onAction="#actionRadioBtnAgregarEmpleado" text="Agregar">
+                  <TextField fx:id="txtBuscarEmpleado" layoutX="367.0" layoutY="51.0" prefHeight="25.0" prefWidth="187.0" />
+                  <Label layoutX="368.0" layoutY="32.0" text="Ingrese el ID del Empleado a buscar">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <RadioButton fx:id="radioBtnAgregarEmpleado" layoutX="43.0" layoutY="46.0" mnemonicParsing="false" onAction="#actionRadioBtnAgregarEmpleado" text="Agregar">
                      <toggleGroup>
                         <ToggleGroup fx:id="radioGroupOpcionEmpleado" />
                      </toggleGroup>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
                   </RadioButton>
-                  <RadioButton fx:id="radioBtnEliminarEmpleado" layoutX="151.0" layoutY="46.0" mnemonicParsing="false" onAction="#actionRadioBtnEliminarEmpleado" text="Eliminar" toggleGroup="$radioGroupOpcionEmpleado" />
-                  <RadioButton fx:id="radioBtnModifcarEmpleado" layoutX="258.0" layoutY="46.0" mnemonicParsing="false" onAction="#actionRadioBtnModifcarEmpleado" text="Modificar" toggleGroup="$radioGroupOpcionEmpleado" />
-                  <Label layoutX="105.0" layoutY="23.0" text="Seleccione la opción deseada" />
-                  <Button fx:id="btnLimpiarEmpleado" layoutX="519.0" layoutY="374.0" mnemonicParsing="false" onAction="#actionLimpiarVenEmpleado" prefHeight="25.0" prefWidth="140.0" text="Limpiar" />
-                  <Separator layoutX="346.0" layoutY="24.0" orientation="VERTICAL" prefHeight="326.0" prefWidth="4.0" />
-                  <Separator layoutX="328.0" layoutY="47.0" orientation="VERTICAL" prefHeight="633.0" prefWidth="15.0" rotate="90.0" />
-                  <Label layoutX="20.0" layoutY="83.0" text="Nombre" />
-                  <TextField fx:id="txtNombreEmpleado" layoutX="74.0" layoutY="79.0" prefHeight="25.0" prefWidth="263.0" />
-                  <Label layoutX="25.0" layoutY="115.0" text="Id" />
-                  <TextField fx:id="txtIdEmpleado" layoutX="42.0" layoutY="111.0" prefHeight="25.0" prefWidth="122.0" />
-                  <Label layoutX="173.0" layoutY="115.0" text="Licencia" />
-                  <TextField fx:id="txtLicenciaEmpleado" layoutX="225.0" layoutY="111.0" prefHeight="25.0" prefWidth="113.0" />
-                  <Label layoutX="20.0" layoutY="148.0" text="Cargo" />
-                  <ComboBox fx:id="cmbCargoEmpleado" layoutX="62.0" layoutY="144.0" prefHeight="25.0" prefWidth="276.0" />
-                  <TextField fx:id="txtMostrarSalario" editable="false" layoutX="62.0" layoutY="178.0" prefHeight="25.0" prefWidth="275.0" />
-                  <Label layoutX="20.0" layoutY="182.0" text="Salario" />
-                  <Label layoutX="20.0" layoutY="217.0" text="Descripcion" />
-                  <TextField fx:id="txtMostrarDescripcion" editable="false" layoutX="88.0" layoutY="213.0" prefHeight="25.0" prefWidth="249.0" />
-                  <Label layoutX="20.0" layoutY="248.0" text="Telefono" />
-                  <ComboBox fx:id="cmbTelefonoEmpleado" layoutX="76.0" layoutY="244.0" prefHeight="25.0" prefWidth="122.0" />
-                  <TextField fx:id="txtTelefonoEmpleado" editable="false" layoutX="213.0" layoutY="244.0" prefHeight="25.0" prefWidth="123.0" />
-                  <Button fx:id="btnAgregarTelefonoEmpleado" layoutX="24.0" layoutY="279.0" mnemonicParsing="false" onAction="#actionAgregarTelefonoEmpleado" prefHeight="25.0" prefWidth="311.0" text="Agregar Telefono" />
+                  <RadioButton fx:id="radioBtnEliminarEmpleado" layoutX="159.0" layoutY="46.0" mnemonicParsing="false" onAction="#actionRadioBtnEliminarEmpleado" text="Eliminar" toggleGroup="$radioGroupOpcionEmpleado">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></RadioButton>
+                  <RadioButton fx:id="radioBtnModifcarEmpleado" layoutX="268.0" layoutY="46.0" mnemonicParsing="false" onAction="#actionRadioBtnModifcarEmpleado" text="Modificar" toggleGroup="$radioGroupOpcionEmpleado">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></RadioButton>
+                  <Label layoutX="44.0" layoutY="24.0" text="Seleccione la opción deseada">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <Button fx:id="btnLimpiarEmpleado" layoutX="569.0" layoutY="374.0" mnemonicParsing="false" onAction="#actionLimpiarVenEmpleado" prefHeight="25.0" prefWidth="140.0" text="Limpiar">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Button>
+                  <Separator layoutX="349.0" layoutY="32.0" orientation="VERTICAL" prefHeight="326.0" prefWidth="4.0" />
+                  <Separator layoutX="368.0" layoutY="50.0" orientation="VERTICAL" prefHeight="633.0" prefWidth="15.0" rotate="90.0" />
+                  <Label layoutX="43.0" layoutY="76.0" text="Nombre">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <TextField fx:id="txtNombreEmpleado" layoutX="122.0" layoutY="72.0" prefHeight="25.0" prefWidth="217.0" />
+                  <Label layoutX="44.0" layoutY="107.0" text="Id">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <TextField fx:id="txtIdEmpleado" layoutX="121.0" layoutY="103.0" prefHeight="25.0" prefWidth="218.0" />
+                  <Label layoutX="44.0" layoutY="140.0" text="Licencia">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <TextField fx:id="txtLicenciaEmpleado" layoutX="120.0" layoutY="136.0" prefHeight="25.0" prefWidth="219.0" />
+                  <Label layoutX="43.0" layoutY="174.0" text="Cargo">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <ComboBox fx:id="cmbCargoEmpleado" layoutX="120.0" layoutY="170.0" prefHeight="25.0" prefWidth="219.0" />
+                  <TextField fx:id="txtMostrarSalario" editable="false" layoutX="120.0" layoutY="205.0" prefHeight="25.0" prefWidth="220.0" />
+                  <Label layoutX="44.0" layoutY="209.0" text="Salario">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <Label layoutX="43.0" layoutY="245.0" text="Descripcion">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <TextField fx:id="txtMostrarDescripcion" editable="false" layoutX="120.0" layoutY="241.0" prefHeight="25.0" prefWidth="220.0" />
+                  <Label layoutX="41.0" layoutY="282.0" text="Telefono">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <ComboBox fx:id="cmbTelefonoEmpleado" layoutX="119.0" layoutY="278.0" prefHeight="25.0" prefWidth="85.0" />
+                  <TextField fx:id="txtTelefonoEmpleado" editable="false" layoutX="215.0" layoutY="278.0" prefHeight="25.0" prefWidth="123.0" />
+                  <Button fx:id="btnAgregarTelefonoEmpleado" layoutX="42.0" layoutY="315.0" mnemonicParsing="false" onAction="#actionAgregarTelefonoEmpleado" prefHeight="25.0" prefWidth="297.0" text="Agregar Telefono">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Button>
+                  <Button fx:id="btnVolverEmpleado" layoutX="668.0" layoutY="413.0" mnemonicParsing="false" onAction="#actionBtnVolverEmpleado" prefHeight="25.0" prefWidth="25.0">
+                     <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="25.0">
+                           <image>
+                              <Image url="@atras.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
                </children>
             </AnchorPane>
          </content>
       </Tab>
       <Tab text="Cita">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+          <AnchorPane maxHeight="500.0" maxWidth="750.0" minHeight="500.0" minWidth="750.0" prefHeight="500.0" prefWidth="750.0">
                <children>
-                  <AnchorPane prefHeight="336.0" prefWidth="635.0">
+                  <AnchorPane maxHeight="500.0" maxWidth="750.0" minHeight="500.0" minWidth="750.0" prefHeight="500.0" prefWidth="750.0">
                      <children>
-                        <Button fx:id="btnAgregarCita" layoutX="20.0" layoutY="374.0" mnemonicParsing="false" onAction="#actionAgregarCita" prefHeight="20.0" prefWidth="140.0" text="Agregar" />
-                        <Button fx:id="btnEliminarCita" layoutX="188.0" layoutY="374.0" mnemonicParsing="false" onAction="#actionEliminarCita" prefHeight="20.0" prefWidth="140.0" text="Eliminar" />
-                        <Button fx:id="btnModificarCita" layoutX="359.0" layoutY="374.0" mnemonicParsing="false" onAction="#actionModificarCita" prefHeight="20.0" prefWidth="140.0" text="Modificar" />
-                        <Button fx:id="btnBuscarCita" layoutX="557.0" layoutY="60.0" mnemonicParsing="false" onAction="#actionBuscarCita" prefHeight="25.0" prefWidth="92.0" text="Buscar" />
-                        <TableView fx:id="tablaCita" layoutX="359.0" layoutY="95.0" prefHeight="255.0" prefWidth="290.0">
+                        <ImageView fitHeight="481.0" fitWidth="760.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@fondo2.png" />
+                           </image>
+                        </ImageView>
+                        <Button fx:id="btnAgregarCita" layoutX="43.0" layoutY="374.0" mnemonicParsing="false" onAction="#actionAgregarCita" prefHeight="20.0" prefWidth="140.0" text="Agregar">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></Button>
+                        <Button fx:id="btnEliminarCita" layoutX="227.0" layoutY="374.0" mnemonicParsing="false" onAction="#actionEliminarCita" prefHeight="20.0" prefWidth="140.0" text="Eliminar">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></Button>
+                        <Button fx:id="btnModificarCita" layoutX="390.0" layoutY="374.0" mnemonicParsing="false" onAction="#actionModificarCita" prefHeight="20.0" prefWidth="140.0" text="Modificar">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></Button>
+                        <Button fx:id="btnBuscarCita" layoutX="569.0" layoutY="60.0" mnemonicParsing="false" onAction="#actionBuscarCita" prefHeight="20.0" prefWidth="140.0" text="Buscar">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></Button>
+                        <TableView fx:id="tablaCita" layoutX="372.0" layoutY="96.0" prefHeight="255.0" prefWidth="337.0">
                            <columns>
-                              <TableColumn fx:id="columnaFechaCita" prefWidth="142.0" text="FECHA" />
-                              <TableColumn fx:id="columnaIdCita" prefWidth="147.0" text="ID" />
+                              <TableColumn fx:id="columnaFechaCita" prefWidth="167.0" text="FECHA" />
+                              <TableColumn fx:id="columnaIdCita" prefWidth="169.0" text="ID" />
                            </columns>
                         </TableView>
-                        <TextField fx:id="txtBuscarCita" layoutX="359.0" layoutY="60.0" prefHeight="25.0" prefWidth="187.0" />
-                        <Label layoutX="359.0" layoutY="38.0" text="Ingrese el ID de la cita." />
-                        <RadioButton fx:id="radioBtnAgregarCita" layoutX="30.0" layoutY="38.0" mnemonicParsing="false" onAction="#actionRadioBtnAgregarCita" text="Agregar">
+                        <TextField fx:id="txtBuscarCita" layoutX="372.0" layoutY="60.0" prefHeight="25.0" prefWidth="187.0" />
+                        <Label layoutX="372.0" layoutY="38.0" text="Ingrese el ID de la cita.">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></Label>
+                        <RadioButton fx:id="radioBtnAgregarCita" layoutX="47.0" layoutY="38.0" mnemonicParsing="false" onAction="#actionRadioBtnAgregarCita" text="Agregar">
                            <toggleGroup>
                               <ToggleGroup fx:id="radioGroupOpcionCita" />
                            </toggleGroup>
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
                         </RadioButton>
-                        <RadioButton fx:id="radioBtnEliminarCita" layoutX="148.0" layoutY="38.0" mnemonicParsing="false" onAction="#actionRadioBtnEliminarCita" text="Eliminar" toggleGroup="$radioGroupOpcionCita" />
-                        <RadioButton fx:id="radioBtnModifcarCita" layoutX="259.0" layoutY="38.0" mnemonicParsing="false" onAction="#actionRadioBtnModifcarCita" text="Modificar" toggleGroup="$radioGroupOpcionCita" />
-                        <Label layoutX="30.0" layoutY="16.0" text="Seleccione la opción deseada" />
-                        <Button fx:id="btnLimpiarCita" layoutX="519.0" layoutY="374.0" mnemonicParsing="false" onAction="#actionLimpiarVenCita" prefHeight="25.0" prefWidth="140.0" text="Limpiar" />
-                        <Separator layoutX="342.0" layoutY="24.0" orientation="VERTICAL" prefHeight="326.0" prefWidth="4.0" />
-                        <Separator layoutX="328.0" layoutY="47.0" orientation="VERTICAL" prefHeight="633.0" prefWidth="15.0" rotate="90.0" />
-                        <DatePicker fx:id="calendarCita" layoutX="95.0" layoutY="96.0" prefHeight="25.0" prefWidth="232.0" />
-                        <Label layoutX="28.0" layoutY="100.0" text="Fecha:" />
-                        <TextField fx:id="txtIdCita" layoutX="95.0" layoutY="60.0" prefHeight="25.0" prefWidth="232.0" />
-                        <Label layoutX="30.0" layoutY="64.0" text="ID:" />
-                        <ComboBox fx:id="cmbEspecialidadCita" layoutX="28.0" layoutY="193.0" prefHeight="25.0" prefWidth="218.0" />
-                        <Label layoutX="30.0" layoutY="170.0" text="Seleccione la especialidad de la cita:" />
-                        <Button fx:id="btnFiltrarEspecialidadCita" layoutX="260.0" layoutY="193.0" mnemonicParsing="false" onAction="#actionFiltrarEspecialidadCita" prefHeight="25.0" prefWidth="70.0" text="Filtrar" />
-                        <TableView fx:id="tablaMedicoCita" layoutX="28.0" layoutY="223.0" prefHeight="130.0" prefWidth="301.0">
+                        <RadioButton fx:id="radioBtnEliminarCita" layoutX="163.0" layoutY="38.0" mnemonicParsing="false" onAction="#actionRadioBtnEliminarCita" text="Eliminar" toggleGroup="$radioGroupOpcionCita">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></RadioButton>
+                        <RadioButton fx:id="radioBtnModifcarCita" layoutX="267.0" layoutY="38.0" mnemonicParsing="false" onAction="#actionRadioBtnModifcarCita" text="Modificar" toggleGroup="$radioGroupOpcionCita">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></RadioButton>
+                        <Label layoutX="47.0" layoutY="21.0" text="Seleccione la opción deseada">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></Label>
+                        <Button fx:id="btnLimpiarCita" layoutX="569.0" layoutY="374.0" mnemonicParsing="false" onAction="#actionLimpiarVenCita" prefHeight="25.0" prefWidth="140.0" text="Limpiar">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></Button>
+                        <Separator layoutX="350.0" layoutY="40.0" orientation="VERTICAL" prefHeight="310.0" prefWidth="4.0" />
+                        <Separator layoutX="373.0" layoutY="50.0" orientation="VERTICAL" prefHeight="633.0" prefWidth="15.0" rotate="90.0" />
+                        <DatePicker fx:id="calendarCita" layoutX="104.0" layoutY="96.0" prefHeight="25.0" prefWidth="233.0" />
+                        <Label layoutX="46.0" layoutY="100.0" text="Fecha">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></Label>
+                        <TextField fx:id="txtIdCita" layoutX="105.0" layoutY="60.0" prefHeight="25.0" prefWidth="232.0" />
+                        <Label layoutX="46.0" layoutY="64.0" text="ID">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></Label>
+                        <ComboBox fx:id="cmbEspecialidadCita" layoutX="42.0" layoutY="193.0" prefHeight="25.0" prefWidth="215.0" />
+                        <Label layoutX="42.0" layoutY="170.0" text="Seleccione la especialidad de la cita">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></Label>
+                        <Button fx:id="btnFiltrarEspecialidadCita" layoutX="267.0" layoutY="193.0" mnemonicParsing="false" onAction="#actionFiltrarEspecialidadCita" prefHeight="25.0" prefWidth="70.0" text="Filtrar">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></Button>
+                        <TableView fx:id="tablaMedicoCita" layoutX="42.0" layoutY="223.0" prefHeight="128.0" prefWidth="295.0">
                           <columns>
                             <TableColumn fx:id="columnaLicenciaCita" prefWidth="143.0" text="LICENCIA" />
                             <TableColumn fx:id="columnaMedicoCita" prefWidth="157.0" text="MEDICO" />
                           </columns>
                         </TableView>
-                        <TextField fx:id="txtPacienteCita" layoutX="95.0" layoutY="132.0" prefHeight="25.0" prefWidth="233.0" />
-                        <Label layoutX="30.0" layoutY="136.0" text="Paciente" />
+                        <TextField fx:id="txtPacienteCita" layoutX="104.0" layoutY="132.0" prefHeight="25.0" prefWidth="233.0" />
+                        <Label layoutX="45.0" layoutY="136.0" text="Paciente">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></Label>
+                        <Button fx:id="btnVolverCita" layoutX="668.0" layoutY="413.0" mnemonicParsing="false" onAction="#actionBtnVolverCita" prefHeight="25.0" prefWidth="25.0">
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="25.0">
+                                 <image>
+                                    <Image url="@atras.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
                      </children>
                   </AnchorPane>
                </children>
