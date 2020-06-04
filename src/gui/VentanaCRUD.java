@@ -14,10 +14,7 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -28,7 +25,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import modelo.alertas.Alerta;
@@ -1815,9 +1811,23 @@ public class VentanaCRUD implements Initializable {
 	// BOTONES ATRAS
 	@FXML
 	private Button btnVolverEps;
+	@FXML
+	private Button btnVolverMedico;
 	
 	@FXML
-	void actionbtnVolverEps(ActionEvent e) throws IOException {
+	void actionBtnVolverEps(ActionEvent e) throws IOException {
+		try {
+			controlador.ventanaAdministrador();
+			stage.close();
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+	}	
+	
+	@FXML
+	void actionBtnVolverMedico(ActionEvent e) throws IOException {
 		try {
 			controlador.ventanaAdministrador();
 			stage.close();
