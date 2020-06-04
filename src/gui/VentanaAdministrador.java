@@ -21,7 +21,15 @@ public class VentanaAdministrador implements Initializable {
 
 	@FXML
 	void actionBtnGenerarReportes(ActionEvent event) {
-		Alerta.mostrarAlerta("Alerta", "Alerta", "Mantenimiento.", AlertType.WARNING);
+		
+		try {
+			controlador.ventanaReporte();
+			stage.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+		}
+		
 	}
 
 	@FXML

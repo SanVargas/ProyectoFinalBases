@@ -33,22 +33,6 @@ public class VentanaIngresar implements Initializable {
 
 	@FXML
 	void actionBtnSalir(ActionEvent event) {
-		
-//		try {
-//		
-//		JasperReport reporte = null;
-//		String path = "src/reportes/Citas.jasper";
-//		reporte = (JasperReport) JRLoader.loadObjectFromFile(path);
-//		JasperPrint jprint = JasperFillManager.fillReport(path, null, controlador.principal.con);
-//		JasperViewer view = new JasperViewer(jprint, false);
-//		
-//		view.setVisible(true);
-//		
-//	} catch (JRException e) {
-//		// TODO Auto-generated catch block
-//		e.printStackTrace();
-//	}
-
 		System.exit(0);
 	}
 
