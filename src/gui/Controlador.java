@@ -18,7 +18,6 @@ public class Controlador {
 		this.principal = principal;
 	}
 	
-	
 	/**
 	 * Controlador De la Ventana Principal en JavaFx
 	 * @throws Exception
