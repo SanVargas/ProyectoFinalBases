@@ -129,8 +129,8 @@ FROM proyecto.cita
 					<textFieldExpression><![CDATA[$F{fechaHora}.toLocalDate()]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="140" y="1" width="170" height="30" uuid="5e4e20eb-1e40-4c63-a87d-3753082fc2b2">
-						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="01487b8c-89f6-4427-b640-56b6dc8b4f28"/>
+					<reportElement x="140" y="0" width="171" height="30" uuid="e1e5007e-31f7-419f-a8f8-7d882f4b66ea">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0cb6fffa-deae-4e71-b586-b84801988cee"/>
 					</reportElement>
 					<textElement textAlignment="Justified" verticalAlignment="Middle">
 						<font size="11"/>
@@ -138,8 +138,8 @@ FROM proyecto.cita
 					<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="330" y="1" width="225" height="30" uuid="112659b9-45b1-4810-9a90-76596f5eecd6">
-						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f4710095-5f22-4fd6-ba7e-706649e50408"/>
+					<reportElement x="330" y="0" width="150" height="30" uuid="f0280707-3b3a-4ff3-a939-22cd239c58f6">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="15eb73cc-5483-4b0f-85bd-678f4449b68c"/>
 					</reportElement>
 					<textElement textAlignment="Justified" verticalAlignment="Middle">
 						<font size="11"/>

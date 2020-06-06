@@ -119,12 +119,21 @@ public class ControladorEmpleado {
 
 		PreparedStatement ps1;
 		PreparedStatement ps2;
+		PreparedStatement ps4;
 
 		try {
 
 			String SQL1 = "DELETE FROM Telefono_Empleado WHERE Empleado_id = ?";
 			ps1 = con.prepareStatement(SQL1);
 			ps1.setString(1, id);
+			
+			try {
+				String SQL4 = "DELETE FROM Registro_Ambulancia WHERE Empleado_id = ?";
+				ps4 = con.prepareStatement(SQL4);
+				ps4.setString(1, id);
+				ps4.execute();
+			} catch (Exception e) {
+			}
 
 			String SQL = "DELETE FROM Empleado WHERE id = ?";
 			ps2 = con.prepareStatement(SQL);

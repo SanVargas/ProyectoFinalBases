@@ -115,14 +115,31 @@ public class ControladorMedico {
 		PreparedStatement ps;
 		PreparedStatement ps1;
 		PreparedStatement ps2;
+		PreparedStatement ps4;
 
 		try {
 
 			String SQL2 = "UPDATE Cita SET Medico_licencia = ? WHERE Medico_licencia = ?";
 			ps2 = con.prepareStatement(SQL2);
 			ps2.setString(1, null);
-			ps2.setString(1, licencia);
-
+			ps2.setString(2, licencia);
+			
+			try {
+				String SQL4 = "DELETE FROM Diagnostico WHERE Medico_licencia = ?";
+				ps4 = con.prepareStatement(SQL4);
+				ps4.setString(1, licencia);
+				ps4.execute();
+			} catch (Exception e) {
+			}
+			
+			try {
+				String SQL4 = "DELETE FROM Cita WHERE Medico_licencia = ?";
+				ps4 = con.prepareStatement(SQL4);
+				ps4.setString(1, licencia);
+				ps4.execute();
+			} catch (Exception e) {
+			}
+			
 			String SQL1 = "DELETE FROM Medico_has_Especialidad WHERE Medico_licencia = ?";
 			ps1 = con.prepareStatement(SQL1);
 			ps1.setString(1, licencia);
@@ -131,6 +148,7 @@ public class ControladorMedico {
 			ps = con.prepareStatement(SQL);
 			ps.setString(1, licencia);
 
+			
 			ps2.execute();
 			ps1.execute();
 			ps.execute();

@@ -1,6 +1,8 @@
 package gui;
 
 import java.net.URL;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,7 +18,7 @@ import modelo.entidad.Administrador;
 public class VentanaIngresar implements Initializable {
 	@FXML
 	Stage stage;
-	
+
 	Controlador controlador;
 
 	@FXML
@@ -50,8 +52,7 @@ public class VentanaIngresar implements Initializable {
 				e.printStackTrace();
 			}
 
-		}else
-		{
+		} else {
 			Alerta.mostrarAlerta("Error", "Alerta", "Administrador no encontrado.", AlertType.ERROR);
 		}
 	}

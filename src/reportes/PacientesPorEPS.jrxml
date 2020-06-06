@@ -13,18 +13,19 @@
 			<style backcolor="#E6DAC3"/>
 		</conditionalStyle>
 	</style>
-	<parameter name="Vemos" class="java.lang.String">
+	<parameter name="ServicioSalud" class="java.lang.String">
 		<parameterDescription><![CDATA[Eps a escoger]]></parameterDescription>
 	</parameter>
 	<queryString>
 		<![CDATA[SELECT proyecto.paciente.dni,
 	proyecto.paciente.nombre,
 	proyecto.paciente.`HistoriaClinica_numero`,
-	proyecto.eps.nombre
+	proyecto.paciente.direccion
 FROM proyecto.paciente
 	INNER JOIN proyecto.eps ON 
-	 proyecto.paciente.`EPS_nit` = proyecto.eps.nit where  
-	 $P{Vemos}  = proyecto.eps.nombre]]>
+	 proyecto.paciente.`EPS_nit` = proyecto.eps.nit 
+WHERE 
+	 $P{ServicioSalud} = proyecto.eps.nombre]]>
 	</queryString>
 	<field name="dni" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="dni"/>
@@ -38,9 +39,9 @@ FROM proyecto.paciente
 		<property name="com.jaspersoft.studio.field.label" value="HistoriaClinica_numero"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="paciente"/>
 	</field>
-	<field name="COLUMN_4" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="nombre"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="eps"/>
+	<field name="direccion" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="direccion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="paciente"/>
 	</field>
 	<background>
 		<band splitType="Stretch"/>
@@ -49,7 +50,7 @@ FROM proyecto.paciente
 		<band height="145" splitType="Stretch">
 			<image>
 				<reportElement x="30" y="5" width="164" height="94" uuid="ddc15723-2728-421f-b95e-2df9faf64ce1"/>
-				<imageExpression><![CDATA["/files/Imagenes/LogoHSJD.png"]]></imageExpression>
+				<imageExpression><![CDATA["LogoHSJD.png"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement style="Title" x="227" y="8" width="263" height="62" uuid="1a652692-054a-40f3-ade5-68d8da36626d"/>
@@ -63,7 +64,7 @@ FROM proyecto.paciente
 				<textElement textAlignment="Center">
 					<font fontName="Times New Roman" size="16"/>
 				</textElement>
-				<text><![CDATA[Lista de Pacientes por afiliacion de salud]]></text>
+				<text><![CDATA[Control Pacientes]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="97" width="340" height="36" forecolor="#064203" uuid="f0bfb1ea-a85a-47cd-a1a4-43f22b45e80f"/>
@@ -77,7 +78,7 @@ FROM proyecto.paciente
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="11"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{Vemos}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{ServicioSalud}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
@@ -112,7 +113,7 @@ FROM proyecto.paciente
 				<textElement textAlignment="Justified" verticalAlignment="Middle">
 					<font size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Afiliacion Salud]]></text>
+				<text><![CDATA[Direccion]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="380" y="0" width="175" height="30" uuid="32da13de-4fff-471a-b714-51705a62f27f">
@@ -170,13 +171,13 @@ FROM proyecto.paciente
 					<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="260" y="0" width="110" height="30" uuid="98c01774-5bf3-4126-af46-d827264ed3e0">
-						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8985dabb-2d59-4283-a660-2f2d3783b488"/>
+					<reportElement x="260" y="0" width="110" height="30" uuid="dfa8c943-ad9c-48b2-939b-02636ddafa59">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fe698ea9-3a66-4c57-8446-956456d9cbab"/>
 					</reportElement>
 					<textElement textAlignment="Justified" verticalAlignment="Middle">
 						<font size="11"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{COLUMN_4}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{direccion}]]></textFieldExpression>
 				</textField>
 			</frame>
 		</band>

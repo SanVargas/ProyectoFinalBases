@@ -5,11 +5,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import conector.ConectorBD;
 import modelo.controladoresEntidades.ControladorAdministrador;
+import modelo.controladoresEntidades.ControladorAmbulancia;
 import modelo.controladoresEntidades.ControladorCargo;
 import modelo.controladoresEntidades.ControladorCita;
+import modelo.controladoresEntidades.ControladorDrogueria;
 import modelo.controladoresEntidades.ControladorEmpleado;
 import modelo.controladoresEntidades.ControladorEps;
 import modelo.controladoresEntidades.ControladorEspecialidad;
+import modelo.controladoresEntidades.ControladorMedicamento;
 import modelo.controladoresEntidades.ControladorMedico;
 import modelo.controladoresEntidades.ControladorPaciente;
 import modelo.controladoresEntidades.ControladorTipoSangre;
@@ -29,6 +32,9 @@ public class Principal {
 	private ControladorEmpleado controladorEmpleado;
 	private ControladorCita controladorCita;
 	private ControladorAdministrador controladorAdmin;
+	private ControladorAmbulancia controladorAmbulancia;
+	private ControladorDrogueria controladorDrogueria;
+	private ControladorMedicamento controladorMedicamento;
 
 	public Principal() {
 		controladorTipoSangre = new ControladorTipoSangre(cc, con, this);
@@ -44,6 +50,33 @@ public class Principal {
 		controladorCita = new ControladorCita(cc, con, this);
 		controladorAdmin = new ControladorAdministrador(cc, con, this);
 		controladorAdmin.insertarAdministradores();
+		controladorAmbulancia = new ControladorAmbulancia(cc, con, this);
+		controladorDrogueria = new ControladorDrogueria(cc, con, this);
+		controladorMedicamento = new ControladorMedicamento(cc, con, this);
+	}
+
+	public ControladorDrogueria getControladorDrogueria() {
+		return controladorDrogueria;
+	}
+
+	public void setControladorDrogueria(ControladorDrogueria controladorDrogueria) {
+		this.controladorDrogueria = controladorDrogueria;
+	}
+
+	public ControladorMedicamento getControladorMedicamento() {
+		return controladorMedicamento;
+	}
+
+	public void setControladorMedicamento(ControladorMedicamento controladorMedicamento) {
+		this.controladorMedicamento = controladorMedicamento;
+	}
+
+	public ControladorAmbulancia getControladorAmbulancia() {
+		return controladorAmbulancia;
+	}
+
+	public void setControladorAmbulancia(ControladorAmbulancia controladorAmbulancia) {
+		this.controladorAmbulancia = controladorAmbulancia;
 	}
 
 	public ControladorEmpleado getControladorEmpleado() {
@@ -133,6 +166,5 @@ public class Principal {
 	public void setControladorAdmin(ControladorAdministrador contraladorAdmin) {
 		this.controladorAdmin = contraladorAdmin;
 	}
-	
-	
+
 }

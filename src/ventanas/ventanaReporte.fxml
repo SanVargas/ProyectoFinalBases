@@ -12,7 +12,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="555.0" prefWidth="740.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.VentanaReporte">
    <children>
-      <ImageView fitHeight="555.0" fitWidth="743.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="565.0" fitWidth="753.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@fondo3.png" />
          </image>

@@ -25,7 +25,7 @@
                <children>
                   <AnchorPane maxHeight="500.0" maxWidth="750.0" minHeight="420.0" minWidth="750.0" prefHeight="425.0" prefWidth="750.0">
                      <children>
-                        <ImageView fitHeight="425.0" fitWidth="760.0">
+                        <ImageView fitHeight="435.0" fitWidth="770.0">
                            <image>
                               <Image url="@fondo2.png" />
                            </image>
@@ -111,7 +111,7 @@
                <children>
                   <AnchorPane maxHeight="500.0" maxWidth="750.0" minHeight="425.0" minWidth="750.0" prefHeight="425.0" prefWidth="750.0">
                      <children>
-                        <ImageView fitHeight="425.0" fitWidth="760.0">
+                        <ImageView fitHeight="435.0" fitWidth="770.0">
                            <image>
                               <Image url="@fondo2.png" />
                            </image>
@@ -207,7 +207,7 @@
          <content>
             <AnchorPane maxHeight="500.0" maxWidth="750.0" minHeight="422.0" minWidth="750.0" prefHeight="425.0" prefWidth="750.0">
                <children>
-                  <ImageView fitHeight="425.0" fitWidth="760.0" pickOnBounds="true" smooth="false">
+                  <ImageView fitHeight="435.0" fitWidth="770.0" pickOnBounds="true" smooth="false">
                      <image>
                         <Image url="@fondo2.png" />
                      </image>
@@ -328,7 +328,7 @@
          <content>
             <AnchorPane maxHeight="500.0" maxWidth="750.0" minHeight="404.0" minWidth="750.0" prefHeight="425.0" prefWidth="750.0">
                <children>
-                  <ImageView fitHeight="425.0" fitWidth="760.0" pickOnBounds="true" smooth="false">
+                  <ImageView fitHeight="435.0" fitWidth="770.0" pickOnBounds="true" smooth="false">
                      <image>
                         <Image url="@fondo2.png" />
                      </image>
@@ -446,7 +446,7 @@
                <children>
                   <AnchorPane maxHeight="500.0" maxWidth="750.0" minHeight="500.0" minWidth="750.0" prefHeight="500.0" prefWidth="750.0">
                      <children>
-                        <ImageView fitHeight="425.0" fitWidth="760.0" pickOnBounds="true">
+                        <ImageView fitHeight="435.0" fitWidth="770.0" pickOnBounds="true">
                            <image>
                               <Image url="@fondo2.png" />
                            </image>

@@ -1,1 +1,13 @@
 /Citas.jasper
+/Cita.jasper
+/DiagnosticosPorPaciente.jasper
+/DrogueriaPorMedicamento.jasper
+/Empleado.jasper
+/EmpleadoPorCargo.jasper
+/EquiposPorAmbulancia.jasper
+/MedicamentosPorDrogueria.jasper
+/Medico.jasper
+/MedicoPorEspecialidad.jasper
+/Paciente.jasper
+/PacientePorTipoSangre.jasper
+/PacientesPorEPS.jasper

@@ -3,9 +3,9 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Medico" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ced95029-b569-4027-895c-af2843a4e088">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Proyecto "/>
 	<property name="com.jaspersoft.studio.data.sql.tables">
-		<![CDATA[cHJveWVjdG8uY2FyZ28gLDE3MSw0MiwyYWFjMzgwZi05YTE4LTRkMWUtOWJlYS0wMDRiZTRkMDIz
-OGQ7cHJveWVjdG8uZW1wbGVhZG8gLDE1LDE1LDgzOWYzMWU2LTZiMmUtNGU3My05YTJhLWRmYzc0
-ZGIzYzBkMjs=]]>
+		<![CDATA[cHJveWVjdG8uZW1wbGVhZG8gLDE1LDE1LGEwOWQ0NTU5LTIwY2MtNDA5Ni05YzY5LTQ0MjVjMmNj
+ZDJlOTtwcm95ZWN0by5jYXJnbyAsMTcxLDQyLDJmODNkODM3LTUzNzUtNGM2Zi04OGIwLThlMjk4
+ZGEwYmQ0Mzs=]]>
 	</property>
 	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w1" value="671"/>
 	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w2" value="315"/>
@@ -26,12 +26,13 @@ ZGIzYzBkMjs=]]>
 		<![CDATA[SELECT proyecto.empleado.nombre,
 	proyecto.empleado.licencia,
 	proyecto.cargo.nombre,
-	proyecto.cargo.id,
-	proyecto.empleado.id
+	proyecto.empleado.id,
+	proyecto.cargo.salario
 FROM proyecto.empleado
 	INNER JOIN proyecto.cargo ON 
-	 proyecto.empleado.`Cargo_id` = proyecto.cargo.id
-	 WHERE  proyecto.cargo.nombre =  $P{cargo}]]>
+	 proyecto.empleado.`Cargo_id` = proyecto.cargo.id 
+WHERE 
+	 proyecto.cargo.nombre = $P{cargo}]]>
 	</queryString>
 	<field name="nombre" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="nombre"/>
@@ -47,11 +48,11 @@ FROM proyecto.empleado
 	</field>
 	<field name="id" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="id"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="cargo"/>
-	</field>
-	<field name="COLUMN_5" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="id"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="empleado"/>
+	</field>
+	<field name="salario" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="salario"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cargo"/>
 	</field>
 	<background>
 		<band splitType="Stretch"/>
@@ -141,7 +142,7 @@ FROM proyecto.empleado
 				<textElement textAlignment="Justified" verticalAlignment="Middle">
 					<font size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[ID Cargo]]></text>
+				<text><![CDATA[Salario]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -190,19 +191,20 @@ FROM proyecto.empleado
 					<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="298" y="1" width="120" height="30" uuid="5b1fbe89-20f1-469e-8285-15d4582fd5f4">
-						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="608d9f61-94ee-476c-8c40-42067ba91041"/>
+					<reportElement x="430" y="0" width="122" height="30" uuid="f7517e41-8bc8-4ae7-adf5-f82c89d6d12c">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="cc13738b-1881-4df3-b348-7a69cb50ad67"/>
 					</reportElement>
 					<textElement textAlignment="Justified" verticalAlignment="Middle">
 						<font size="11"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{COLUMN_3}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{salario}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="430" y="0" width="125" height="30" uuid="630d5086-69e5-4ffa-97ad-eb15a435dd83">
-						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ca88c203-7515-43f9-be77-581ec899d93a"/>
-					</reportElement>
-					<textFieldExpression><![CDATA[$F{COLUMN_5}]]></textFieldExpression>
+					<reportElement x="298" y="0" width="120" height="30" uuid="ef3f8e63-0a68-45cf-947b-f174602cd974"/>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font size="11"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{cargo}]]></textFieldExpression>
 				</textField>
 			</frame>
 		</band>

@@ -102,6 +102,7 @@ public class Controlador {
 		VentanaReporte vc = fxmlLoader.getController();
 		vc.setControlador(this);
 		vc.setStage(primaryStage);
+		vc.llenarComboBox();
 	}
 
 }

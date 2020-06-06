@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashMap;
+import java.util.Map;
 
 import conector.ConectorBD;
 import modelo.Principal;
@@ -15,7 +17,7 @@ public class ControladorTipoSangre {
 	Principal principal;
 	private PreparedStatement ps;
 	private ResultSet rs;
-	
+
 	public ControladorTipoSangre(ConectorBD cc, Connection con, Principal principal) {
 		super();
 		this.cc = cc;
@@ -94,4 +96,40 @@ public class ControladorTipoSangre {
 		}
 
 	}
+
+	public Map<String, Object> devolverMap(String tipoSangre) {
+
+		Map<String, Object> parametro = new HashMap<String, Object>();
+
+		if (tipoSangre.equals("O+")) {
+			parametro.put("grupoS", "O");
+			parametro.put("rh", "+");
+		} else if (tipoSangre.equals("O-")) {
+			parametro.put("grupoS", "O");
+			parametro.put("rh", "-");
+		} else if (tipoSangre.equals("A+")) {
+			parametro.put("grupoS", "A");
+			parametro.put("rh", "+");
+		} else if (tipoSangre.equals("A-")) {
+			parametro.put("grupoS", "A");
+			parametro.put("rh", "-");
+		} else if (tipoSangre.equals("B+")) {
+			parametro.put("grupoS", "B");
+			parametro.put("rh", "+");
+		} else if (tipoSangre.equals("B-")) {
+			parametro.put("grupoS", "B");
+			parametro.put("rh", "-");
+		} else if (tipoSangre.equals("AB+")) {
+			parametro.put("grupoS", "AB");
+			parametro.put("rh", "+");
+		} else if (tipoSangre.equals("AB-")) {
+			parametro.put("grupoS", "AB");
+			parametro.put("rh", "-");
+
+		}
+
+		return parametro;
+
+	}
+
 }

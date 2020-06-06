@@ -3,10 +3,10 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Medico" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ced95029-b569-4027-895c-af2843a4e088">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Proyecto "/>
 	<property name="com.jaspersoft.studio.data.sql.tables">
-		<![CDATA[cHJveWVjdG8uaGlzdG9yaWFjbGluaWNhIEFTICwzODgsMTgsZGZlYjA3MGEtMjRlNi00ZjRmLTgw
-NjUtN2E4YjExOTc3MjEyO3Byb3llY3RvLnRpcG9zYW5ncmUgQVMgLDIzMCwyMDMsM2E2MmZmZjIt
-NzdiMi00MWY4LWEwOWItMDExY2E1ZDY3OTlmO3Byb3llY3RvLnBhY2llbnRlIEFTICw4MCwtOSxi
-NWFmNDY0Mi0zNDcyLTQ5Y2EtYjhhYy04OTMyZTVlOTA2OGU7]]>
+		<![CDATA[cHJveWVjdG8uZHJvZ3VlcmlhX2hhc19tZWRpY2FtZW50byAsMTUsODYsNzgzZjEwMWMtM2VlYS00
+ZDkwLWFiZWEtOTdhM2NjMjUzNzRkO3Byb3llY3RvLmRyb2d1ZXJpYSAsMjY1LDE1LDIwMjUwYWY3
+LTJlMDItNGY1MS1iMTQ3LWUyZjM5Zjg3NDg5ZDtwcm95ZWN0by5tZWRpY2FtZW50byAsMjY1LDEz
+MSwzODk3NzM0Yy1jYjY3LTRmZWUtOWVmNy01MDkxNjkwOTI5MDc7]]>
 	</property>
 	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w1" value="671"/>
 	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w2" value="315"/>
@@ -20,41 +20,38 @@ NWFmNDY0Mi0zNDcyLTQ5Y2EtYjhhYy04OTMyZTVlOTA2OGU7]]>
 			<style backcolor="#E6DAC3"/>
 		</conditionalStyle>
 	</style>
-	<parameter name="grupoS" class="java.lang.String"/>
-	<parameter name="rh" class="java.lang.String"/>
+	<parameter name="drogueria" class="java.lang.String">
+		<parameterDescription><![CDATA[1]]></parameterDescription>
+	</parameter>
 	<queryString>
-		<![CDATA[SELECT proyecto.paciente.dni,
-	proyecto.paciente.nombre,
-	proyecto.historiaclinica.estatura,
-	proyecto.historiaclinica.peso
-FROM proyecto.historiaclinica
-	INNER JOIN proyecto.paciente ON 
-	 proyecto.historiaclinica.`Paciente_dni` = proyecto.paciente.dni 
-	INNER JOIN proyecto.tiposangre ON 
-	 proyecto.historiaclinica.`TipoSangre_id` = proyecto.tiposangre.id
-	 WHERE  $P{grupoS} =  proyecto.tiposangre.`grupoSanguineo` AND  proyecto.tiposangre.rh =  $P{rh} ]]>
+		<![CDATA[SELECT proyecto.medicamento.`registroSanitario`,
+	proyecto.medicamento.nombre,
+	proyecto.medicamento.gramaje
+FROM proyecto.drogueria_has_medicamento
+	INNER JOIN proyecto.drogueria ON 
+	 proyecto.drogueria_has_medicamento.`Drogueria_nit` = proyecto.drogueria.nit 
+	INNER JOIN proyecto.medicamento ON 
+	 proyecto.drogueria_has_medicamento.`Medicamento_registroSanitario` = proyecto.medicamento.`registroSanitario` 
+WHERE 
+	 $P{drogueria} = proyecto.drogueria.nombre]]>
 	</queryString>
-	<field name="dni" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="dni"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="paciente"/>
+	<field name="registroSanitario" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="registroSanitario"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="medicamento"/>
 	</field>
 	<field name="nombre" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="nombre"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="paciente"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="medicamento"/>
 	</field>
-	<field name="estatura" class="java.lang.Double">
-		<property name="com.jaspersoft.studio.field.label" value="estatura"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="historiaclinica"/>
-	</field>
-	<field name="peso" class="java.lang.Double">
-		<property name="com.jaspersoft.studio.field.label" value="peso"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="historiaclinica"/>
+	<field name="gramaje" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="gramaje"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="medicamento"/>
 	</field>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="136" splitType="Stretch">
+		<band height="138" splitType="Stretch">
 			<image>
 				<reportElement x="30" y="5" width="164" height="94" uuid="ddc15723-2728-421f-b95e-2df9faf64ce1"/>
 				<imageExpression><![CDATA["LogoHSJD.png"]]></imageExpression>
@@ -71,28 +68,21 @@ FROM proyecto.historiaclinica
 				<textElement textAlignment="Center">
 					<font fontName="Times New Roman" size="16"/>
 				</textElement>
-				<text><![CDATA[Banco de Sangre]]></text>
+				<text><![CDATA[Control de Farmaceutico]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="97" width="340" height="36" forecolor="#064203" uuid="f0bfb1ea-a85a-47cd-a1a4-43f22b45e80f"/>
+				<reportElement x="0" y="97" width="298" height="36" forecolor="#064203" uuid="f0bfb1ea-a85a-47cd-a1a4-43f22b45e80f"/>
 				<textElement textAlignment="Justified" verticalAlignment="Middle">
 					<font size="11"/>
 				</textElement>
-				<text><![CDATA[Los pacientes en la lista siguiente concuerda con el grupo sanguineo: ]]></text>
+				<text><![CDATA[A continuacion se listaron los medicamentos de la drogueria:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="340" y="97" width="10" height="36" forecolor="#064203" uuid="d4159642-53f2-45d5-9c09-0bed274e1193"/>
-				<textElement textAlignment="Justified" verticalAlignment="Middle">
+				<reportElement x="298" y="97" width="100" height="36" forecolor="#064203" uuid="aba64886-1d29-4061-a72e-375bace31168"/>
+				<textElement verticalAlignment="Middle">
 					<font size="11"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{grupoS}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="350" y="97" width="10" height="36" forecolor="#064203" uuid="c906a802-a2bb-47ae-a92d-ea0973b793b9"/>
-				<textElement textAlignment="Justified" verticalAlignment="Middle">
-					<font size="11"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{rh}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{drogueria}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
@@ -103,40 +93,31 @@ FROM proyecto.historiaclinica
 		<band height="30" splitType="Stretch">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<staticText>
-				<reportElement x="10" y="0" width="100" height="30" uuid="b6a10bca-e1f6-4a4e-a3ee-5c59e824906a">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="26b94a1a-5900-4d08-800d-bfd5bc99b5d1"/>
+				<reportElement x="10" y="0" width="140" height="30" uuid="ce0f7c7d-b96a-426e-a38a-2fc459edf91f">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="556461b7-5f70-4051-98d0-b2cd4b72baa6"/>
 				</reportElement>
 				<textElement textAlignment="Justified" verticalAlignment="Middle">
 					<font size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[DNI]]></text>
+				<text><![CDATA[Registro Sanitario]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="120" y="0" width="220" height="30" uuid="368a02db-6614-43f6-bea0-ada62396f68f">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0f9dac4f-81ac-47e0-8024-82994fb130ce"/>
+				<reportElement x="180" y="0" width="180" height="30" uuid="849c917a-a5d6-49ca-9f39-203979b4319d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2290d62d-073d-4c63-95b0-59a21307bfbf"/>
 				</reportElement>
-				<textElement textAlignment="Justified" verticalAlignment="Middle">
+				<textElement verticalAlignment="Middle">
 					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Nombre]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="360" y="0" width="80" height="30" uuid="8264a043-1780-4da5-b902-23c908a35912">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="97c4a26c-f96e-4c90-af8d-ba9117d1fe00"/>
+				<reportElement x="380" y="0" width="120" height="30" uuid="ff348a67-d0ab-48a2-9fbd-8ea40c5784df">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9ff42acb-f2f9-4d17-891f-0bae941dc1e2"/>
 				</reportElement>
 				<textElement textAlignment="Justified" verticalAlignment="Middle">
 					<font size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Estatura]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="460" y="0" width="84" height="30" uuid="9de36ca4-6b6a-4779-af84-1b3e06dbc7c7">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f423845b-a9cc-4996-ab1b-19b56b861820"/>
-				</reportElement>
-				<textElement textAlignment="Justified" verticalAlignment="Middle">
-					<font size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Peso]]></text>
+				<text><![CDATA[Gramaje]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -158,17 +139,17 @@ FROM proyecto.historiaclinica
 					</graphicElement>
 				</line>
 				<textField>
-					<reportElement x="10" y="0" width="100" height="30" uuid="7607f3a8-6f27-4eed-a007-7613e6ea8626">
-						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="26b94a1a-5900-4d08-800d-bfd5bc99b5d1"/>
+					<reportElement x="10" y="0" width="140" height="30" uuid="c8cad34b-8c0e-4f01-be89-9223a8b2b717">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f5c998fd-7409-4e19-b972-b72d5196e49e"/>
 					</reportElement>
 					<textElement textAlignment="Justified" verticalAlignment="Middle">
 						<font size="11"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{dni}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{registroSanitario}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="120" y="0" width="220" height="30" uuid="5473f583-67f6-4885-a27a-ed156b9ddc15">
-						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0f9dac4f-81ac-47e0-8024-82994fb130ce"/>
+					<reportElement x="180" y="0" width="180" height="30" uuid="c0f35294-3e76-4d4d-8142-beb1ae060d43">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bb5b41d0-e6dc-456b-b91a-95bae01bfe64"/>
 					</reportElement>
 					<textElement textAlignment="Justified" verticalAlignment="Middle">
 						<font size="11"/>
@@ -176,22 +157,13 @@ FROM proyecto.historiaclinica
 					<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="360" y="0" width="80" height="30" uuid="c96e51e4-b258-470b-a10f-eee592cda431">
-						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="97c4a26c-f96e-4c90-af8d-ba9117d1fe00"/>
+					<reportElement x="380" y="0" width="120" height="30" uuid="156a1b3a-d24e-44b6-9d33-9b09ed9727ff">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9662eb7e-f47c-44a5-b978-49a5fa52bcea"/>
 					</reportElement>
 					<textElement textAlignment="Justified" verticalAlignment="Middle">
 						<font size="11"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{estatura}]]></textFieldExpression>
-				</textField>
-				<textField>
-					<reportElement x="460" y="0" width="84" height="30" uuid="231722fc-2a58-448e-bf8d-52abdee4b08a">
-						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f423845b-a9cc-4996-ab1b-19b56b861820"/>
-					</reportElement>
-					<textElement textAlignment="Justified" verticalAlignment="Middle">
-						<font size="11"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{peso}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{gramaje}]]></textFieldExpression>
 				</textField>
 			</frame>
 		</band>

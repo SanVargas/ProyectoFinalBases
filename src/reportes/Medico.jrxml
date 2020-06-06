@@ -47,7 +47,7 @@ FROM proyecto.medico_has_especialidad
 		<band height="136" splitType="Stretch">
 			<image>
 				<reportElement x="30" y="5" width="164" height="94" uuid="ddc15723-2728-421f-b95e-2df9faf64ce1"/>
-				<imageExpression><![CDATA["/files/Imagenes/LogoHSJD.png"]]></imageExpression>
+				<imageExpression><![CDATA["LogoHSJD.png"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement style="Title" x="227" y="8" width="263" height="62" uuid="1a652692-054a-40f3-ade5-68d8da36626d"/>

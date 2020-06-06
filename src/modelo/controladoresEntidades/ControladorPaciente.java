@@ -151,18 +151,54 @@ public class ControladorPaciente {
 		PreparedStatement ps1;
 		PreparedStatement ps3;
 		PreparedStatement ps2;
+		PreparedStatement ps4;
 
 		try {
 
 			String SQL3 = "UPDATE Cita SET Paciente_dni = ? WHERE Paciente_dni = ?";
 			ps2 = con.prepareStatement(SQL3);
 			ps2.setString(1, null);
-			ps2.setString(1, dni);
+			ps2.setString(2, dni);
 			
-
 			String SQL1 = "DELETE FROM HistoriaClinica WHERE Paciente_dni = ?";
 			ps1 = con.prepareStatement(SQL1);
 			ps1.setString(1, dni);
+	
+			try {
+				Paciente pp = buscarPaciente(dni);
+				String SQL4 = "DELETE FROM Diagnostico WHERE HistoriaClinica_numero = ?";
+				ps4 = con.prepareStatement(SQL4);
+				ps4.setString(1, pp.getHistoriaClinica().getNumero());
+				ps4.execute();
+			} catch (Exception e) {
+			}
+	
+			try {
+				Paciente pp = buscarPaciente(dni);
+				String SQL4 = "DELETE FROM Examen WHERE HistoriaClinica_numero = ?";
+				ps4 = con.prepareStatement(SQL4);
+				ps4.setString(1, pp.getHistoriaClinica().getNumero());
+				ps4.execute();
+			} catch (Exception e) {
+			}
+			
+			try {
+				String SQL4 = "DELETE FROM Registro_Ambulancia WHERE Paciente_dni = ?";
+				ps4 = con.prepareStatement(SQL4);
+				ps4.setString(1, dni);
+				ps4.execute();
+			} catch (Exception e) {
+			}
+			
+			try {
+				Paciente pp = buscarPaciente(dni);
+				String SQL4 = "DELETE FROM Cita WHERE Paciente_dni = ?";
+				ps4 = con.prepareStatement(SQL4);
+				ps4.setString(1, dni);
+				ps4.execute();
+			} catch (Exception e) {
+			}
+
 
 			String SQL2 = "DELETE FROM Telefono_Paciente WHERE Paciente_dni = ?";
 			ps3 = con.prepareStatement(SQL2);
@@ -172,6 +208,7 @@ public class ControladorPaciente {
 			ps = con.prepareStatement(SQL);
 			ps.setString(1, dni);
 
+			
 			ps2.execute();
 			ps3.execute();
 			ps1.execute();
@@ -180,6 +217,7 @@ public class ControladorPaciente {
 			Alerta.mostrarAlerta("Confirmacion", "Alerta", "Se elimino existosamente.", AlertType.CONFIRMATION);
 		} catch (Exception e) {
 			Alerta.mostrarAlerta("Error", "Alerta", "Error al eliminar.", AlertType.ERROR);
+			e.printStackTrace();
 		}
 	}
 

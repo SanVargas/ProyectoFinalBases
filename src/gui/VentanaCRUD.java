@@ -137,6 +137,7 @@ public class VentanaCRUD implements Initializable {
 		cmbSeleccionarEPS.setDisable(true);
 		btnAgregarTelefonoPaciente.setDisable(false);
 		txtTelefonoPaciente.setText("");
+		actionLimpiarVenPaciente(event);
 
 	}
 
@@ -701,6 +702,7 @@ public class VentanaCRUD implements Initializable {
 
 	@FXML
 	void actionEliminarMedico(ActionEvent event) {
+		System.out.println(txtLicenciaMedico.getText());
 		controlador.principal.getControladorMedico().eliminarMedico(txtLicenciaMedico.getText());
 
 		actionLimpiarVenMedico(event);
@@ -782,6 +784,7 @@ public class VentanaCRUD implements Initializable {
 	@FXML
 	void actionRadioBtnEliminarMedico(ActionEvent event) {
 
+		
 		btnEliminarMedico.setDisable(false);
 		btnModificarMedico.setDisable(true);
 		btnAgregarMedico.setDisable(true);
@@ -793,7 +796,9 @@ public class VentanaCRUD implements Initializable {
 
 	@FXML
 	void actionRadioBtnModifcarMedico(ActionEvent event) {
-
+		cmbEspecialidad.setItems(controlador.principal.getControladorMedico().verEspecialidades());
+		cmbEspecialidad.getSelectionModel().select(0);
+		cmbEspecialidad.setDisable(false);
 		btnEliminarMedico.setDisable(true);
 		btnModificarMedico.setDisable(false);
 		btnAgregarMedico.setDisable(true);
