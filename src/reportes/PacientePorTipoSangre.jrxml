@@ -32,7 +32,7 @@ FROM proyecto.historiaclinica
 	 proyecto.historiaclinica.`Paciente_dni` = proyecto.paciente.dni 
 	INNER JOIN proyecto.tiposangre ON 
 	 proyecto.historiaclinica.`TipoSangre_id` = proyecto.tiposangre.id
-	 WHERE  $P{grupoS} =  proyecto.tiposangre.`grupoSanguineo` AND  proyecto.tiposangre.rh =  $P{rh} ]]>
+	 WHERE  $P{grupoS} =  proyecto.tiposangre.`grupoSanguineo` AND  proyecto.tiposangre.rh =  $P{rh}]]>
 	</queryString>
 	<field name="dni" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="dni"/>
@@ -81,15 +81,15 @@ FROM proyecto.historiaclinica
 				<text><![CDATA[Los pacientes en la lista siguiente concuerda con el grupo sanguineo: ]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="340" y="97" width="10" height="36" forecolor="#064203" uuid="d4159642-53f2-45d5-9c09-0bed274e1193"/>
-				<textElement textAlignment="Justified" verticalAlignment="Middle">
+				<reportElement x="340" y="97" width="20" height="36" forecolor="#064203" uuid="d4159642-53f2-45d5-9c09-0bed274e1193"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{grupoS}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="350" y="97" width="10" height="36" forecolor="#064203" uuid="c906a802-a2bb-47ae-a92d-ea0973b793b9"/>
-				<textElement textAlignment="Justified" verticalAlignment="Middle">
+				<reportElement x="360" y="97" width="10" height="36" forecolor="#064203" uuid="c906a802-a2bb-47ae-a92d-ea0973b793b9"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{rh}]]></textFieldExpression>
