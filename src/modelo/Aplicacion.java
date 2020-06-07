@@ -2,9 +2,13 @@ package modelo;
 
 import gui.Controlador;
 import javafx.application.Application;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
-
+/**
+ * Clase encargada de controlar la Aplicacion.
+ * 
+ * @author Diego riveros - Lissete Quebrada - Santiago Vargas
+ *
+ */
 public class Aplicacion extends Application {
 	
 	/**

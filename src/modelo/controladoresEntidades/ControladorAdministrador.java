@@ -10,6 +10,12 @@ import modelo.Principal;
 import modelo.alertas.Alerta;
 import modelo.entidad.Administrador;
 
+/**
+ * Clase encargada de controlar lo relacionado con Administrador.
+ * 
+ * @author Diego riveros - Lissete Quebrada - Santiago Vargas
+ *
+ */
 public class ControladorAdministrador {
 
 	ConectorBD cc;

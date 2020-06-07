@@ -16,7 +16,12 @@ import modelo.controladoresEntidades.ControladorMedicamento;
 import modelo.controladoresEntidades.ControladorMedico;
 import modelo.controladoresEntidades.ControladorPaciente;
 import modelo.controladoresEntidades.ControladorTipoSangre;
-
+/**
+ * Clase encargada de controlar lo relacionado de los controladores de cada entidad.
+ * 
+ * @author Diego riveros - Lissete Quebrada - Santiago Vargas
+ *
+ */
 public class Principal {
 
 	public ConectorBD cc = new ConectorBD();

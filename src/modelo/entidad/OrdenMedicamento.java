@@ -2,7 +2,12 @@ package modelo.entidad;
 
 import java.sql.Date;
 import java.util.ArrayList;
-
+/**
+ * Clase encargada de controlar la entidad.
+ * 
+ * @author Diego riveros - Lissete Quebrada - Santiago Vargas
+ *
+ */
 public class OrdenMedicamento {
 
 	private String id;

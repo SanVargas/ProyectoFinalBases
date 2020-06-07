@@ -1,7 +1,12 @@
 package modelo.entidad;
 
 import java.util.ArrayList;
-
+/**
+ * Clase encargada de controlar la entidad.
+ * 
+ * @author Diego riveros - Lissete Quebrada - Santiago Vargas
+ *
+ */
 public class TipoSangre {
 	private String rh;
 	private String grupoSanguineo;

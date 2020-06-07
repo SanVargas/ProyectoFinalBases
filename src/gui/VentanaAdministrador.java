@@ -6,10 +6,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
-import modelo.alertas.Alerta;
-
+/**
+ * Clase encargada de controlar la ventana Administrador.
+ * 
+ * @author Diego riveros - Lissete Quebrada - Santiago Vargas
+ *
+ */
 public class VentanaAdministrador implements Initializable {
 	@FXML
 	Stage stage;

@@ -8,7 +8,12 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import modelo.Principal;
-
+/**
+ * Clase encargada de controlar todas las ventanas.
+ * 
+ * @author Diego riveros - Lissete Quebrada - Santiago Vargas
+ *
+ */
 public class Controlador {
 
 	public Principal principal;

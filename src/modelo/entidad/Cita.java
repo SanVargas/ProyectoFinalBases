@@ -1,7 +1,12 @@
 package modelo.entidad;
 
 import java.sql.Date;
-
+/**
+ * Clase encargada de controlar la entidad.
+ * 
+ * @author Diego riveros - Lissete Quebrada - Santiago Vargas
+ *
+ */
 public class Cita {
 	private Date fechaHora;
 	private String id;

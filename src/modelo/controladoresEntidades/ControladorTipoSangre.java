@@ -7,10 +7,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
-
 import conector.ConectorBD;
 import modelo.Principal;
-
+/**
+ * Clase encargada de controlar lo relacionado con TipoSangre.
+ * 
+ * @author Diego riveros - Lissete Quebrada - Santiago Vargas
+ *
+ */
 public class ControladorTipoSangre {
 	ConectorBD cc;
 	Connection con;

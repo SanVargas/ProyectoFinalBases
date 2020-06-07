@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-
 import conector.ConectorBD;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,12 +14,13 @@ import modelo.Principal;
 import modelo.alertas.Alerta;
 import modelo.entidad.Cargo;
 import modelo.entidad.Empleado;
-import modelo.entidad.Eps;
-import modelo.entidad.HistoriaClinica;
-import modelo.entidad.Medico;
-import modelo.entidad.Paciente;
-import modelo.entidad.TipoSangre;
 
+/**
+ * Clase encargada de controlar lo relacionado con Empleado.
+ * 
+ * @author Diego riveros - Lissete Quebrada - Santiago Vargas
+ *
+ */
 public class ControladorEmpleado {
 	ConectorBD cc;
 	Connection con;

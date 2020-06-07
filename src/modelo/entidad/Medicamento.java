@@ -1,5 +1,10 @@
 package modelo.entidad;
-
+/**
+ * Clase encargada de controlar la entidad.
+ * 
+ * @author Diego riveros - Lissete Quebrada - Santiago Vargas
+ *
+ */
 public class Medicamento {
 	private String registroSanitario;
 	private String nombre;

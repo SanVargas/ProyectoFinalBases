@@ -2,9 +2,12 @@ package conector;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-
-
-
+/**
+ * Clase encargada de conectar con la BD.
+ * 
+ * @author Diego riveros - Lissete Quebrada - Santiago Vargas
+ *
+ */
 public class ConectorBD {
 
 	public static final String URL = "jdbc:mysql://localhost:3306/Proyecto";

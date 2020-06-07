@@ -17,7 +17,7 @@ import modelo.entidad.HistoriaClinica;
 import modelo.entidad.Paciente;
 import modelo.entidad.TipoSangre;
 /**
- * Clase encargada de controlar lo relacionado con paciente.
+ * Clase encargada de controlar lo relacionado con Paciente.
  * 
  * @author Diego riveros - Lissete Quebrada - Santiago Vargas
  *

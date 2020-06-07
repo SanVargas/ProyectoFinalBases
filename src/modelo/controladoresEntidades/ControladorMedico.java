@@ -16,7 +16,7 @@ import modelo.entidad.Especialidad;
 import modelo.entidad.Medico;
 
 /**
- * Clase encargada de controlar lo relacionado con medico.
+ * Clase encargada de controlar lo relacionado con Medico.
  * 
  * @author Diego riveros - Lissete Quebrada - Santiago Vargas
  *

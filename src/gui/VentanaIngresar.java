@@ -1,8 +1,6 @@
 package gui;
 
 import java.net.URL;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,7 +12,12 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import modelo.alertas.Alerta;
 import modelo.entidad.Administrador;
-
+/**
+ * Clase encargada de controlar la ventana Ingresar.
+ * 
+ * @author Diego riveros - Lissete Quebrada - Santiago Vargas
+ *
+ */
 public class VentanaIngresar implements Initializable {
 	@FXML
 	Stage stage;

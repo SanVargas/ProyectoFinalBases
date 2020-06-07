@@ -1,14 +1,13 @@
 package modelo.alertas;
 import java.util.Optional;
-
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 
 /**
- * Clase para empaquetar metodo de confirmacion o de informacion hacia el 
- * el cliente
- * @author  Ivan Andres Guapacha - Juan Miguel Giraldo
+ * Clase encargada de controlar lo relacionado con Alertas.
+ * 
+ * @author Diego riveros - Lissete Quebrada - Santiago Vargas
  *
  */
 public class Alerta {

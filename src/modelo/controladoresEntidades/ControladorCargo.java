@@ -6,13 +6,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-
 import conector.ConectorBD;
 import javafx.scene.control.Alert.AlertType;
 import modelo.Principal;
 import modelo.alertas.Alerta;
 import modelo.entidad.Cargo;
-import modelo.entidad.Eps;
+/**
+ * Clase encargada de controlar lo relacionado con Cargo.
+ * 
+ * @author Diego riveros - Lissete Quebrada - Santiago Vargas
+ *
+ */
 
 public class ControladorCargo {
 	ConectorBD cc;

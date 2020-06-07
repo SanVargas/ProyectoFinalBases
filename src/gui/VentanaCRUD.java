@@ -33,7 +33,12 @@ import modelo.entidad.Empleado;
 import modelo.entidad.Eps;
 import modelo.entidad.Medico;
 import modelo.entidad.Paciente;
-
+/**
+ * Clase encargada de controlar la ventana CRUD.
+ * 
+ * @author Diego riveros - Lissete Quebrada - Santiago Vargas
+ *
+ */
 public class VentanaCRUD implements Initializable {
 	@FXML
 	Stage stage;
