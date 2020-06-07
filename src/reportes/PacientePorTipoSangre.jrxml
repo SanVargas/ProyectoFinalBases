@@ -2,12 +2,7 @@
 <!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Medico" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ced95029-b569-4027-895c-af2843a4e088">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Proyecto "/>
-	<property name="com.jaspersoft.studio.data.sql.tables">
-		<![CDATA[cHJveWVjdG8uaGlzdG9yaWFjbGluaWNhIEFTICwzODgsMTgsZGZlYjA3MGEtMjRlNi00ZjRmLTgw
-NjUtN2E4YjExOTc3MjEyO3Byb3llY3RvLnRpcG9zYW5ncmUgQVMgLDIzMCwyMDMsM2E2MmZmZjIt
-NzdiMi00MWY4LWEwOWItMDExY2E1ZDY3OTlmO3Byb3llY3RvLnBhY2llbnRlIEFTICw4MCwtOSxi
-NWFmNDY0Mi0zNDcyLTQ5Y2EtYjhhYy04OTMyZTVlOTA2OGU7]]>
-	</property>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w1" value="671"/>
 	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w2" value="315"/>
 	<style name="Title" fontName="Times New Roman" fontSize="50" isBold="true"/>
@@ -23,7 +18,7 @@ NWFmNDY0Mi0zNDcyLTQ5Y2EtYjhhYy04OTMyZTVlOTA2OGU7]]>
 	<parameter name="grupoS" class="java.lang.String"/>
 	<parameter name="rh" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[SELECT proyecto.paciente.dni,
+		<![CDATA[SELECT proyecto.paciente.dni, 
 	proyecto.paciente.nombre,
 	proyecto.historiaclinica.estatura,
 	proyecto.historiaclinica.peso
@@ -121,15 +116,6 @@ FROM proyecto.historiaclinica
 				<text><![CDATA[Nombre]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="360" y="0" width="80" height="30" uuid="8264a043-1780-4da5-b902-23c908a35912">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="97c4a26c-f96e-4c90-af8d-ba9117d1fe00"/>
-				</reportElement>
-				<textElement textAlignment="Justified" verticalAlignment="Middle">
-					<font size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Estatura]]></text>
-			</staticText>
-			<staticText>
 				<reportElement x="460" y="0" width="84" height="30" uuid="9de36ca4-6b6a-4779-af84-1b3e06dbc7c7">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f423845b-a9cc-4996-ab1b-19b56b861820"/>
 				</reportElement>
@@ -137,6 +123,15 @@ FROM proyecto.historiaclinica
 					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Peso]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="360" y="0" width="80" height="30" uuid="8264a043-1780-4da5-b902-23c908a35912">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="97c4a26c-f96e-4c90-af8d-ba9117d1fe00"/>
+				</reportElement>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Estatura]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
