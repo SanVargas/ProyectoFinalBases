@@ -160,9 +160,7 @@ public class ControladorPaciente {
 			ps2.setString(1, null);
 			ps2.setString(2, dni);
 			
-			String SQL1 = "DELETE FROM HistoriaClinica WHERE Paciente_dni = ?";
-			ps1 = con.prepareStatement(SQL1);
-			ps1.setString(1, dni);
+			
 	
 			try {
 				Paciente pp = buscarPaciente(dni);
@@ -191,6 +189,32 @@ public class ControladorPaciente {
 			}
 			
 			try {
+				String SQL4 = "DELETE FROM Examen WHERE Paciente_dni = ?";
+				ps4 = con.prepareStatement(SQL4);
+				ps4.setString(1, dni);
+				ps4.execute();
+			} catch (Exception e) {
+			}
+			
+			try {
+				
+				Paciente pp = buscarPaciente(dni);
+				String SQL = "SELECT * FROM Diagnostico WHERE HistoriaClinica_numero = ?";
+				ps = con.prepareStatement(SQL);
+				ps.setString(1, pp.getHistoriaClinica().getNumero());
+				rs = ps.executeQuery();
+
+				if (rs.next()) {
+					String SQL4 = "DELETE FROM Orden_Medicamento WHERE Diagnostico_fecha = ?";
+					ps4 = con.prepareStatement(SQL4);
+					ps4.setDate(1, rs.getDate("fecha"));
+					ps4.execute();
+				}
+
+			} catch (Exception e) {
+			}
+			
+			try {
 				Paciente pp = buscarPaciente(dni);
 				String SQL4 = "DELETE FROM Cita WHERE Paciente_dni = ?";
 				ps4 = con.prepareStatement(SQL4);
@@ -203,6 +227,10 @@ public class ControladorPaciente {
 			String SQL2 = "DELETE FROM Telefono_Paciente WHERE Paciente_dni = ?";
 			ps3 = con.prepareStatement(SQL2);
 			ps3.setString(1, dni);
+			
+			String SQL1 = "DELETE FROM HistoriaClinica WHERE Paciente_dni = ?";
+			ps1 = con.prepareStatement(SQL1);
+			ps1.setString(1, dni);
 
 			String SQL = "DELETE FROM Paciente WHERE dni = ?";
 			ps = con.prepareStatement(SQL);
